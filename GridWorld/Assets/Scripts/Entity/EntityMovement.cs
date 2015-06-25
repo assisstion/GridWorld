@@ -41,9 +41,7 @@ public class EntityMovement : MonoBehaviour {
 	protected float speed;
 
 	protected void Setup(int x, int y, int dir){
-		_playerX = x;
-		_playerY = y;
-		_direction = dir;
+		TryMove (x, y, dir, false);
 	}
 
 	//0 = move success
@@ -52,7 +50,7 @@ public class EntityMovement : MonoBehaviour {
 	protected int GoTowards(int dir){
 		if(direction == dir){
 			if(TryMove(playerX + Direction.ValueX(dir), 
-			        playerY + Direction.ValueY(dir), dir)){
+			        playerY + Direction.ValueY(dir), dir, true)){
 				return 0;
 			}
 			else{
@@ -75,16 +73,18 @@ public class EntityMovement : MonoBehaviour {
 			&& CanPass (map.tiles [x, y]);
 	}
 
-	protected bool TryMove(int x, int y, int direction) {
+	protected bool TryMove(int x, int y, int direction, bool ping) {
 		
-		if (CanMoveTo(x,y)) {
+		if (!ping || CanMoveTo(x,y)) {
 			map.objects[playerX,playerY] = null;
 			_playerX = x;
 			_playerY = y;
 			_direction = direction;
 			map.objects[x,y] = this.gameObject;
 			UpdatePosition ();
-			MoveSuccess();
+			if(ping){
+				MoveSuccess();
+			}
 			return true;
 		}
 		return false;

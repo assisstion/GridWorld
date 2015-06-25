@@ -3,28 +3,37 @@ using System.Collections;
 
 public class Slash : Skill{
 
-	public Slash(PlayerController control) : base(control, "slash", 1.0f){
+	float cd;
 
+	public Slash(PlayerController control, float cd) 
+			: base(control, "slash", cd){
+		this.cd = cd;
 	} 
 
 	public override SkillEvent GetSkillEvent(){
-		return new SlashSkillEvent (controller);
+		return new SlashSkillEvent (controller, cd);
 	}
 
 	public class SlashSkillEvent : AbstractSkillEvent{
 
+		int direction;
+		int x;
+		int y;
+		float cooldown;
 		GameObject animObj;
 		PlayerController controller;
 
-		public SlashSkillEvent(PlayerController cont){
+		public SlashSkillEvent(PlayerController cont, float cd){
 			controller = cont;
+			cooldown = cd;
 		}
 
 		public override bool Initialize(){
 			base.Initialize ();
 
-			int x = controller.movement.playerX + Direction.ValueX (controller.movement.direction);
-			int y = controller.movement.playerY + Direction.ValueY (controller.movement.direction);
+			direction = controller.movement.direction;
+			x = controller.movement.playerX + Direction.ValueX (direction);
+			y = controller.movement.playerY + Direction.ValueY (direction);
 
 			//Cancel checking
 			if(!(controller.movement.IsGameSpace(x, y) && controller.movement.CanPass (controller.movement.map.tiles [x, y]))){
@@ -34,7 +43,7 @@ public class Slash : Skill{
 			//Animation
 			animObj = GameObject.CreatePrimitive (PrimitiveType.Plane);
 			animObj.transform.position = controller.movement.ConvertPosition (x, y, -2.0f);
-			animObj.transform.rotation = Quaternion.Euler (new Vector3 (Direction.Rotation(controller.movement.direction), 270, 90));
+			animObj.transform.rotation = Quaternion.Euler (new Vector3 (Direction.Rotation(direction), 270, 90));
 			animObj.transform.localScale = new Vector3 (0.1f, 1, 0.02f);
 
 			//On hit effects
@@ -43,7 +52,7 @@ public class Slash : Skill{
 				EnemyBaseManager manager = target.GetComponent<EnemyBaseManager>();
 				if(manager != null){
 					EnemyBaseController enemyControl = manager.controller;
-					enemyControl.combat.TakeDamage(100);
+					enemyControl.combat.TakeDamage(10);
 				}
 			}
 
@@ -51,7 +60,12 @@ public class Slash : Skill{
 		}
 
 		public override bool Update(){
-			if (TimePassed() > 1) {
+			animObj.transform.position = controller.movement.ConvertPosition (x, y, -2.0f) 
+				- Direction.ToVector(direction).normalized
+					*controller.movement.map.gridSize*(TimePassed()/cooldown)/2;
+			animObj.transform.localScale = new Vector3 
+				(0.1f*(1-TimePassed()/cooldown) ,animObj.transform.localScale.y,animObj.transform.localScale.z);
+			if (TimePassed() > cooldown) {
 				return false;
 			}
 			return true;

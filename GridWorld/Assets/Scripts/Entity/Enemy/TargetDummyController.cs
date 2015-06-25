@@ -69,8 +69,8 @@ namespace TargetDummyEnemy{
 				}
 				started = true;
 				controller = control;
-				Setup (x, y, dir);
 				this.map = map;
+				Setup (x, y, dir);
 				lastDirection = direction;
 			}
 
@@ -106,6 +106,7 @@ namespace TargetDummyEnemy{
 				}
 				started = true;
 				controller = control;
+				maxHealth = 10;
 			}
 
 			protected override void PerformAction(){

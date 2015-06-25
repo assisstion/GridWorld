@@ -71,7 +71,7 @@ public class MapGenerator : MonoBehaviour {
 			while (counter < tries) {
 				int x = (int)(generator.NextDouble() * width);
 				int y = (int)(generator.NextDouble() * width);
-				if (ctrl.movement.CanMoveTo (x, y)) {
+				if (ctrl.movement.CanMoveTo (x, y) && !(x == 0 && y == 0)) {
 					ctrl.movement.SetLocation (x, y, 
 					     Direction.RandomDirection());
 					break;

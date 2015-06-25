@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class PlayerMovement : EntityMovement {
+
+	bool started;
 	
 	PlayerController controller;
 
@@ -13,12 +15,22 @@ public class PlayerMovement : EntityMovement {
 
 	// Use this for initialization
 	protected override void Start () {
-		Setup (0, 0, Direction.right);
 		controller = this.gameObject.GetComponent<PlayerController> ();
+	}
+
+	public void Initialize(){
+		if (started) {
+			return;
+		}
+		started = true;
+		Setup (0, 0, Direction.right);
 	}
 	
 	// Update is called once per frame
 	protected override void Update () {
+		if (!started) {
+			Initialize();
+		}
 		if(controller.combat.TryLockAction()){
 			if (Input.GetKey (KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
 				GoTowards(Direction.up);
