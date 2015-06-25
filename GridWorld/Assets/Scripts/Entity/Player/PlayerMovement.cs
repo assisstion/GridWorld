@@ -7,8 +7,8 @@ public class PlayerMovement : EntityMovement {
 
 	public CameraController cam;
 
-	public PlayerMovement() : base(0, 0, Direction.right){
-
+	public PlayerMovement(){
+		Setup (0, 0, Direction.right);
 	}
 
 	// Use this for initialization
@@ -20,36 +20,16 @@ public class PlayerMovement : EntityMovement {
 	protected override void Update () {
 		if(controller.combat.TryLockAction()){
 			if (Input.GetKey (KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-				if(direction == Direction.up){
-					TryMove(playerX, playerY + 1, Direction.up);
-				}
-				else{
-					TryTurn(Direction.up);
-				}
+				GoTowards(Direction.up);
 			}
 			else if (Input.GetKey (KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-				if(direction == Direction.left){
-					TryMove(playerX - 1, playerY, Direction.left);
-				}
-				else{
-					TryTurn(Direction.left);
-				}
+				GoTowards(Direction.left);
 			}
 			else if (Input.GetKey (KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-				if(direction == Direction.down){
-					TryMove(playerX, playerY - 1, Direction.down);
-				}
-				else{
-					TryTurn(Direction.down);
-				}
+				GoTowards(Direction.down);
 			}
 			else if (Input.GetKey (KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-				if(direction == Direction.right){
-					TryMove(playerX + 1, playerY, Direction.right);
-				}
-				else{
-					TryTurn(Direction.right);
-				}
+				GoTowards(Direction.right);
 			}
 			controller.combat.UnlockAction();
 		}

@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TargetDummyEnemy;
 
 public class MapGenerator : MonoBehaviour {
-	
+
+	public GameObject targetDummy;
 	public GameObject tile;
 	public Material rockMaterial;
 	public Material grassMaterial;
@@ -27,6 +29,7 @@ public class MapGenerator : MonoBehaviour {
 		tiles = new GameObject[width,height];
 		objects = new GameObject[width, height];
 		GenerateWorld ();
+		GenerateEnemies ();
 	}
 
 	void GenerateWorld(){
@@ -41,6 +44,12 @@ public class MapGenerator : MonoBehaviour {
 		plane.transform.rotation = Quaternion.Euler (new Vector3 (270, 0, 0));
 		MeshRenderer mr = plane.GetComponent<MeshRenderer> ();
 		mr.material = bgMaterial;
+	}
+
+	void GenerateEnemies(){
+		GameObject obj = Instantiate (targetDummy) as GameObject;
+		TargetDummyController ctrl = obj.GetComponentInChildren<TargetDummyController> ();
+		ctrl.map = this;
 	}
 	
 	// Update is called once per frame

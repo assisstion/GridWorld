@@ -10,14 +10,7 @@ public class EnemyBaseMovement : EntityMovement {
 	}
 	EnemyBaseController _controller;
 
-	public EnemyBaseMovement(int x, int y, int dir) 
-	: base(x, y, dir){
-		
-	}
-
-	public EnemyBaseMovement(EnemyBaseController controller, 
-	    	int x, int y, int dir) 
-			: base(x, y, dir){
+	protected void SetupController(EnemyBaseController controller){
 		_controller = controller;
 	}
 
@@ -27,11 +20,11 @@ public class EnemyBaseMovement : EntityMovement {
 
 	// Use this for initialization
 	protected override void Start () {
-	
+		base.Start ();
 	}
 	
 	// Update is called once per frame
 	protected override void Update () {
-	
+		base.Update ();
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class EntityCombat : MonoBehaviour {
 	
+	public GameObject holder;
 	public Skill[] skills;
 	volatile bool actionLocked;
 	List<SkillEvent> liveSkills;
@@ -58,7 +59,7 @@ public class EntityCombat : MonoBehaviour {
 		
 	}
 	
-	public void ActionUpdate(){
+	public virtual void ActionUpdate(){
 		if (action > 0) {
 			action -= Time.deltaTime;
 		}
@@ -74,8 +75,13 @@ public class EntityCombat : MonoBehaviour {
 		} else {
 			int tempHealth = health;
 			health = 0;
+			Remove ();
 			return tempHealth;
 		}
+	}
+	
+	protected void Remove(){
+		GameObject.Destroy (holder);
 	}
 	
 	public void ActivateSkill(int button){

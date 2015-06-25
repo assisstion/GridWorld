@@ -36,22 +36,41 @@ public class EntityMovement : MonoBehaviour {
 	protected int _playerY;
 	
 	protected float moveCooldown = 0.5f;
-	protected float turnCooldown = 0.1f;
+	protected float turnCooldown = 0.15f;
 
 	protected float speed;
 
-	public EntityMovement(int x, int y, int dir){
+	protected void Setup(int x, int y, int dir){
 		_playerX = x;
 		_playerY = y;
 		_direction = dir;
 	}
 
+	//0 = move success
+	//1 = move fail, no turn
+	//2 = turn success
+	protected int GoTowards(int dir){
+		if(direction == dir){
+			if(TryMove(playerX + Direction.ValueX(dir), 
+			        playerY + Direction.ValueY(dir), dir)){
+				return 0;
+			}
+			else{
+				return 1;
+			}
+		}
+		else{
+			TryTurn(dir);
+			return 2;
+		}
+	}
+	
 	protected void TryTurn(int direction){
 		_direction = direction;
 		TurnSuccess ();
 	}
 
-	protected void TryMove(int x, int y, int direction) {
+	protected bool TryMove(int x, int y, int direction) {
 		
 		if (IsGameSpace(x, y) && map.objects[x,y] == null 
 		    && CanPass (map.tiles [x, y])) {
@@ -62,7 +81,9 @@ public class EntityMovement : MonoBehaviour {
 			map.objects[x,y] = this.gameObject;
 			UpdatePosition ();
 			MoveSuccess();
+			return true;
 		}
+		return false;
 	}
 
 	protected virtual void MoveSuccess(){
@@ -92,9 +113,6 @@ public class EntityMovement : MonoBehaviour {
 	
 	}
 
-	
-	
-	
 	public bool CanPass(GameObject obj){
 		GridController gc = obj.GetComponent<GridController> ();
 		if (gc.terrainType.Equals ("rock")) {

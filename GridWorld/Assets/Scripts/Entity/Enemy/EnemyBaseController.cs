@@ -5,14 +5,14 @@ public class EnemyBaseController : EntityController {
 
 	public new EnemyBaseMovement movement{
 		get{
-			return __movement;
+			return MovementHolder() as EnemyBaseMovement;
 		}
 	}
 	protected EnemyBaseMovement __movement;
 	
 	public new EnemyBaseCombat combat{
 		get{
-			return __combat;
+			return CombatHolder() as EnemyBaseCombat;
 		}
 	}
 	protected EnemyBaseCombat __combat;

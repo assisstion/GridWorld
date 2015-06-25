@@ -52,7 +52,9 @@
      <Compile Include="Assets\Scripts\Direction.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseCombat.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseController.cs" />
+     <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseManager.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseMovement.cs" />
+     <Compile Include="Assets\Scripts\Entity\Enemy\TargetDummyController.cs" />
      <Compile Include="Assets\Scripts\Entity\EntityCombat.cs" />
      <Compile Include="Assets\Scripts\Entity\EntityController.cs" />
      <Compile Include="Assets\Scripts\Entity\EntityMovement.cs" />
