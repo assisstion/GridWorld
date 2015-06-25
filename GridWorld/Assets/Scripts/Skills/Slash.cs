@@ -5,7 +5,7 @@ public class Slash : Skill{
 
 	float cd;
 
-	public Slash(PlayerController control, float cd) 
+	public Slash(EntityController control, float cd) 
 			: base(control, "slash", cd){
 		this.cd = cd;
 	} 
@@ -21,9 +21,9 @@ public class Slash : Skill{
 		int y;
 		float cooldown;
 		GameObject animObj;
-		PlayerController controller;
+		EntityController controller;
 
-		public SlashSkillEvent(PlayerController cont, float cd){
+		public SlashSkillEvent(EntityController cont, float cd){
 			controller = cont;
 			cooldown = cd;
 		}
@@ -49,10 +49,19 @@ public class Slash : Skill{
 			//On hit effects
 			GameObject target = controller.movement.map.objects[x,y];
 			if (target != null) {
-				EnemyBaseManager manager = target.GetComponent<EnemyBaseManager>();
-				if(manager != null){
-					EnemyBaseController enemyControl = manager.controller;
-					enemyControl.combat.TakeDamage(10);
+				if(target.tag.Equals("Enemy")){
+					if(!controller.tag.Equals("Enemy")){
+						EnemyBaseManager manager = target.GetComponent<EnemyBaseManager>();
+						if(manager != null){
+							EnemyBaseController enemyControl = manager.controller;
+							enemyControl.combat.TakeDamage(10);
+						}
+					}
+				}
+				else if(target.tag.Equals("Player")){
+					if(!controller.tag.Equals("Player")){
+						target.GetComponent<PlayerCombat>().TakeDamage(10);
+					}
 				}
 			}
 

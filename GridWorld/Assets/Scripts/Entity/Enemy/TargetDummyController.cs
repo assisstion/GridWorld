@@ -97,6 +97,8 @@ namespace TargetDummyEnemy{
 			new TargetDummyController controller;
 			bool started = false;
 
+			float strikeChance = 0.25f;
+
 			public TargetDummyCombat(){
 			}
 
@@ -106,11 +108,21 @@ namespace TargetDummyEnemy{
 				}
 				started = true;
 				controller = control;
+				skills = new Skill[1];
+				skills [0] = new Slash (controller, 0.5f);
 				maxHealth = 10;
 			}
 
 			protected override void PerformAction(){
-				controller.movement.Move ();
+				if (Random.value < strikeChance) {
+					Attack();
+				} else {
+					controller.movement.Move ();
+				}
+			}
+
+			void Attack(){
+				action = skills [0].Activate ();
 			}
 			
 		}

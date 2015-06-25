@@ -49,7 +49,6 @@ public class EntityCombat : MonoBehaviour {
 	protected virtual void Start () {
 		liveSkills = new List<SkillEvent> ();
 		health = maxHealth;
-		skills = new Skill[10];
 	}
 	
 	// Update is called once per frame
@@ -81,6 +80,9 @@ public class EntityCombat : MonoBehaviour {
 	}
 	
 	protected void Remove(){
+		foreach (SkillEvent sEvent in liveSkills) {
+			sEvent.CleanUp();
+		}
 		GameObject.Destroy (holder);
 	}
 	

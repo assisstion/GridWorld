@@ -4,15 +4,15 @@ using System.Collections;
 public abstract class Skill{
 
 	protected string name;
-	protected PlayerController controller;
+	protected EntityController controller;
 
-	public Skill(PlayerController control, string skillName, float cd){
+	public Skill(EntityController control, string skillName, float cd){
 		this.controller = control;
 		name = skillName;
 		_cooldown = cd;
 	}
 
-	public Skill(PlayerController control) : this (control, "generic_skill", 1.0f){
+	public Skill(EntityController control) : this (control, "generic_skill", 1.0f){
 
 	}
 
