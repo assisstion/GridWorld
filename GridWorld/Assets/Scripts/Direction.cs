@@ -44,4 +44,8 @@ public class Direction{
 	public static float Rotation(int dir){
 		return 90 * dir;
 	}
+
+	public static int RandomDirection(){
+		return Random.Range(0,4);
+	}
 }

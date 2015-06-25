@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using TargetDummyEnemy;
+using Random = System.Random;
 
 public class MapGenerator : MonoBehaviour {
 
+	Random generator;
+	int seed;
 	public GameObject targetDummy;
 	public GameObject tile;
 	public Material rockMaterial;
@@ -23,9 +26,15 @@ public class MapGenerator : MonoBehaviour {
 	
 	public GameObject[,] tiles;
 	public GameObject[,] objects;
+
+	int swampCount;
+	HashSet<KeyValuePair<int,int>> swamps = new HashSet<KeyValuePair<int,int>>();
 	
 	// Use this for initialization
 	void Start () {
+		swampCount = width * height / 8;
+		seed = new Random ().Next ();
+		generator = new Random (seed);
 		tiles = new GameObject[width,height];
 		objects = new GameObject[width, height];
 		GenerateWorld ();
@@ -33,6 +42,11 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	void GenerateWorld(){
+		for (int i = 0; i < swampCount; i++) {
+			swamps.Add(new KeyValuePair<int, int>(
+				(int)(generator.NextDouble() * width),
+				(int)(generator.NextDouble() * height)));
+		}
 		for(int x = 0; x < width; x++){
 			for(int y = 0; y < height; y++){
 				tiles[x,y] = GetTile(x,y);
@@ -47,9 +61,27 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	void GenerateEnemies(){
-		GameObject obj = Instantiate (targetDummy) as GameObject;
-		TargetDummyController ctrl = obj.GetComponentInChildren<TargetDummyController> ();
-		ctrl.map = this;
+		for (int i = 0; i < 10; i++) {
+			GameObject obj = Instantiate (targetDummy) as GameObject;
+			TargetDummyController ctrl = obj.GetComponentInChildren<TargetDummyController> ();
+			ctrl.map = this;
+			ctrl.Initialize ();
+			int tries = 10000;
+			int counter = 0;
+			while (counter < tries) {
+				int x = (int)(generator.NextDouble() * width);
+				int y = (int)(generator.NextDouble() * width);
+				if (ctrl.movement.CanMoveTo (x, y)) {
+					ctrl.movement.SetLocation (x, y, 
+					     Direction.RandomDirection());
+					break;
+				}
+				counter++;
+			}
+			if (counter >= tries) {
+				Debug.Log ("What is this unluckiness?");
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -74,7 +106,7 @@ public class MapGenerator : MonoBehaviour {
 			terrainType = "rock";
 			return rockMaterial;
 		}
-		if (x == 7 || y == 7) {
+		if (swamps.Contains(new KeyValuePair<int, int>(x, y))) {
 			terrainType = "swamp";
 			return swampMaterial;
 		}

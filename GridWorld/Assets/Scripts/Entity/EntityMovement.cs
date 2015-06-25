@@ -70,10 +70,14 @@ public class EntityMovement : MonoBehaviour {
 		TurnSuccess ();
 	}
 
+	public bool CanMoveTo(int x, int y){
+		return IsGameSpace (x, y) && map.objects [x, y] == null 
+			&& CanPass (map.tiles [x, y]);
+	}
+
 	protected bool TryMove(int x, int y, int direction) {
 		
-		if (IsGameSpace(x, y) && map.objects[x,y] == null 
-		    && CanPass (map.tiles [x, y])) {
+		if (CanMoveTo(x,y)) {
 			map.objects[playerX,playerY] = null;
 			_playerX = x;
 			_playerY = y;

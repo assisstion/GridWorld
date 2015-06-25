@@ -29,8 +29,24 @@ namespace TargetDummyEnemy{
 			return ___combat;
 		}
 
+		bool started;
+
 		protected override void Start(){
 			base.Start ();
+			if (!started) {
+				Initialize();
+			}
+		}
+
+		protected override void Update(){
+			base.Update ();
+		}
+
+		public void Initialize(){
+			if (started) {
+				return;
+			}
+			started = true;
 			___movement = this.gameObject.AddComponent <TargetDummyMovement>() 
 				as TargetDummyMovement;
 			movement.Initialize(this, 4, 8, Direction.right, map);
@@ -45,6 +61,7 @@ namespace TargetDummyEnemy{
 
 			new TargetDummyController controller;
 			bool started = false;
+			int lastDirection;
 
 			public void Initialize(TargetDummyController control, int x, int y, int dir, MapGenerator map){
 				if (started) {
@@ -54,11 +71,20 @@ namespace TargetDummyEnemy{
 				controller = control;
 				Setup (x, y, dir);
 				this.map = map;
+				lastDirection = direction;
 			}
 
 			public void Move(){
-				int targetDir = Direction.down;
+				int targetDir = Direction.RandomDirection ();
+				if (Random.Range (0, 2) == 0) {
+					targetDir = lastDirection;
+				}
+				lastDirection = targetDir;
 				GoTowards (targetDir);
+			}
+
+			public void SetLocation(int x, int y, int dir){
+				Setup (x, y, dir);
 			}
 
 			protected override void MoveSuccess(){

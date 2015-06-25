@@ -8,11 +8,12 @@ public class PlayerMovement : EntityMovement {
 	public CameraController cam;
 
 	public PlayerMovement(){
-		Setup (0, 0, Direction.right);
+
 	}
 
 	// Use this for initialization
 	protected override void Start () {
+		Setup (0, 0, Direction.right);
 		controller = this.gameObject.GetComponent<PlayerController> ();
 	}
 	
