@@ -30,7 +30,7 @@ public class Slash : Skill{
 			animObj = GameObject.CreatePrimitive (PrimitiveType.Plane);
 			animObj.transform.position = controller.movement.ConvertPosition (x, y, -2.0f);
 			animObj.transform.rotation = Quaternion.Euler (new Vector3 (Direction.Rotation(controller.movement.direction), 270, 90));
-			animObj.transform.localScale = new Vector3 (0.02f, 1, 0.1f);
+			animObj.transform.localScale = new Vector3 (0.1f, 1, 0.02f);
 			return true;
 		}
 

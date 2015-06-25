@@ -5,6 +5,8 @@ public class PlayerMovement : EntityMovement {
 	
 	PlayerController controller;
 
+	public CameraController cam;
+
 	public PlayerMovement() : base(0, 0, Direction.right){
 
 	}
@@ -18,16 +20,36 @@ public class PlayerMovement : EntityMovement {
 	protected override void Update () {
 		if(controller.combat.TryLockAction()){
 			if (Input.GetKey (KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-				TryMove(playerX, playerY + 1, Direction.up);
+				if(direction == Direction.up){
+					TryMove(playerX, playerY + 1, Direction.up);
+				}
+				else{
+					TryTurn(Direction.up);
+				}
 			}
 			else if (Input.GetKey (KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-				TryMove(playerX - 1, playerY, Direction.left);
+				if(direction == Direction.left){
+					TryMove(playerX - 1, playerY, Direction.left);
+				}
+				else{
+					TryTurn(Direction.left);
+				}
 			}
 			else if (Input.GetKey (KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-				TryMove(playerX, playerY - 1, Direction.down);
+				if(direction == Direction.down){
+					TryMove(playerX, playerY - 1, Direction.down);
+				}
+				else{
+					TryTurn(Direction.down);
+				}
 			}
 			else if (Input.GetKey (KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-				TryMove(playerX + 1, playerY, Direction.right);
+				if(direction == Direction.right){
+					TryMove(playerX + 1, playerY, Direction.right);
+				}
+				else{
+					TryTurn(Direction.right);
+				}
 			}
 			controller.combat.UnlockAction();
 		}
@@ -37,13 +59,26 @@ public class PlayerMovement : EntityMovement {
 	{
 		//Overriden method currently empty
 		base.MoveSuccess ();
+		cam.UpdateLocation (transform.position.x, transform.position.y);
 		GridController gc = map.tiles[playerX,playerY].GetComponent<GridController> ();
 		if (gc.terrainType.Equals ("swamp")) {
-			controller.combat.action = moveCooldown * 4;
 			controller.combat.TakeDamage(10);
+			controller.combat.action = moveCooldown * 4;
 		}
 		else{
 			controller.combat.action = moveCooldown;
+		}
+	}
+
+	protected override void TurnSuccess(){
+		//Overriden method currently empty
+		base.TurnSuccess ();
+		GridController gc = map.tiles[playerX,playerY].GetComponent<GridController> ();
+		if (gc.terrainType.Equals ("swamp")) {
+			controller.combat.action = turnCooldown * 4;
+		}
+		else{
+			controller.combat.action = turnCooldown;
 		}
 	}
 	

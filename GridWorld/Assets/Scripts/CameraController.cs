@@ -15,6 +15,10 @@ public class CameraController : MonoBehaviour {
 
 	}
 
+	public void UpdateLocation(float x, float y){
+		transform.position = new Vector3 (x, y, transform.position.z);
+	}
+
 	void ManualMovement(){
 		
 		//Manual Movement

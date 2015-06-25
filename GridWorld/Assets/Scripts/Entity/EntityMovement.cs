@@ -10,8 +10,18 @@ public class EntityMovement : MonoBehaviour {
 			return _direction;
 		}
 	}
-	protected int _direction;
-	
+	protected int _direction{
+		get{
+			return __direction;
+		}
+		set{
+			__direction = value;
+			transform.rotation = Quaternion.Euler(
+				new Vector3(Direction.Rotation(__direction), 270, 90));
+		}
+	}
+	int __direction;
+
 	public int playerX {
 		get{
 			return _playerX;
@@ -26,6 +36,7 @@ public class EntityMovement : MonoBehaviour {
 	protected int _playerY;
 	
 	protected float moveCooldown = 0.5f;
+	protected float turnCooldown = 0.1f;
 
 	protected float speed;
 
@@ -33,6 +44,11 @@ public class EntityMovement : MonoBehaviour {
 		_playerX = x;
 		_playerY = y;
 		_direction = dir;
+	}
+
+	protected void TryTurn(int direction){
+		_direction = direction;
+		TurnSuccess ();
 	}
 
 	protected void TryMove(int x, int y, int direction) {
@@ -50,6 +66,10 @@ public class EntityMovement : MonoBehaviour {
 	}
 
 	protected virtual void MoveSuccess(){
+		//to be overriden
+	}
+
+	protected virtual void TurnSuccess(){
 		//to be overriden
 	}
 

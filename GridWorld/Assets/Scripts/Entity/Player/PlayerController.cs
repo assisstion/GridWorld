@@ -28,11 +28,11 @@ public class PlayerController : EntityController {
 	
 	}
 
-	protected virtual EntityMovement MovementHolder(){
+	protected override EntityMovement MovementHolder(){
 		return __movement;
 	}
 	
-	protected virtual EntityCombat CombatHolder(){
+	protected override EntityCombat CombatHolder(){
 		return __combat;
 	}
 }
