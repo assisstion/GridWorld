@@ -50,6 +50,9 @@
      <Compile Include="Assets\Scripts\BarController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Direction.cs" />
+     <Compile Include="Assets\Scripts\EntityCombat.cs" />
+     <Compile Include="Assets\Scripts\EntityController.cs" />
+     <Compile Include="Assets\Scripts\EntityMovement.cs" />
      <Compile Include="Assets\Scripts\GridController.cs" />
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
      <Compile Include="Assets\Scripts\PlayerCombat.cs" />

@@ -1,19 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : EntityController {
 
-	public PlayerMovement movement;
-	public PlayerCombat combat;
+	public new PlayerMovement movement{
+		get{
+			return __movement;
+		}
+	}
+	PlayerMovement __movement;
+
+	public new PlayerCombat combat{
+		get{
+			return __combat;
+		}
+	}
+	PlayerCombat __combat;
 
 	// Use this for initialization
-	void Start () {
-		movement = this.gameObject.GetComponent<PlayerMovement> ();
-		combat = this.gameObject.GetComponent<PlayerCombat> ();
+	protected override void Start () {
+		__movement = this.gameObject.GetComponent<PlayerMovement> ();
+		__combat = this.gameObject.GetComponent<PlayerCombat> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
 	
+	}
+
+	protected virtual EntityMovement MovementHolder(){
+		return __movement;
+	}
+	
+	protected virtual EntityCombat CombatHolder(){
+		return __combat;
 	}
 }

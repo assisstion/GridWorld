@@ -1,12 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Skills\Slash.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerController.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerCombat.cs" Line="145" Column="3" />
-      <File FileName="Assets\Scripts\Skill.cs" Line="33" Column="26" />
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="17" Column="2" />
+      <File FileName="Assets\Scripts\PlayerCombat.cs" Line="57" Column="17" />
+      <File FileName="Assets\Scripts\Skill.cs" Line="27" Column="1" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="4" Column="49" />
       <File FileName="Assets\Scripts\Skills\Slash.cs" Line="16" Column="22" />
       <File FileName="Assets\Scripts\SkillEvent.cs" Line="5" Column="2" />
+      <File FileName="Assets\Scripts\PlayerMovement.cs" Line="12" Column="30" />
+      <File FileName="Assets\Scripts\EntityMovement.cs" Line="48" Column="18" />
+      <File FileName="Assets\Scripts\EntityCombat.cs" Line="84" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
