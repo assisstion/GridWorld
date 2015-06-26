@@ -46,8 +46,14 @@ public class PlayerCombat : EntityCombat {
 		controller = this.gameObject.GetComponent<PlayerController> ();
 		skills = new Skill[10];
 		for (int i = 0; i < 10; i++) {
-			Skill tempSkill = new Slash(controller, 0.5f);
-			//tempSkill.cooldown = (i+1) * 0.1f;
+			Skill tempSkill;
+			if(i == 1){
+				tempSkill = new Lunge(controller, 1f, 0.3f);
+			}
+			else{
+				tempSkill = new Slash(controller, 0.5f);
+				//tempSkill.cooldown = (i+1) * 0.1f;
+			}
 			skills[i] = tempSkill;
 		}
 	}

@@ -41,7 +41,7 @@ public class EntityMovement : MonoBehaviour {
 	protected float speed;
 
 	protected void Setup(int x, int y, int dir){
-		TryMove (x, y, dir, false);
+		TryMove (x, y, dir, MoveMode.NoEvent);
 	}
 
 	//0 = move success
@@ -50,7 +50,7 @@ public class EntityMovement : MonoBehaviour {
 	protected int GoTowards(int dir){
 		if(direction == dir){
 			if(TryMove(playerX + Direction.ValueX(dir), 
-			        playerY + Direction.ValueY(dir), dir, true)){
+			        playerY + Direction.ValueY(dir), dir, MoveMode.Cooldown)){
 				return 0;
 			}
 			else{
@@ -63,7 +63,7 @@ public class EntityMovement : MonoBehaviour {
 		}
 	}
 	
-	protected void TryTurn(int direction){
+	public void TryTurn(int direction){
 		_direction = direction;
 		TurnSuccess ();
 	}
@@ -73,24 +73,31 @@ public class EntityMovement : MonoBehaviour {
 			&& CanPass (map.tiles [x, y]);
 	}
 
-	protected bool TryMove(int x, int y, int direction, bool ping) {
+	public bool TryMove(int x, int y, int direction, MoveMode mode) {
 		
-		if (!ping || CanMoveTo(x,y)) {
+		if (mode.Equals(MoveMode.NoEvent) || CanMoveTo(x,y)) {
 			map.objects[playerX,playerY] = null;
 			_playerX = x;
 			_playerY = y;
 			_direction = direction;
 			map.objects[x,y] = this.gameObject;
 			UpdatePosition ();
-			if(ping){
-				MoveSuccess();
+			switch(mode){
+			case MoveMode.Cooldown:
+				MoveSuccess(true);
+				break;
+			case MoveMode.NoCooldown:
+				MoveSuccess(false);
+				break;
+			case MoveMode.NoEvent:
+				break;
 			}
 			return true;
 		}
 		return false;
 	}
 
-	protected virtual void MoveSuccess(){
+	protected virtual void MoveSuccess(bool ping){
 		//to be overriden
 	}
 
@@ -127,5 +134,9 @@ public class EntityMovement : MonoBehaviour {
 	
 	public Vector3 ConvertPosition(int x, int y, float z){
 		return new Vector3 (x * map.gridSize, y * map.gridSize, z);
+	}
+
+	public enum MoveMode{
+		Cooldown,NoCooldown,NoEvent
 	}
 }

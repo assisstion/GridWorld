@@ -48,18 +48,22 @@ public class PlayerMovement : EntityMovement {
 		}
 	}
 
-	protected override void MoveSuccess ()
+	protected override void MoveSuccess (bool ping)
 	{
 		//Overriden method currently empty
-		base.MoveSuccess ();
+		base.MoveSuccess (ping);
 		cam.UpdateLocation (transform.position.x, transform.position.y);
 		GridController gc = map.tiles[playerX,playerY].GetComponent<GridController> ();
 		if (gc.terrainType.Equals ("swamp")) {
 			controller.combat.TakeDamage(10);
-			controller.combat.action = moveCooldown * 4;
+			if(ping){
+				controller.combat.action = moveCooldown * 4;
+			}
 		}
 		else{
-			controller.combat.action = moveCooldown;
+			if(ping){
+				controller.combat.action = moveCooldown;
+			}
 		}
 	}
 

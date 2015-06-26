@@ -98,4 +98,8 @@ public abstract class AbstractSkillEvent : SkillEvent {
 	public enum CanCastValue{
 		Yes,CancelThis,CancelAll
 	}
+
+	public float GetCoolDown(){
+		return cooldown;
+	}
 }

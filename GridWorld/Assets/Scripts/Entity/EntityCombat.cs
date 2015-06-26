@@ -7,6 +7,7 @@ public class EntityCombat : MonoBehaviour {
 	public Skill[] skills;
 	volatile bool actionLocked;
 	List<SkillEvent> liveSkills;
+	List<SkillEvent> toAdd;
 	
 	public virtual int health {
 		set {
@@ -48,6 +49,7 @@ public class EntityCombat : MonoBehaviour {
 	// Use this for initialization
 	protected virtual void Start () {
 		liveSkills = new List<SkillEvent> ();
+		toAdd = new List<SkillEvent> ();
 		health = maxHealth;
 	}
 	
@@ -104,7 +106,7 @@ public class EntityCombat : MonoBehaviour {
 	
 	public bool ActivateAnimation(SkillEvent skill){
 		if (skill.Initialize ()) {
-			liveSkills.Add (skill);
+			AddSkillEvent(skill);
 			return true;
 		} else {
 			return false;
@@ -123,5 +125,13 @@ public class EntityCombat : MonoBehaviour {
 			liveSkills.Remove(sEvent);
 		}
 		toBeRemoved.Clear ();
+		foreach (SkillEvent sEvent in toAdd) {
+			liveSkills.Add(sEvent);
+		}
+		toAdd.Clear ();
+	}
+
+	public void AddSkillEvent(SkillEvent skill){
+		toAdd.Add (skill);
 	}
 }

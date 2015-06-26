@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\AbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\BarController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\CompositeSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Direction.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseCombat.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseController.cs" />
@@ -63,8 +64,10 @@
      <Compile Include="Assets\Scripts\Entity\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\GridController.cs" />
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
+     <Compile Include="Assets\Scripts\NoncombatAbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill.cs" />
      <Compile Include="Assets\Scripts\SkillEvent.cs" />
+     <Compile Include="Assets\Scripts\Skills\Lunge.cs" />
      <Compile Include="Assets\Scripts\Skills\Slash.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

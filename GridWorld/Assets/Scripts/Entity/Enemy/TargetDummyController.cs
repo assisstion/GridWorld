@@ -87,8 +87,11 @@ namespace TargetDummyEnemy{
 				Setup (x, y, dir);
 			}
 
-			protected override void MoveSuccess(){
-				controller.combat.action = moveCooldown;
+			protected override void MoveSuccess(bool ping){
+				base.MoveSuccess (ping);
+				if (ping) {
+					controller.combat.action = moveCooldown;
+				}
 			}
 		}
 		
