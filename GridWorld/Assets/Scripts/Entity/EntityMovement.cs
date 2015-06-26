@@ -47,7 +47,7 @@ public class EntityMovement : MonoBehaviour {
 	//0 = move success
 	//1 = move fail, no turn
 	//2 = turn success
-	protected int GoTowards(int dir){
+	public int GoTowards(int dir){
 		if(direction == dir){
 			if(TryMove(playerX + Direction.ValueX(dir), 
 			        playerY + Direction.ValueY(dir), dir, MoveMode.Cooldown)){
@@ -63,9 +63,14 @@ public class EntityMovement : MonoBehaviour {
 		}
 	}
 	
-	public void TryTurn(int direction){
-		_direction = direction;
-		TurnSuccess ();
+	public bool TryTurn(int direction){
+		if (this.direction == direction) {
+			return false;
+		} else {
+			_direction = direction;
+			TurnSuccess ();
+			return true;
+		}
 	}
 
 	public bool CanMoveTo(int x, int y){

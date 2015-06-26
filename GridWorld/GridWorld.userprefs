@@ -1,24 +1,20 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Skills\Lunge.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Entity\Enemy\Instance\FighterController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Skills\Slash.cs" Line="60" Column="4" />
-      <File FileName="Assets\Scripts\AbstractSkillEvent.cs" Line="110" Column="15" />
-      <File FileName="Assets\Scripts\MapGenerator.cs" Line="37" Column="35" />
-      <File FileName="Assets\Scripts\Skills\Lunge.cs" Line="74" Column="42" />
-      <File FileName="Assets\Scripts\CompositeSkillEvent.cs" Line="56" Column="35" />
-      <File FileName="Assets\Scripts\SkillEvent.cs" Line="9" Column="16" />
-      <File FileName="Assets\Scripts\Entity\EntityController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\EntityCombat.cs" Line="109" Column="25" />
-      <File FileName="Assets\Scripts\Entity\Player\PlayerCombat.cs" Line="50" Column="15" />
-      <File FileName="Assets\Scripts\Skill.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\NoncombatAbstractSkillEvent.cs" Line="18" Column="2" />
-      <File FileName="Assets\Scripts\BarController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\EntityMovement.cs" Line="88" Column="11" />
-      <File FileName="Assets\Scripts\Entity\Player\PlayerMovement.cs" Line="54" Column="14" />
-      <File FileName="Assets\Scripts\CameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Enemy\TargetDummyController.cs" Line="110" Column="13" />
+      <File FileName="Assets\Scripts\Entity\Enemy\Instance\FighterController.cs" Line="185" Column="42" />
+      <File FileName="Assets\Scripts\Entity\Enemy\Instance\TargetDummyController.cs" Line="128" Column="37" />
+      <File FileName="Assets\Scripts\Entity\EntityMovement.cs" Line="72" Column="16" />
+      <File FileName="Assets\Scripts\Entity\EntityCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Player\PlayerMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Entity\Player\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Player\PlayerCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\EntityController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapGenerator.cs" Line="70" Column="65" />
+      <File FileName="Assets\Scripts\Skill\Instance\Slash.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\AbstractSkillEvent.cs" Line="61" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -65,7 +65,9 @@ public class MapGenerator : MonoBehaviour {
 	void GenerateEnemies(){
 		for (int i = 0; i < enemyCount; i++) {
 			GameObject obj = Instantiate (targetDummy) as GameObject;
-			TargetDummyController ctrl = obj.GetComponentInChildren<TargetDummyController> ();
+			//TargetDummyController ctrl = obj.GetComponentInChildren<TargetDummyController> ();
+			FighterEnemy.FighterController ctrl = obj.GetComponentInChildren<FighterEnemy.FighterController> ();
+			ctrl.target = GameObject.FindObjectOfType<PlayerController>();
 			ctrl.map = this;
 			ctrl.Initialize ();
 			int tries = 10000;

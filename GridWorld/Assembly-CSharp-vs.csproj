@@ -46,16 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\AbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\BarController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\CompositeSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Direction.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseCombat.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseController.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseManager.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseMovement.cs" />
-     <Compile Include="Assets\Scripts\Entity\Enemy\TargetDummyController.cs" />
+     <Compile Include="Assets\Scripts\Entity\Enemy\Instance\FighterController.cs" />
+     <Compile Include="Assets\Scripts\Entity\Enemy\Instance\TargetDummyController.cs" />
      <Compile Include="Assets\Scripts\Entity\EntityCombat.cs" />
      <Compile Include="Assets\Scripts\Entity\EntityController.cs" />
      <Compile Include="Assets\Scripts\Entity\EntityMovement.cs" />
@@ -64,11 +63,13 @@
      <Compile Include="Assets\Scripts\Entity\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\GridController.cs" />
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
-     <Compile Include="Assets\Scripts\NoncombatAbstractSkillEvent.cs" />
-     <Compile Include="Assets\Scripts\Skill.cs" />
-     <Compile Include="Assets\Scripts\SkillEvent.cs" />
-     <Compile Include="Assets\Scripts\Skills\Lunge.cs" />
-     <Compile Include="Assets\Scripts\Skills\Slash.cs" />
+     <Compile Include="Assets\Scripts\Skill\AbstractSkillEvent.cs" />
+     <Compile Include="Assets\Scripts\Skill\CompositeSkillEvent.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Lunge.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Slash.cs" />
+     <Compile Include="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" />
+     <Compile Include="Assets\Scripts\Skill\Skill.cs" />
+     <Compile Include="Assets\Scripts\Skill\SkillEvent.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
