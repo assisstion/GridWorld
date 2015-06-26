@@ -27,12 +27,14 @@ public class MapGenerator : MonoBehaviour {
 	public GameObject[,] tiles;
 	public GameObject[,] objects;
 
+	int enemyCount;
 	int swampCount;
 	HashSet<KeyValuePair<int,int>> swamps = new HashSet<KeyValuePair<int,int>>();
 	
 	// Use this for initialization
 	void Start () {
 		swampCount = width * height / 8;
+		enemyCount = width * height / 24;
 		seed = new Random ().Next ();
 		generator = new Random (seed);
 		tiles = new GameObject[width,height];
@@ -61,7 +63,7 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	void GenerateEnemies(){
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < enemyCount; i++) {
 			GameObject obj = Instantiate (targetDummy) as GameObject;
 			TargetDummyController ctrl = obj.GetComponentInChildren<TargetDummyController> ();
 			ctrl.map = this;
