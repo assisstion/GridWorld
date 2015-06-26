@@ -112,7 +112,7 @@ namespace TargetDummyEnemy{
 				started = true;
 				controller = control;
 				skills = new Skill[1];
-				skills [0] = new Slash (controller, 0.5f);
+				skills [0] = new Slash (controller, 0.35f);
 				maxHealth = 10;
 			}
 

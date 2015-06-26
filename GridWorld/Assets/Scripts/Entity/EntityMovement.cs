@@ -106,7 +106,7 @@ public class EntityMovement : MonoBehaviour {
 	}
 
 	
-	void UpdatePosition(){
+	public void UpdatePosition(){
 		transform.position = ConvertPosition (playerX, playerY, transform.position.z);
 	}
 	

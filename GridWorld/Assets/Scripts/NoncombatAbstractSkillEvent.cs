@@ -19,4 +19,5 @@ public abstract class NoncombatAbstractSkillEvent : AbstractSkillEvent {
 	protected override void Hit(EntityController control){
 		//Do nothing
 	}
+
 }

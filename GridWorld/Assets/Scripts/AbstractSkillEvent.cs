@@ -10,6 +10,9 @@ public abstract class AbstractSkillEvent : SkillEvent {
 		direction = controller.movement.direction;
 		x = controller.movement.playerX;// + Direction.ValueX (direction);
 		y = controller.movement.playerY;// + Direction.ValueY (direction);
+		if (!CanRun ()) {
+			return false;
+		}
 		HashSet<KeyValuePair<int, int>> willCast = new HashSet<KeyValuePair<int, int>>();
 		HashSet<KeyValuePair<int, int>> set = GetCoordinates ();
 		foreach (KeyValuePair<int, int> pair in set) {
@@ -101,5 +104,9 @@ public abstract class AbstractSkillEvent : SkillEvent {
 
 	public float GetCoolDown(){
 		return cooldown;
+	}
+	
+	protected virtual bool CanRun(){
+		return true;
 	}
 }

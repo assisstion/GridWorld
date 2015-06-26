@@ -51,7 +51,7 @@ public class PlayerCombat : EntityCombat {
 				tempSkill = new Lunge(controller, 1f, 0.3f);
 			}
 			else{
-				tempSkill = new Slash(controller, 0.5f);
+				tempSkill = new Slash(controller, 0.35f);
 				//tempSkill.cooldown = (i+1) * 0.1f;
 			}
 			skills[i] = tempSkill;
