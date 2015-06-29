@@ -1,27 +1,31 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Entity\Enemy\Instance\TargetDummyController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\BackToMainButton.cs">
     <Files>
-      <File FileName="Assets\Scripts\Entity\Enemy\Instance\FighterController.cs" Line="211" Column="42" />
-      <File FileName="Assets\Scripts\Entity\Enemy\Instance\TargetDummyController.cs" Line="82" Column="5" />
-      <File FileName="Assets\Scripts\Entity\EntityMovement.cs" Line="77" Column="17" />
-      <File FileName="Assets\Scripts\Entity\EntityCombat.cs" Line="124" Column="16" />
-      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseMovement.cs" Line="35" Column="36" />
+      <File FileName="Assets\Scripts\UI\BeginButton.cs" Line="18" Column="3" />
+      <File FileName="Assets\Scripts\Entity\Enemy\Instance\FighterController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Enemy\Instance\TargetDummyController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\EntityMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\EntityCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Entity\Player\PlayerMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Entity\Player\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Player\PlayerCombat.cs" Line="58" Column="43" />
+      <File FileName="Assets\Scripts\Entity\Player\PlayerCombat.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Entity\EntityController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapGenerator.cs" Line="91" Column="6" />
-      <File FileName="Assets\Scripts\Skill\Instance\Slash.cs" Line="18" Column="34" />
-      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseController.cs" Line="45" Column="3" />
-      <File FileName="Assets\Scripts\Skill\Instance\Fireball.cs" Line="18" Column="41" />
-      <File FileName="Assets\Scripts\Skill\Instance\Lunge.cs" Line="24" Column="3" />
-      <File FileName="Assets\Scripts\Skill\AbstractSkillEvent.cs" Line="115" Column="2" />
-      <File FileName="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" Line="23" Column="20" />
-      <File FileName="Assets\Scripts\Skill\Skill.cs" Line="38" Column="39" />
+      <File FileName="Assets\Scripts\MapGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\Instance\Slash.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\Instance\Fireball.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\Instance\Lunge.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\AbstractSkillEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\Skill.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Skill\SkillEvent.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Server\ServerSystem.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\MultiButton.cs" Line="16" Column="2" />
+      <File FileName="Assets\Scripts\UI\BackToMainButton.cs" Line="16" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
