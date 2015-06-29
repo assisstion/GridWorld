@@ -26,6 +26,9 @@ public abstract class AbstractSkillEvent : SkillEvent {
 				return false;
 			}
 		}
+		if (ShouldCancel (willCast)) {
+			return false;
+		}
 		foreach (KeyValuePair<int, int> pair in willCast) {
 			RunAttack(pair);
 		}
@@ -43,7 +46,6 @@ public abstract class AbstractSkillEvent : SkillEvent {
 	protected int x;
 	protected int y;
 	protected float cooldown;
-	protected GameObject animObj;
 	protected EntityController controller;
 
 	public float TimePassed(){
@@ -63,7 +65,7 @@ public abstract class AbstractSkillEvent : SkillEvent {
 		if (!(controller.movement.IsGameSpace (vx, vy) 
 		      && controller.movement.CanPass 
 		      (controller.movement.map.tiles [vx, vy]))) {
-			return CanCastValue.CancelAll;
+			return CanCastValue.CancelThis;
 		} else {
 			return CanCastValue.Yes;
 		}
@@ -108,5 +110,9 @@ public abstract class AbstractSkillEvent : SkillEvent {
 	
 	protected virtual bool CanRun(){
 		return true;
+	}
+
+	protected virtual bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
+		return casts.Count == 0;
 	}
 }

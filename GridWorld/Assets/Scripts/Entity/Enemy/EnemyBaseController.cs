@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class EnemyBaseController : EntityController {
+	
+	public EntityController target;
+	public MapGenerator map;
 
 	public new EnemyBaseMovement movement{
 		get{
@@ -35,6 +38,10 @@ public class EnemyBaseController : EntityController {
 	// Update is called once per frame
 	protected override void Update () {
 		
+	}
+
+	public virtual void Initialize(){
+
 	}
 	
 	protected override EntityMovement MovementHolder(){

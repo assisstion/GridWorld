@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
      <Compile Include="Assets\Scripts\Skill\AbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\CompositeSkillEvent.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Fireball.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Lunge.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Slash.cs" />
      <Compile Include="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" />

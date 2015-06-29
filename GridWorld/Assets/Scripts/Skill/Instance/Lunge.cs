@@ -6,8 +6,8 @@ public class Lunge : Skill {
 	float cd;
 	float dashTime;
 	
-	public Lunge(EntityController control, float cd, float dashTime) 
-	: base(control, "slash", cd){
+	public Lunge(EntityController control, float cd, float dashTime, float manaCost) 
+	: base(control, "lunge", cd, manaCost){
 		this.cd = cd;
 		this.dashTime = dashTime;
 	} 
@@ -17,6 +17,10 @@ public class Lunge : Skill {
 		evs.Add (new LungeDashEvent (controller, dashTime));
 		evs.Add (new LungeStrikeEvent (controller, cd - dashTime));
 		return new CompositeSkillEvent(controller, evs);
+	}
+
+	public static Lunge Default(EntityController control){
+		return new Lunge (control, 1f, 0.3f, 10);
 	}
 
 	public class LungeDashEvent : NoncombatAbstractSkillEvent{
@@ -84,7 +88,10 @@ public class Lunge : Skill {
 	}
 
 	public class LungeStrikeEvent : AbstractSkillEvent{
+
 		
+		protected GameObject animObj;
+
 		public LungeStrikeEvent(EntityController cont, float cd){
 			controller = cont;
 			cooldown = cd;

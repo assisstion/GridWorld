@@ -20,4 +20,7 @@ public abstract class NoncombatAbstractSkillEvent : AbstractSkillEvent {
 		//Do nothing
 	}
 
+	protected override bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
+		return false;
+	}
 }

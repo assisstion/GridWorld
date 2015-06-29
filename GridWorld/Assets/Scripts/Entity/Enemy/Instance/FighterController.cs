@@ -4,8 +4,6 @@ using System.Collections;
 namespace FighterEnemy{
 	public class FighterController : EnemyBaseController {
 
-		public EntityController target;
-		public MapGenerator map;
 		
 		public new FighterMovement movement{
 			get{
@@ -43,7 +41,7 @@ namespace FighterEnemy{
 			base.Update ();
 		}
 		
-		public void Initialize(){
+		public override void Initialize(){
 			if (started) {
 				return;
 			}
@@ -83,16 +81,9 @@ namespace FighterEnemy{
 				lastDirection = targetDir;
 				GoTowards (targetDir);
 			}
-			
-			public void SetLocation(int x, int y, int dir){
-				Setup (x, y, dir);
-			}
-			
-			protected override void MoveSuccess(bool ping){
-				base.MoveSuccess (ping);
-				if (ping) {
-					controller.combat.action = moveCooldown;
-				}
+
+			protected override EnemyBaseController GetController(){
+				return controller;
 			}
 		}
 		
@@ -101,7 +92,7 @@ namespace FighterEnemy{
 			new FighterController controller;
 			bool started = false;
 			
-			float strikeChance = 0.25f;
+			//float strikeChance = 0.25f;
 			
 			public FighterCombat(){
 			}
@@ -113,7 +104,7 @@ namespace FighterEnemy{
 				started = true;
 				controller = control;
 				skills = new Skill[1];
-				skills [0] = new Slash (controller, 0.35f);
+				skills [0] = Slash.Default (controller);
 				maxHealth = 10;
 			}
 			
@@ -176,7 +167,7 @@ namespace FighterEnemy{
 			
 			void Attack(){
 				int xDist = controller.target.movement.playerX - controller.movement.playerX;
-				int yDist = controller.target.movement.playerX - controller.movement.playerX;
+				int yDist = controller.target.movement.playerY - controller.movement.playerY;
 				if (xDist == 1) {
 					if (!controller.movement.TryTurn (Direction.right)) {
 						action = skills [0].Activate ();
@@ -215,6 +206,10 @@ namespace FighterEnemy{
 				} else {
 					return 0;
 				}
+			}
+
+			protected override EnemyBaseController GetController(){
+				return controller;
 			}
 			
 		}

@@ -40,7 +40,7 @@ public class EntityMovement : MonoBehaviour {
 
 	protected float speed;
 
-	protected void Setup(int x, int y, int dir){
+	public void Setup(int x, int y, int dir){
 		TryMove (x, y, dir, MoveMode.NoEvent);
 	}
 

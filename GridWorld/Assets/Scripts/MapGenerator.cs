@@ -8,6 +8,7 @@ public class MapGenerator : MonoBehaviour {
 	Random generator;
 	int seed;
 	public GameObject targetDummy;
+	public GameObject fighter;
 	public GameObject tile;
 	public Material rockMaterial;
 	public Material grassMaterial;
@@ -21,6 +22,7 @@ public class MapGenerator : MonoBehaviour {
 
 	public int width = 16;
 	public int height = 16;
+
 	Vector3 origin = new Vector3 (0, 0, 0);
 	
 	
@@ -64,9 +66,16 @@ public class MapGenerator : MonoBehaviour {
 
 	void GenerateEnemies(){
 		for (int i = 0; i < enemyCount; i++) {
-			GameObject obj = Instantiate (targetDummy) as GameObject;
-			//TargetDummyController ctrl = obj.GetComponentInChildren<TargetDummyController> ();
-			FighterEnemy.FighterController ctrl = obj.GetComponentInChildren<FighterEnemy.FighterController> ();
+			GameObject obj;
+			EnemyBaseController ctrl;
+			if(UnityEngine.Random.value > 0.5f){
+				obj = Instantiate (targetDummy) as GameObject;
+				ctrl = obj.GetComponentInChildren<TargetDummyController> ();
+			}
+			else{
+				obj = Instantiate (fighter) as GameObject;
+				ctrl = obj.GetComponentInChildren<FighterEnemy.FighterController> ();
+			}
 			ctrl.target = GameObject.FindObjectOfType<PlayerController>();
 			ctrl.map = this;
 			ctrl.Initialize ();
@@ -76,7 +85,7 @@ public class MapGenerator : MonoBehaviour {
 				int x = (int)(generator.NextDouble() * width);
 				int y = (int)(generator.NextDouble() * width);
 				if (ctrl.movement.CanMoveTo (x, y) && !(x == 0 && y == 0)) {
-					ctrl.movement.SetLocation (x, y, 
+					ctrl.movement.Setup (x, y, 
 					     Direction.RandomDirection());
 					break;
 				}

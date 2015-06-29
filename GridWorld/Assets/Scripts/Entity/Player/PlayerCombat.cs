@@ -7,7 +7,7 @@ public class PlayerCombat : EntityCombat {
 	public BarController actionBar;
 	public BarController manaBar;
 
-	public override int health{
+	public override float health{
 		set{
 			base.health = value;
 			healthBar.percent = _health * 100.0f / maxHealth;
@@ -27,7 +27,7 @@ public class PlayerCombat : EntityCombat {
 		}
 	}
 
-	public override int mana{
+	public override float mana{
 		set{
 			base.mana = value;
 			manaBar.percent = _mana * 100.0f / maxMana;
@@ -47,11 +47,16 @@ public class PlayerCombat : EntityCombat {
 		skills = new Skill[10];
 		for (int i = 0; i < 10; i++) {
 			Skill tempSkill;
-			if(i == 1){
-				tempSkill = new Lunge(controller, 1f, 0.3f);
-			}
-			else{
-				tempSkill = new Slash(controller, 0.35f);
+			switch(i){
+			case 1:
+				tempSkill = Lunge.Default(controller);
+				break;
+			case 2:
+				tempSkill = Fireball.Default(controller);
+				break;
+			default:
+				tempSkill = Slash.Default(controller);
+				break;
 				//tempSkill.cooldown = (i+1) * 0.1f;
 			}
 			skills[i] = tempSkill;

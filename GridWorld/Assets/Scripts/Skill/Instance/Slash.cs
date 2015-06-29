@@ -5,8 +5,8 @@ public class Slash : Skill{
 
 	float cd;
 
-	public Slash(EntityController control, float cd) 
-			: base(control, "slash", cd){
+	public Slash(EntityController control, float cd, float manaCost) 
+			: base(control, "slash", cd, manaCost){
 		this.cd = cd;
 	} 
 
@@ -14,7 +14,14 @@ public class Slash : Skill{
 		return new SlashSkillEvent (controller, cd);
 	}
 
+	public static Slash Default(EntityController control){
+		return new Slash (control, 0.35f, 0);
+	}
+
 	public class SlashSkillEvent : AbstractSkillEvent{
+
+		
+		protected GameObject animObj;
 
 		public SlashSkillEvent(EntityController cont, float cd){
 			controller = cont;

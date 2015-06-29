@@ -27,4 +27,17 @@ public class EnemyBaseMovement : EntityMovement {
 	protected override void Update () {
 		base.Update ();
 	}
+	
+	
+	protected override void MoveSuccess(bool ping){
+		base.MoveSuccess (ping);
+		if (ping) {
+			controller.combat.action = moveCooldown;
+		}
+	}
+	
+	protected override void TurnSuccess(){
+		controller.combat.action = turnCooldown;
+	}
+
 }

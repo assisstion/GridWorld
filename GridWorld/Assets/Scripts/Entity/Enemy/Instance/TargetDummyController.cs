@@ -4,8 +4,6 @@ using System.Collections;
 namespace TargetDummyEnemy{
 	public class TargetDummyController : EnemyBaseController {
 
-		public MapGenerator map;
-
 		public new TargetDummyMovement movement{
 			get{
 				return ___movement;
@@ -42,7 +40,7 @@ namespace TargetDummyEnemy{
 			base.Update ();
 		}
 
-		public void Initialize(){
+		public override void Initialize(){
 			if (started) {
 				return;
 			}
@@ -83,15 +81,8 @@ namespace TargetDummyEnemy{
 				GoTowards (targetDir);
 			}
 
-			public void SetLocation(int x, int y, int dir){
-				Setup (x, y, dir);
-			}
-
-			protected override void MoveSuccess(bool ping){
-				base.MoveSuccess (ping);
-				if (ping) {
-					controller.combat.action = moveCooldown;
-				}
+			protected override EnemyBaseController GetController(){
+				return controller;
 			}
 		}
 		
@@ -112,7 +103,7 @@ namespace TargetDummyEnemy{
 				started = true;
 				controller = control;
 				skills = new Skill[1];
-				skills [0] = new Slash (controller, 0.35f);
+				skills [0] = Slash.Default (controller);
 				maxHealth = 10;
 			}
 
@@ -126,6 +117,10 @@ namespace TargetDummyEnemy{
 
 			void Attack(){
 				action = skills [0].Activate ();
+			}
+
+			protected override EnemyBaseController GetController(){
+				return controller;
 			}
 			
 		}

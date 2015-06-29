@@ -9,7 +9,7 @@ public class EntityCombat : MonoBehaviour {
 	List<SkillEvent> liveSkills;
 	List<SkillEvent> toAdd;
 	
-	public virtual int health {
+	public virtual float health {
 		set {
 			_health = value;
 		}
@@ -17,11 +17,11 @@ public class EntityCombat : MonoBehaviour {
 			return _health;
 		}
 	}
-	protected int _health;
+	protected float _health;
+	protected float maxHealth = 100;
+	protected float baseHealthRegen = 1f; // per second
 	
-	protected int maxHealth = 100;
-	
-	public virtual int mana{
+	public virtual float mana{
 		set{
 			_mana = value;
 		}
@@ -29,9 +29,9 @@ public class EntityCombat : MonoBehaviour {
 			return _mana;
 		}
 	}
-	protected int _mana;
-	
-	protected int maxMana = 200;
+	protected float _mana;
+	protected float maxMana = 100;
+	protected float baseManaRegen = 10f; // per second
 	
 	public virtual float action{
 		set{
@@ -51,13 +51,26 @@ public class EntityCombat : MonoBehaviour {
 		liveSkills = new List<SkillEvent> ();
 		toAdd = new List<SkillEvent> ();
 		health = maxHealth;
+		mana = maxMana;
 	}
 	
 	// Update is called once per frame
 	protected virtual void Update () {
 		ActionUpdate ();
 		SkillEventUpdate ();
-		
+		Tick ();
+	}
+
+	public virtual void Tick(){
+		float delta = Time.deltaTime;
+		health += delta * baseHealthRegen;
+		if (health > maxHealth) {
+			health = maxHealth;
+		}
+		mana += delta * baseManaRegen;
+		if (mana > maxMana) {
+			mana = maxMana;
+		}
 	}
 	
 	public virtual void ActionUpdate(){
@@ -69,12 +82,12 @@ public class EntityCombat : MonoBehaviour {
 		}
 	}
 	
-	public int TakeDamage(int dealt){
+	public float TakeDamage(float dealt){
 		if (health > dealt) {
 			health -= dealt;
 			return dealt;
 		} else {
-			int tempHealth = health;
+			float tempHealth = health;
 			health = 0;
 			Remove ();
 			return tempHealth;
@@ -89,7 +102,8 @@ public class EntityCombat : MonoBehaviour {
 	}
 	
 	public void ActivateSkill(int button){
-		action = skills [button].Activate ();
+		Skill skill = skills [button];
+		action = skill.Activate ();
 	}
 	
 	public bool TryLockAction(){
