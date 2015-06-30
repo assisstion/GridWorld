@@ -45,7 +45,8 @@ public class PlayerCombat : EntityCombat {
 		
 		controller = this.gameObject.GetComponent<PlayerController> ();
 		skills = new Skill[10];
-		for (int i = 0; i < 10; i++) {
+		skills [0] = Slash.Default (controller);
+		/*for (int i = 0; i < 10; i++) {
 			Skill tempSkill;
 			switch(i){
 			case 1:
@@ -60,13 +61,16 @@ public class PlayerCombat : EntityCombat {
 			case 4:
 				tempSkill = Hyper.Default(controller);
 				break;
+			case 5:
+				tempSkill = Quake.Default(controller);
+				break;
 			default:
 				tempSkill = Slash.Default(controller);
 				break;
 				//tempSkill.cooldown = (i+1) * 0.1f;
 			}
 			skills[i] = tempSkill;
-		}
+		}*/
 	}
 
 	protected override void Update(){
@@ -100,6 +104,10 @@ public class PlayerCombat : EntityCombat {
 			}
 			UnlockAction();
 		}
+	}
+
+	public void AddSkill(Skill s, int id){
+		skills [id] = s;
 	}
 
 	protected override void CleanUp(){

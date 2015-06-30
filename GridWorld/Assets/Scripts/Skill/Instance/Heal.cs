@@ -6,7 +6,7 @@ public class Heal : Skill {
 	float cd;
 	
 	public Heal(EntityController control, float cd, float manaCost) 
-	: base(control, "heal", cd, manaCost){
+	: base(control, "Heal", cd, manaCost){
 		this.cd = cd;
 	} 
 	
@@ -15,7 +15,19 @@ public class Heal : Skill {
 	}
 
 	public static Heal Default(EntityController control){
-		return new Heal (control, 1.0f, 20);
+		return new Heal (control, 0.1f, 30);
+	}
+
+	public override int GetID (){
+		return 3;
+	}
+
+	public override string GetCustomStat(){
+		return "Heal: " + 10;
+	}
+
+	public override string GetBody(){
+		return "Restores health to the caster";
 	}
 	
 	public class HealEvent : NoncombatAbstractSkillEvent{

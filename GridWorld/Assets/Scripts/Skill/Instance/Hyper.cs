@@ -6,7 +6,7 @@ public class Hyper : Skill {
 	float cd;
 	
 	public Hyper(EntityController control, float cd, float manaCost) 
-	: base(control, "hyper", cd, manaCost){
+	: base(control, "Hyper", cd, manaCost){
 		this.cd = cd;
 	} 
 	
@@ -16,6 +16,18 @@ public class Hyper : Skill {
 
 	public static Hyper Default(EntityController control){
 		return new Hyper (control, 0.5f, 75);
+	}
+
+	public override int GetID (){
+		return 4;
+	}
+
+	public override string GetCustomStat(){
+		return "Duration: " + 5 + " s";
+	}
+
+	public override string GetBody(){
+		return "Reduces movement cooldown by half";
 	}
 	
 	public class HyperEvent : NoncombatAbstractSkillEvent{

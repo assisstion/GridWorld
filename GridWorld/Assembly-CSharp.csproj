@@ -63,12 +63,14 @@
      <Compile Include="Assets\Scripts\Entity\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\GridController.cs" />
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
+     <Compile Include="Assets\Scripts\ShopManager.cs" />
      <Compile Include="Assets\Scripts\Skill\AbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\CompositeSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Fireball.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Heal.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Hyper.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Lunge.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Quake.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Slash.cs" />
      <Compile Include="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\Skill.cs" />
@@ -76,6 +78,8 @@
      <Compile Include="Assets\Scripts\UI\BackToMainButton.cs" />
      <Compile Include="Assets\Scripts\UI\BeginButton.cs" />
      <Compile Include="Assets\Scripts\UI\MultiButton.cs" />
+     <Compile Include="Assets\Scripts\UI\ShopButtonHandler.cs" />
+     <Compile Include="Assets\Scripts\UI\ShopButtonManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

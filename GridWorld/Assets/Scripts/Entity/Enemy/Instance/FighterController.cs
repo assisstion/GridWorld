@@ -57,6 +57,16 @@ namespace FighterEnemy{
 		
 		
 		public class FighterMovement : EnemyBaseMovement{
+
+			// Use this for initialization
+			protected override void Start () {
+				base.Start ();
+			}
+			
+			// Update is called once per frame
+			protected override void Update () {
+				base.Update ();
+			}
 			
 			new FighterController controller;
 			bool started = false;
@@ -88,6 +98,16 @@ namespace FighterEnemy{
 		}
 		
 		public class FighterCombat : EnemyBaseCombat{
+
+			// Use this for initialization
+			protected override void Start () {
+				base.Start ();
+			}
+			
+			// Update is called once per frame
+			protected override void Update () {
+				base.Update ();
+			}
 			
 			new FighterController controller;
 			bool started = false;
@@ -152,7 +172,18 @@ namespace FighterEnemy{
 							}
 						}
 					}
-					if(f > 0.2){
+					if(f > 0.8){
+						if(controller.movement.direction == primaryD){
+							controller.movement.GoTowards(primaryD);
+						}
+						else if(controller.movement.direction == secondaryD){
+							controller.movement.GoTowards(secondaryD);
+						}
+						else{
+							controller.movement.MoveRandom();
+						}
+					}
+					else if(f > 0.2){
 						controller.movement.GoTowards(primaryD);
 					}
 					else if(f > 0.1){

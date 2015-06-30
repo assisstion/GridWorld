@@ -46,4 +46,54 @@ public abstract class Skill{
 	public string GetName(){
 		return name;
 	}
+
+	public string GetInfo(){
+		return "Mana: " + manaCost + "\n" +
+			"Cooldown: " + cooldown + " s\n" +
+			GetCustomStat ();
+	}
+
+	public abstract string GetBody();
+
+	public abstract string GetCustomStat ();
+
+	public static Skill GetDefaultFromTitle(string title, PlayerController controller){
+		switch (title) {
+		case "Slash":
+			return Slash.Default(controller);
+		case "Lunge":
+			return Lunge.Default(controller);
+		case "Fireball":
+			return Fireball.Default(controller);
+		case "Heal":
+			return Heal.Default(controller);
+		case "Hyper":
+			return Hyper.Default(controller);
+		case "Quake":
+			return Quake.Default(controller);
+		default:
+			return Slash.Default(controller);
+		}
+	}
+
+	public abstract int GetID();
+
+	public static string GetTitleFromID(int id){
+		switch (id) {
+		case 0:
+			return "Slash";
+		case 1:
+			return "Lunge";
+		case 2:
+			return "Fireball";
+		case 3:
+			return "Heal";
+		case 4:
+			return "Hyper";
+		case 5:
+			return "Quake";
+		default:
+			return "";
+		}
+	}
 }

@@ -6,7 +6,7 @@ public class Slash : Skill{
 	float cd;
 
 	public Slash(EntityController control, float cd, float manaCost) 
-			: base(control, "slash", cd, manaCost){
+			: base(control, "Slash", cd, manaCost){
 		this.cd = cd;
 	} 
 
@@ -16,6 +16,18 @@ public class Slash : Skill{
 
 	public static Slash Default(EntityController control){
 		return new Slash (control, 0.35f, 0);
+	}
+
+	public override int GetID (){
+		return 0;
+	}
+
+	public override string GetCustomStat(){
+		return "";
+	}
+
+	public override string GetBody(){
+		return "A basic slash that damages enemies";
 	}
 
 	public class SlashSkillEvent : AbstractSkillEvent{

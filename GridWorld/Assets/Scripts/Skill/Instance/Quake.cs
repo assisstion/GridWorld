@@ -1,40 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Fireball : Skill {
-	
+public class Quake : Skill{
+
 	float cd;
-	
-	public Fireball(EntityController control, float cd, float manaCost) 
-	: base(control, "Fireball", cd, manaCost){
+
+	public Quake(EntityController control, float cd, float manaCost) 
+			: base(control, "Quake", cd, manaCost){
 		this.cd = cd;
 	} 
-	
+
 	public override SkillEvent GetSkillEvent(){
-		return new FireballEvent (controller, cd);
+		return new QuakeEvent (controller, cd);
 	}
 
-	public static Fireball Default(EntityController control){
-		return new Fireball (control, 1.0f, 30);
+	public static Quake Default(EntityController control){
+		return new Quake (control, 2f, 50);
 	}
 
 	public override int GetID (){
-		return 2;
+		return 5;
 	}
 
 	public override string GetCustomStat(){
-		return "Range: " + 4;
+		return "Range: " + 1;
 	}
 
 	public override string GetBody(){
-		return "Cast a 3x3 burst of fire that deals damage to enemies";
+		return "Deal damage to all enemies around the caster";
 	}
-	
-	public class FireballEvent : AbstractSkillEvent{
 
+	public class QuakeEvent : AbstractSkillEvent{
+		
 		public Dictionary<KeyValuePair<int, int>, GameObject> anim;
 		
-		public FireballEvent(EntityController cont, float cd){
+		public QuakeEvent(EntityController cont, float cd){
 			controller = cont;
 			cooldown = cd;
 			anim = new Dictionary<KeyValuePair<int, int>, GameObject>();
@@ -49,7 +49,7 @@ public class Fireball : Skill {
 				animX.transform.position = controller.movement.ConvertPosition (vx, vy, -2.0f);
 				animX.transform.localScale = new Vector3 
 					(0.05f*(1-TimePassed()/cooldown) ,animX.transform.localScale.y,0.05f*(1-TimePassed()/cooldown));
-
+				
 			}
 			if (TimePassed() > cooldown) {
 				return false;
@@ -62,14 +62,16 @@ public class Fireball : Skill {
 				GameObject.Destroy (animPair.Value);
 			}
 		}
-
-		int centerX = 0;
-		int centerY = 4;
+		
+		int extent = 1;
 		
 		protected override HashSet<KeyValuePair<int, int>> GetCoordinates (){
 			HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>> ();
-			for (int x = centerX - 1; x <= centerX + 1; x++) {
-				for(int y = centerY - 1; y <= centerY + 1; y++){
+			for (int x = -extent; x <= extent; x++) {
+				for(int y = -extent; y <= extent; y++){
+					if(x == 0 && y == 0){
+						continue;
+					}
 					set.Add (new KeyValuePair<int, int> (x, y));
 				}
 			}
@@ -80,7 +82,7 @@ public class Fireball : Skill {
 			KeyValuePair<int, int> pair = LocalToGame (coords);
 			GameObject animObj;
 			animObj = GameObject.CreatePrimitive (PrimitiveType.Plane);
-			animObj.GetComponent<MeshRenderer> ().material.color = new Color (1, 0, 0);
+			animObj.GetComponent<MeshRenderer> ().material.color = new Color (1f, 1f, 0);
 			animObj.transform.position = controller.movement.ConvertPosition (pair.Key, pair.Value, -2.0f);
 			animObj.transform.rotation = Quaternion.Euler (new Vector3 (Direction.Rotation(direction), 270, 90));
 			animObj.transform.localScale = new Vector3 (0.05f, 1, 0.05f);
@@ -89,13 +91,6 @@ public class Fireball : Skill {
 		
 		protected override void Hit(EntityController control){
 			control.combat.TakeDamage (10);
-		}
-
-		protected override bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
-			if (base.ShouldCancel (casts)) {
-				return true;
-			}
-			return !(casts.Contains(new KeyValuePair<int, int>(centerX, centerY)));
 		}
 	}
 }

@@ -7,7 +7,7 @@ public class Lunge : Skill {
 	float dashTime;
 	
 	public Lunge(EntityController control, float cd, float dashTime, float manaCost) 
-	: base(control, "lunge", cd, manaCost){
+	: base(control, "Lunge", cd, manaCost){
 		this.cd = cd;
 		this.dashTime = dashTime;
 	} 
@@ -23,6 +23,18 @@ public class Lunge : Skill {
 		return new Lunge (control, 1f, 0.3f, 10);
 	}
 
+	public override string GetCustomStat(){
+		return "Range: " + 3;
+	}
+
+	public override int GetID (){
+		return 1;
+	}
+
+	public override string GetBody(){
+		return "Dash for a short distance, then performs a strike";
+	}
+
 	public class LungeDashEvent : NoncombatAbstractSkillEvent{
 		
 		public LungeDashEvent(EntityController cont, float cd){
@@ -30,7 +42,7 @@ public class Lunge : Skill {
 			cooldown = cd;
 		}
 
-		int dashDistance = 2;
+		int dashDistance = 3;
 		int stop = 0;
 		bool moveDone;
 		

@@ -14,6 +14,7 @@ public class MapGenerator : MonoBehaviour {
 	public Material grassMaterial;
 	public Material swampMaterial;
 	public Material bgMaterial;
+	public ShopManager shopManager;
 	
 	public float gridSize = 1.0f;
 	public float spacing = 0.01f;
@@ -69,11 +70,13 @@ public class MapGenerator : MonoBehaviour {
 	public void EnemyDestroyed(){
 		waveLeft--;
 		if (waveLeft == 0) {
-			NextWave();
+			shopManager.Shop();
 		}
 	}
 
-	void NextWave(){
+
+
+	public void NextWave(){
 		wave++;
 		enemyCount = (int)(width * height / 4.0f * (1 - Mathf.Pow(0.95f, wave))) + 1;
 		float waveValue = 0.5f * (1 - Mathf.Pow (0.8f, wave));
