@@ -69,7 +69,7 @@ namespace TargetDummyEnemy{
 				controller = control;
 				this.map = map;
 				Setup (x, y, dir);
-				lastDirection = GetDirection();
+				lastDirection = direction;
 			}
 
 			public void Move(){

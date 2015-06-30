@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
 
 public class PlayerMovement : EntityMovement {
 
-	[SyncVar]
 	bool started;
-
-	//[SyncVar]
+	
 	PlayerController controller;
 
-	//[SyncVar]
 	public CameraController cam;
 
 	public PlayerMovement(){
@@ -33,56 +29,30 @@ public class PlayerMovement : EntityMovement {
 	// Update is called once per frame
 	protected override void Update () {
 		if (!started) {
-			//Initialize();
-			return;
-		}
-		//if (!isLocalPlayer) {
-		//	return;
-		//}
-		InputCheck ();
-	}
-
-	[ClientCallback]
-	public void InputCheck(){
-		if (!isLocalPlayer) {
-			return;
+			Initialize();
 		}
 		if(controller.combat.TryLockAction()){
 			if (Input.GetKey (KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-				CmdMoveAction(Direction.up);
+				GoTowards(Direction.up);
 			}
 			else if (Input.GetKey (KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-				CmdMoveAction(Direction.left);
+				GoTowards(Direction.left);
 			}
 			else if (Input.GetKey (KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-				CmdMoveAction(Direction.down);
+				GoTowards(Direction.down);
 			}
 			else if (Input.GetKey (KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-				CmdMoveAction(Direction.right);
+				GoTowards(Direction.right);
 			}
 			controller.combat.UnlockAction();
 		}
-	}
-
-	[Command]
-	public void CmdMoveAction(int direction){
-		GoTowards(direction);
-	}
-
-	public override void Setup(int x, int y, int dir){
-		base.Setup (x, y, dir);
-		UpdateCam ();
-	}
-
-	void UpdateCam(){
-		cam.UpdateLocation (transform.position.x, transform.position.y, GetDirection());
 	}
 
 	protected override void MoveSuccess (bool ping)
 	{
 		//Overriden method currently empty
 		base.MoveSuccess (ping);
-		UpdateCam ();
+		cam.UpdateLocation (transform.position.x, transform.position.y);
 		GridController gc = map.tiles[playerX,playerY].GetComponent<GridController> ();
 		if (gc.terrainType.Equals ("swamp")) {
 			controller.combat.TakeDamage(10);
@@ -100,7 +70,6 @@ public class PlayerMovement : EntityMovement {
 	protected override void TurnSuccess(){
 		//Overriden method currently empty
 		base.TurnSuccess ();
-		UpdateCam ();
 		GridController gc = map.tiles[playerX,playerY].GetComponent<GridController> ();
 		if (gc.terrainType.Equals ("swamp")) {
 			controller.combat.action = turnCooldown * 4;

@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Networking;
 
-public class EntityCombat : NetworkBehaviour {
+public class EntityCombat : MonoBehaviour {
 	
 	public GameObject holder;
 	public Skill[] skills;
@@ -101,9 +100,8 @@ public class EntityCombat : NetworkBehaviour {
 		}
 		GameObject.Destroy (holder);
 	}
-
-	[Command]
-	public void CmdActivateSkill(int button){
+	
+	public void ActivateSkill(int button){
 		Skill skill = skills [button];
 		action = skill.Activate ();
 	}

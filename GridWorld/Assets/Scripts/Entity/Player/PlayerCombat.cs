@@ -70,30 +70,27 @@ public class PlayerCombat : EntityCombat {
 
 	
 	public void InputCheck(){
-		if (!isLocalPlayer) {
-			return;
-		}
 		if (TryLockAction ()) {
 			if(Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)){
-				CmdActivateSkill(0);
+				ActivateSkill(0);
 			} else if(Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)){
-				CmdActivateSkill(1);
+				ActivateSkill(1);
 			} else if(Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3)){
-				CmdActivateSkill(2);
+				ActivateSkill(2);
 			} else if(Input.GetKey(KeyCode.Alpha4) || Input.GetKey(KeyCode.Keypad4)){
-				CmdActivateSkill(3);
+				ActivateSkill(3);
 			} else if(Input.GetKey(KeyCode.Alpha5) || Input.GetKey(KeyCode.Keypad5)){
-				CmdActivateSkill(4);
+				ActivateSkill(4);
 			} else if(Input.GetKey(KeyCode.Alpha6) || Input.GetKey(KeyCode.Keypad6)){
-				CmdActivateSkill(5);
+				ActivateSkill(5);
 			} else if(Input.GetKey(KeyCode.Alpha7) || Input.GetKey(KeyCode.Keypad7)){
-				CmdActivateSkill(6);
+				ActivateSkill(6);
 			} else if(Input.GetKey(KeyCode.Alpha8) || Input.GetKey(KeyCode.Keypad8)){
-				CmdActivateSkill(7);
+				ActivateSkill(7);
 			} else if(Input.GetKey(KeyCode.Alpha9) || Input.GetKey(KeyCode.Keypad9)){
-				CmdActivateSkill(8);
+				ActivateSkill(8);
 			} else if(Input.GetKey(KeyCode.Alpha0) || Input.GetKey(KeyCode.Keypad0)){
-				CmdActivateSkill(9);
+				ActivateSkill(9);
 			}
 			UnlockAction();
 		}

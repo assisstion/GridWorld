@@ -7,7 +7,7 @@ public abstract class AbstractSkillEvent : SkillEvent {
 
 	public virtual bool Initialize(){
 		startTime = Time.time;
-		direction = controller.movement.GetDirection();
+		direction = controller.movement.direction;
 		x = controller.movement.playerX;// + Direction.ValueX (direction);
 		y = controller.movement.playerY;// + Direction.ValueY (direction);
 		if (!CanRun ()) {

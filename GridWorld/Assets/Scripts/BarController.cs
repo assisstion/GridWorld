@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.Networking;
 
-public class BarController : NetworkBehaviour {
+public class BarController : MonoBehaviour {
 
 	public float percent {
 		set {

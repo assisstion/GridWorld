@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
 
-public class GridController : NetworkBehaviour {
+public class GridController : MonoBehaviour {
 
-	public string terrainType;
+	public string terrainType {
+		get;
+		set; 
+	}
+	private string _terrainType;
 
 	// Use this for initialization
 	void Start () {
@@ -15,4 +18,5 @@ public class GridController : NetworkBehaviour {
 	void Update () {
 	
 	}
+
 }

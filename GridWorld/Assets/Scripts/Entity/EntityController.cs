@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
 
-public class EntityController : NetworkBehaviour {
+public class EntityController : MonoBehaviour {
 
 	public EntityController(){
 

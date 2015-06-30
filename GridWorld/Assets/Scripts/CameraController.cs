@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
 
-public class CameraController : NetworkBehaviour {
+public class CameraController : MonoBehaviour {
 
 	float speed = 10.0f;
 
@@ -16,10 +15,8 @@ public class CameraController : NetworkBehaviour {
 
 	}
 
-	public void UpdateLocation(float x, float y, int direction){
+	public void UpdateLocation(float x, float y){
 		transform.position = new Vector3 (x, y, transform.position.z);
-		transform.localRotation = Quaternion.Euler(new Vector3 (90,
-			(Direction.Rotation (direction) + 90) % 360, 0));
 	}
 
 	void ManualMovement(){

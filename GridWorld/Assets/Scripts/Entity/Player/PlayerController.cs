@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
 
 public class PlayerController : EntityController {
 
-	//[SyncVar]
-	public new PlayerMovement movement;
+	public new PlayerMovement movement{
+		get{
+			return __movement;
+		}
+	}
+	PlayerMovement __movement;
 
-	//[SyncVar]
-	public new PlayerCombat combat;
+	public new PlayerCombat combat{
+		get{
+			return __combat;
+		}
+	}
+	PlayerCombat __combat;
 
 	// Use this for initialization
 	protected override void Start () {
-
-	}
-
-	public void Initialize(MapGenerator map){
-		movement = this.gameObject.GetComponent<PlayerMovement> ();
-		movement.map = map;
-		movement.Initialize ();
-		combat = this.gameObject.GetComponent<PlayerCombat> ();
+		__movement = this.gameObject.GetComponent<PlayerMovement> ();
+		__combat = this.gameObject.GetComponent<PlayerCombat> ();
 	}
 	
 	// Update is called once per frame
@@ -28,10 +29,10 @@ public class PlayerController : EntityController {
 	}
 
 	protected override EntityMovement MovementHolder(){
-		return movement;
+		return __movement;
 	}
 	
 	protected override EntityCombat CombatHolder(){
-		return combat;
+		return __combat;
 	}
 }
