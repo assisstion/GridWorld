@@ -1,36 +1,24 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MapGenerator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Skill\Instance\Heal.cs">
     <Files>
-      <File FileName="Assets\Scripts\MapGenerator.cs" Line="19" Column="33" />
-      <File FileName="Assets\Scripts\UI\BeginButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapGenerator.cs" Line="77" Column="2" />
+      <File FileName="Assets\Scripts\ShopManager.cs" Line="32" Column="54" />
+      <File FileName="Assets\Scripts\Skill\Skill.cs" Line="96" Column="14" />
+      <File FileName="Assets\Scripts\Skill\Instance\Fireball.cs" Line="31" Column="3" />
+      <File FileName="Assets\Scripts\Skill\SkillEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\Instance\Heal.cs" Line="18" Column="32" />
+      <File FileName="Assets\Scripts\Skill\Instance\Hyper.cs" Line="25" Column="2" />
+      <File FileName="Assets\Scripts\Skill\Instance\Lunge.cs" Line="116" Column="1" />
+      <File FileName="Assets\Scripts\Skill\Instance\Quake.cs" Line="30" Column="55" />
+      <File FileName="Assets\Scripts\Skill\Instance\Slash.cs" Line="30" Column="45" />
+      <File FileName="Assets\Scripts\Entity\Player\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Player\PlayerCombat.cs" Line="48" Column="41" />
+      <File FileName="Assets\Scripts\Entity\EntityCombat.cs" Line="134" Column="11" />
       <File FileName="Assets\Scripts\Entity\Enemy\Instance\FighterController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Entity\Enemy\Instance\TargetDummyController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\EntityMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\EntityCombat.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Player\PlayerMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Player\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\EntityController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\Instance\Slash.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\Instance\Fireball.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\Instance\Lunge.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\AbstractSkillEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\Skill.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\SkillEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseCombat.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\MultiButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\BackToMainButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\Instance\Heal.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Player\PlayerCombat.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\CompositeSkillEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\Instance\Hyper.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\Instance\Quake.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\ShopButtonHandler.cs" Line="7" Column="48" />
-      <File FileName="Assets\Scripts\UI\ShopButtonManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\AbstractSkillEvent.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

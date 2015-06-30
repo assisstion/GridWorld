@@ -42,7 +42,7 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler {
 			obj.transform.localPosition = new Vector3(-120 + (120 * i), -20, 0);
 			ShopButtonManager manager = obj.GetComponent<ShopButtonManager>();
 			manager.AttachHandler(this);
-			manager.SetText(skills[i].GetName(), skills[i].GetInfo(), skills[i].GetBody());
+			manager.SetText(skills[i].GetName(), skills[i].GetID()+1, skills[i].GetInfo(), skills[i].GetBody());
 			addedButtons.Add(obj);
 		}
 	}

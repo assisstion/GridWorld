@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class ShopButtonManager : MonoBehaviour {
 
+	string name;
+	int id;
+
 	public Text titleText;
 	public Text infoText;
 	public Text bodyText;
@@ -20,14 +23,24 @@ public class ShopButtonManager : MonoBehaviour {
 	
 	}
 
-	public void SetText(string title, string info, string body){
-		titleText.text = title;
+	public void SetText(string name, int id, string info, string body){
+		this.name = name;
+		this.id = id;
+		titleText.text = Format(name, id);
 		infoText.text = info;
 		bodyText.text = body;
 	}
 
+	static string Format(string name, int id){
+		return name + " (" + id + ")";
+	}
+
 	public string GetTitle(){
-		return titleText.text;
+		return name;
+	}
+
+	public int GetID(){
+		return id;
 	}
 
 	public string GetInfo(){
