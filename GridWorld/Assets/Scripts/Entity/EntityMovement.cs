@@ -34,9 +34,12 @@ public class EntityMovement : MonoBehaviour {
 		}
 	}
 	protected int _playerY;
+
+	public float defaultMoveCooldown = 0.5f;
+	public float defaultTurnCooldown = 0.15f;
 	
-	protected float moveCooldown = 0.5f;
-	protected float turnCooldown = 0.15f;
+	public float moveCooldown;
+	public float turnCooldown;
 
 	protected float speed;
 
@@ -121,7 +124,8 @@ public class EntityMovement : MonoBehaviour {
 
 	// Use this for initialization
 	protected virtual void Start () {
-	
+		moveCooldown = defaultMoveCooldown;
+		turnCooldown = defaultTurnCooldown;
 	}
 	
 	// Update is called once per frame

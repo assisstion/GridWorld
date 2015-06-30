@@ -54,6 +54,12 @@ public class PlayerCombat : EntityCombat {
 			case 2:
 				tempSkill = Fireball.Default(controller);
 				break;
+			case 3:
+				tempSkill = Heal.Default(controller);
+				break;
+			case 4:
+				tempSkill = Hyper.Default(controller);
+				break;
 			default:
 				tempSkill = Slash.Default(controller);
 				break;
@@ -94,5 +100,9 @@ public class PlayerCombat : EntityCombat {
 			}
 			UnlockAction();
 		}
+	}
+
+	protected override void CleanUp(){
+		Application.LoadLevel ("MainMenu");
 	}
 }

@@ -1,31 +1,33 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\BackToMainButton.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Entity\Player\PlayerCombat.cs">
     <Files>
-      <File FileName="Assets\Scripts\UI\BeginButton.cs" Line="18" Column="3" />
-      <File FileName="Assets\Scripts\Entity\Enemy\Instance\FighterController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Enemy\Instance\TargetDummyController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\EntityMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\EntityCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapGenerator.cs" Line="59" Column="5" />
+      <File FileName="Assets\Scripts\UI\BeginButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Enemy\Instance\FighterController.cs" Line="108" Column="6" />
+      <File FileName="Assets\Scripts\Entity\Enemy\Instance\TargetDummyController.cs" Line="154" Column="28" />
+      <File FileName="Assets\Scripts\Entity\EntityMovement.cs" Line="42" Column="50" />
+      <File FileName="Assets\Scripts\Entity\EntityCombat.cs" Line="95" Column="25" />
       <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseMovement.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Entity\Player\PlayerMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Player\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Player\PlayerCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity\Player\PlayerController.cs" Line="39" Column="1" />
       <File FileName="Assets\Scripts\Entity\EntityController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MapGenerator.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\Instance\Slash.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\Instance\Slash.cs" Line="70" Column="1" />
       <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Skill\Instance\Fireball.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Skill\Instance\Lunge.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\AbstractSkillEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\AbstractSkillEvent.cs" Line="122" Column="75" />
+      <File FileName="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" Line="11" Column="23" />
       <File FileName="Assets\Scripts\Skill\Skill.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Skill\SkillEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseCombat.cs" Line="1" Column="1" />
-      <File FileName="Assets\Server\ServerSystem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\MultiButton.cs" Line="16" Column="2" />
+      <File FileName="Assets\Scripts\Entity\Enemy\EnemyBaseCombat.cs" Line="47" Column="36" />
+      <File FileName="Assets\Scripts\UI\MultiButton.cs" Line="20" Column="1" />
       <File FileName="Assets\Scripts\UI\BackToMainButton.cs" Line="16" Column="27" />
+      <File FileName="Assets\Scripts\Skill\Instance\Heal.cs" Line="40" Column="32" />
+      <File FileName="Assets\Scripts\Entity\Player\PlayerCombat.cs" Line="62" Column="11" />
+      <File FileName="Assets\Scripts\Skill\CompositeSkillEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Skill\Instance\Hyper.cs" Line="8" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -42,4 +42,8 @@ public class EnemyBaseCombat : EntityCombat {
 	protected virtual void PerformAction(){
 		//to be overriden
 	}
+
+	protected override void CleanUp(){
+		controller.map.EnemyDestroyed ();
+	}
 }

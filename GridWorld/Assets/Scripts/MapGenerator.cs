@@ -29,6 +29,9 @@ public class MapGenerator : MonoBehaviour {
 	public GameObject[,] tiles;
 	public GameObject[,] objects;
 
+	protected int waveLeft;
+	int wave = 0;
+
 	int enemyCount;
 	int swampCount;
 	HashSet<KeyValuePair<int,int>> swamps = new HashSet<KeyValuePair<int,int>>();
@@ -36,13 +39,12 @@ public class MapGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		swampCount = width * height / 8;
-		enemyCount = width * height / 24;
 		seed = new Random ().Next ();
 		generator = new Random (seed);
 		tiles = new GameObject[width,height];
 		objects = new GameObject[width, height];
 		GenerateWorld ();
-		GenerateEnemies ();
+		NextWave ();
 	}
 
 	void GenerateWorld(){
@@ -64,13 +66,26 @@ public class MapGenerator : MonoBehaviour {
 		mr.material = bgMaterial;
 	}
 
-	void GenerateEnemies(){
+	public void EnemyDestroyed(){
+		waveLeft--;
+		if (waveLeft == 0) {
+			NextWave();
+		}
+	}
+
+	void NextWave(){
+		wave++;
+		enemyCount = (int)(width * height / 4.0f * (1 - Mathf.Pow(0.95f, wave))) + 1;
+		float waveValue = 0.5f * (1 - Mathf.Pow (0.8f, wave));
+		Debug.Log(wave + ":" + enemyCount + "," + waveValue);
 		for (int i = 0; i < enemyCount; i++) {
 			GameObject obj;
 			EnemyBaseController ctrl;
-			if(UnityEngine.Random.value > 0.5f){
+			if(UnityEngine.Random.value > waveValue){
 				obj = Instantiate (targetDummy) as GameObject;
-				ctrl = obj.GetComponentInChildren<TargetDummyController> ();
+				TargetDummyController tdc = obj.GetComponentInChildren<TargetDummyController> ();
+				tdc.SetMode(UnityEngine.Random.Range(0,4));
+				ctrl = tdc; 
 			}
 			else{
 				obj = Instantiate (fighter) as GameObject;
@@ -94,6 +109,7 @@ public class MapGenerator : MonoBehaviour {
 			if (counter >= tries) {
 				Debug.Log ("What is this unluckiness?");
 			}
+			waveLeft = enemyCount;
 		}
 	}
 	

@@ -105,7 +105,7 @@ namespace FighterEnemy{
 				controller = control;
 				skills = new Skill[1];
 				skills [0] = Slash.Default (controller);
-				maxHealth = 10;
+				_maxHealth = 10;
 			}
 			
 			protected override void PerformAction(){

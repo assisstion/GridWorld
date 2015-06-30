@@ -4,6 +4,8 @@ using System.Collections;
 namespace TargetDummyEnemy{
 	public class TargetDummyController : EnemyBaseController {
 
+		int mode;
+
 		public new TargetDummyMovement movement{
 			get{
 				return ___movement;
@@ -54,6 +56,14 @@ namespace TargetDummyEnemy{
 			combat.holder = this.gameObject.GetComponent<EnemyBaseManager> ().holder;
 		}
 
+		//0 = no attack
+		//1 = slash
+		//2 = slash/dash
+		//3 = slash/dash/fireball/heal
+		public void SetMode(int mode){
+			this.mode = mode;
+		}
+
 		
 		public class TargetDummyMovement : EnemyBaseMovement{
 
@@ -102,9 +112,12 @@ namespace TargetDummyEnemy{
 				}
 				started = true;
 				controller = control;
-				skills = new Skill[1];
+				skills = new Skill[4];
 				skills [0] = Slash.Default (controller);
-				maxHealth = 10;
+				skills [1] = Lunge.Default (controller);
+				skills [2] = Fireball.Default (controller);
+				skills [3] = Heal.Default (controller);
+				_maxHealth = 10;
 			}
 
 			protected override void PerformAction(){
@@ -116,13 +129,33 @@ namespace TargetDummyEnemy{
 			}
 
 			void Attack(){
-				action = skills [0].Activate ();
+				int[] aSkill = AllowedSkills ();
+				if (aSkill.Length == 0) {
+					action = 0;
+				} else {
+					action = skills [aSkill[
+					  Random.Range(0, aSkill.Length)]].Activate ();
+				}
 			}
 
 			protected override EnemyBaseController GetController(){
 				return controller;
 			}
-			
+
+			public int[] AllowedSkills(){
+				switch (controller.mode) {
+				case 0:
+					return new int[]{};
+				case 1:
+					return new int[]{0};
+				case 2:
+					return new int[]{0,1};
+				case 3:
+					return new int[]{0,1,2};
+				default:
+					return new int[]{};
+				}
+			}
 		}
 	}
 }

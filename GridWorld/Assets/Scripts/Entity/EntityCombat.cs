@@ -18,7 +18,12 @@ public class EntityCombat : MonoBehaviour {
 		}
 	}
 	protected float _health;
-	protected float maxHealth = 100;
+	public float maxHealth{
+		get{
+			return _maxHealth;
+		}
+	}
+	protected float _maxHealth = 100;
 	protected float baseHealthRegen = 1f; // per second
 	
 	public virtual float mana{
@@ -30,8 +35,13 @@ public class EntityCombat : MonoBehaviour {
 		}
 	}
 	protected float _mana;
-	protected float maxMana = 100;
-	protected float baseManaRegen = 10f; // per second
+	public float maxMana{
+		get{
+			return _maxMana;
+		}
+	}
+	protected float _maxMana = 100;
+	protected float baseManaRegen = 5f; // per second
 	
 	public virtual float action{
 		set{
@@ -81,6 +91,18 @@ public class EntityCombat : MonoBehaviour {
 			action = 0;
 		}
 	}
+
+	public float HealHealth(float healed){
+		float temp = health + healed;
+		if (temp < maxHealth) {
+			health = temp;
+			return healed;
+		} else {
+			float temp2 = health;
+			health = maxHealth;
+			return health - temp2;
+		}
+	}
 	
 	public float TakeDamage(float dealt){
 		if (health > dealt) {
@@ -98,7 +120,12 @@ public class EntityCombat : MonoBehaviour {
 		foreach (SkillEvent sEvent in liveSkills) {
 			sEvent.CleanUp();
 		}
+		CleanUp ();
 		GameObject.Destroy (holder);
+	}
+
+	protected virtual void CleanUp(){
+
 	}
 	
 	public void ActivateSkill(int button){

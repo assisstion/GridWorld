@@ -15,7 +15,7 @@ public class Fireball : Skill {
 	}
 
 	public static Fireball Default(EntityController control){
-		return new Fireball (control, 1.0f, 50);
+		return new Fireball (control, 1.0f, 40);
 	}
 	
 	public class FireballEvent : AbstractSkillEvent{

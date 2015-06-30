@@ -39,6 +39,9 @@ public abstract class AbstractSkillEvent : SkillEvent {
 				OnHit(target, pair);
 			}
 		}
+		if (!PostCast ()) {
+			return false;
+		}
 		return true;
 	}
 
@@ -90,6 +93,10 @@ public abstract class AbstractSkillEvent : SkillEvent {
 			}
 		}
 		return false;
+	}
+
+	protected virtual bool PostCast(){
+		return true;
 	}
 
 	protected abstract void Hit (EntityController controller);

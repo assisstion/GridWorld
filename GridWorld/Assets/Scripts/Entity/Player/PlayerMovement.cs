@@ -15,6 +15,7 @@ public class PlayerMovement : EntityMovement {
 
 	// Use this for initialization
 	protected override void Start () {
+		base.Start ();
 		controller = this.gameObject.GetComponent<PlayerController> ();
 	}
 
