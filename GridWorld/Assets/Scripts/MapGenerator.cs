@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using TargetDummyEnemy;
 using Random = System.Random;
+using UnityEngine.Networking;
 
-public class MapGenerator : MonoBehaviour {
+public class MapGenerator : NetworkBehaviour{
 
 	Random generator;
 	int seed;
 	public GameObject targetDummy;
 	public GameObject fighter;
 	public GameObject tile;
+	public GameObject planeObj;
 	public Material rockMaterial;
 	public Material grassMaterial;
 	public Material swampMaterial;
@@ -24,8 +26,7 @@ public class MapGenerator : MonoBehaviour {
 	public int height = 16;
 
 	Vector3 origin = new Vector3 (0, 0, 0);
-	
-	
+
 	public GameObject[,] tiles;
 	public GameObject[,] objects;
 
@@ -42,7 +43,7 @@ public class MapGenerator : MonoBehaviour {
 		tiles = new GameObject[width,height];
 		objects = new GameObject[width, height];
 		GenerateWorld ();
-		GenerateEnemies ();
+		//GenerateEnemies ();
 	}
 
 	void GenerateWorld(){
@@ -56,10 +57,11 @@ public class MapGenerator : MonoBehaviour {
 				tiles[x,y] = GetTile(x,y);
 			}
 		}
-		GameObject plane = GameObject.CreatePrimitive (PrimitiveType.Plane);
+		GameObject plane = Instantiate (planeObj) as GameObject;
 		plane.transform.position = new Vector3 (gridSize * (width - 1) / 2.0f, gridSize * (height - 1) / 2.0f, 0.01f);
 		plane.transform.localScale = new Vector3 (scaleConst * gridSize * width, 1, scaleConst * gridSize * height);
 		plane.transform.rotation = Quaternion.Euler (new Vector3 (270, 0, 0));
+		NetworkServer.Spawn (plane);
 		MeshRenderer mr = plane.GetComponent<MeshRenderer> ();
 		mr.material = bgMaterial;
 	}
@@ -94,6 +96,7 @@ public class MapGenerator : MonoBehaviour {
 			if (counter >= tries) {
 				Debug.Log ("What is this unluckiness?");
 			}
+			NetworkServer.Spawn (obj);
 		}
 	}
 	

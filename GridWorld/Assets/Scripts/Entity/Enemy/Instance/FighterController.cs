@@ -70,7 +70,7 @@ namespace FighterEnemy{
 				controller = control;
 				this.map = map;
 				Setup (x, y, dir);
-				lastDirection = direction;
+				lastDirection = GetDirection();
 			}
 			
 			public void MoveRandom(){

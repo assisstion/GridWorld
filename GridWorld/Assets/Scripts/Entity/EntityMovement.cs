@@ -1,46 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class EntityMovement : MonoBehaviour {
+public class EntityMovement : NetworkBehaviour {
 
+	//[SyncVar]
 	public MapGenerator map;
 
-	public int direction{
-		get{
-			return _direction;
-		}
-	}
-	protected int _direction{
-		get{
-			return __direction;
-		}
-		set{
-			__direction = value;
-			transform.rotation = Quaternion.Euler(
-				new Vector3(Direction.Rotation(__direction), 270, 90));
-		}
-	}
+	[SyncVar]
 	int __direction;
 
-	public int playerX {
-		get{
-			return _playerX;
-		}
+	public void SetDirection(int dir){
+		__direction = dir;
+		transform.rotation = Quaternion.Euler(
+			new Vector3(Direction.Rotation(__direction), 270, 90));
 	}
-	protected int _playerX;
-	public int playerY {
-		get{
-			return _playerY;
-		}
+
+	public int GetDirection(){
+		return __direction;
 	}
-	protected int _playerY;
-	
+
+	[SyncVar]
+	public int playerX;
+	[SyncVar]
+	public int playerY;
+
+	[SyncVar]
 	protected float moveCooldown = 0.5f;
+	[SyncVar]
 	protected float turnCooldown = 0.15f;
 
+	[SyncVar]
 	protected float speed;
 
-	public void Setup(int x, int y, int dir){
+	public virtual void Setup(int x, int y, int dir){
 		TryMove (x, y, dir, MoveMode.NoEvent);
 	}
 
@@ -48,7 +41,7 @@ public class EntityMovement : MonoBehaviour {
 	//1 = move fail, no turn
 	//2 = turn success
 	public int GoTowards(int dir){
-		if(direction == dir){
+		if(GetDirection() == dir){
 			if(TryMove(playerX + Direction.ValueX(dir), 
 			        playerY + Direction.ValueY(dir), dir, MoveMode.Cooldown)){
 				return 0;
@@ -64,10 +57,10 @@ public class EntityMovement : MonoBehaviour {
 	}
 	
 	public bool TryTurn(int direction){
-		if (this.direction == direction) {
+		if (GetDirection() == direction) {
 			return false;
 		} else {
-			_direction = direction;
+			SetDirection(direction);
 			TurnSuccess ();
 			return true;
 		}
@@ -82,9 +75,9 @@ public class EntityMovement : MonoBehaviour {
 		
 		if (mode.Equals(MoveMode.NoEvent) || CanMoveTo(x,y)) {
 			map.objects[playerX,playerY] = null;
-			_playerX = x;
-			_playerY = y;
-			_direction = direction;
+			playerX = x;
+			playerY = y;
+			SetDirection(direction);
 			map.objects[x,y] = this.gameObject;
 			UpdatePosition ();
 			switch(mode){
