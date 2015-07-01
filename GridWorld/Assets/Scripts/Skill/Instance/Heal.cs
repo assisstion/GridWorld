@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 
 public class Heal : Skill {
-	
+
+	static int healAmt = 20;
 	float cd;
 	
 	public Heal(EntityController control, float cd, float manaCost) 
@@ -15,7 +16,7 @@ public class Heal : Skill {
 	}
 
 	public static Heal Default(EntityController control){
-		return new Heal (control, 0.1f, 30);
+		return new Heal (control, 0.2f, 30);
 	}
 
 	public override int GetID (){
@@ -23,7 +24,7 @@ public class Heal : Skill {
 	}
 
 	public override string GetCustomStat(){
-		return "Heal: " + 10;
+		return "Heal: " + healAmt;
 	}
 
 	public override string GetBody(){
@@ -49,7 +50,7 @@ public class Heal : Skill {
 		}
 
 		protected override bool PostCast(){
-			controller.combat.HealHealth (10);
+			controller.combat.HealHealth (healAmt);
 			return true;
 		}
 

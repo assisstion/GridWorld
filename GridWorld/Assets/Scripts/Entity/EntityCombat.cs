@@ -133,6 +133,10 @@ public class EntityCombat : MonoBehaviour {
 		if (skill == null) {
 			return;
 		}
+		ActivateSkill (skill);
+	}
+
+	public void ActivateSkill(Skill skill){
 		action = skill.Activate ();
 	}
 	

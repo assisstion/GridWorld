@@ -27,7 +27,7 @@ public class Hyper : Skill {
 	}
 
 	public override string GetBody(){
-		return "Reduces movement cooldown by half";
+		return "Doubles movement speed";
 	}
 	
 	public class HyperEvent : NoncombatAbstractSkillEvent{

@@ -15,11 +15,23 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler {
 		addedButtons = new List<GameObject> ();
 	}
 
+	public List<int> CanUnlockSkills(){
+		//todo add skill tree
+		List<int> list = new List<int> ();
+		for (int i = 0; i <= maxID; i++) {
+			list.Add(i);
+		}
+		return list;
+	}
+
 	public void Shop(){
 		shop.SetActive (true);
+		player.combat.health = player.combat.maxHealth;
+		player.combat.mana = player.combat.maxMana;
+		player.combat.action = 0f;
 		List<Skill> missing = new List<Skill> ();
-		for(int i = 0; i <= maxID; i++){
-			if(player.combat.skills[i] == null){
+		foreach(int i in CanUnlockSkills()){
+			if(!System.Array.Exists<Skill>(player.combat.skills, (x => x != null && x.GetID() == i))){
 				missing.Add(Skill.GetDefaultFromTitle(Skill.GetTitleFromID(i), player));
 			}
 		}

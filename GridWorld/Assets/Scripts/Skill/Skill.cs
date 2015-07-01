@@ -23,6 +23,10 @@ public abstract class Skill{
 
 	}
 
+	public EntityController GetController(){
+		return controller;
+	}
+
 	public float cooldown{
 		get{
 			return _cooldown;

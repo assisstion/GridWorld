@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using TargetDummyEnemy;
 using Random = System.Random;
@@ -15,6 +16,8 @@ public class MapGenerator : MonoBehaviour {
 	public Material swampMaterial;
 	public Material bgMaterial;
 	public ShopManager shopManager;
+	public Text waveText;
+	public Text enemiesLeftText;
 	
 	public float gridSize = 1.0f;
 	public float spacing = 0.01f;
@@ -30,8 +33,26 @@ public class MapGenerator : MonoBehaviour {
 	public GameObject[,] tiles;
 	public GameObject[,] objects;
 
-	protected int waveLeft;
-	int wave = 0;
+	protected int waveLeft{
+		get{
+			return _waveLeft;
+		}
+		set{
+			_waveLeft = value;
+			enemiesLeftText.text = "Enemies Left: " + _waveLeft;
+		}
+	}
+	int _waveLeft;
+	protected int wave{
+		get{
+			return _wave;
+		}
+		set{
+			_wave = value;
+			waveText.text = "Wave: " + _wave;
+		}
+	}
+	int _wave;
 
 	int enemyCount;
 	int swampCount;

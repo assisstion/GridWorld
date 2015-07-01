@@ -75,11 +75,13 @@
      <Compile Include="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\Skill.cs" />
      <Compile Include="Assets\Scripts\Skill\SkillEvent.cs" />
+     <Compile Include="Assets\Scripts\SkillManager.cs" />
      <Compile Include="Assets\Scripts\UI\BackToMainButton.cs" />
      <Compile Include="Assets\Scripts\UI\BeginButton.cs" />
      <Compile Include="Assets\Scripts\UI\MultiButton.cs" />
      <Compile Include="Assets\Scripts\UI\ShopButtonHandler.cs" />
      <Compile Include="Assets\Scripts\UI\ShopButtonManager.cs" />
+     <Compile Include="Assets\Scripts\UI\SkillButtonManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

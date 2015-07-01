@@ -6,6 +6,7 @@ public class PlayerCombat : EntityCombat {
 	public BarController healthBar;
 	public BarController actionBar;
 	public BarController manaBar;
+	public SkillManager manager;
 
 	public override float health{
 		set{
@@ -44,8 +45,9 @@ public class PlayerCombat : EntityCombat {
 		base.Start ();
 		
 		controller = this.gameObject.GetComponent<PlayerController> ();
-		skills = new Skill[10];
-		skills [0] = Slash.Default (controller);
+		manager.Initialize ();
+		skills = new Skill[100];
+		AddSkill (Slash.Default (controller), 0);
 		/*for (int i = 0; i < 10; i++) {
 			Skill tempSkill;
 			switch(i){
@@ -107,7 +109,16 @@ public class PlayerCombat : EntityCombat {
 	}
 
 	public void AddSkill(Skill s, int id){
-		skills [id] = s;
+		int index = id;
+		while (skills[index] != null) {
+			index ++;
+			if(index >= skills.Length){
+				Debug.Log("No more space for skill");
+				break;
+			}
+		}
+		skills [index] = s;
+		manager.SetSkill (s, index);
 	}
 
 	protected override void CleanUp(){
