@@ -10,6 +10,7 @@ public class MapGenerator : MonoBehaviour {
 	int seed;
 	public GameObject targetDummy;
 	public GameObject fighter;
+	public GameObject mage;
 	public GameObject tile;
 	public Material rockMaterial;
 	public Material grassMaterial;
@@ -106,14 +107,22 @@ public class MapGenerator : MonoBehaviour {
 			GameObject obj;
 			EnemyBaseController ctrl;
 			if(UnityEngine.Random.value > waveValue){
-				obj = Instantiate (targetDummy) as GameObject;
-				TargetDummyController tdc = obj.GetComponentInChildren<TargetDummyController> ();
-				tdc.SetMode(UnityEngine.Random.Range(0,4));
-				ctrl = tdc; 
+					obj = Instantiate (targetDummy) as GameObject;
+					TargetDummyController tdc = obj.GetComponentInChildren<TargetDummyController> ();
+					tdc.SetMode(UnityEngine.Random.Range(0,4));
+					ctrl = tdc; 
+
 			}
 			else{
-				obj = Instantiate (fighter) as GameObject;
-				ctrl = obj.GetComponentInChildren<FighterEnemy.FighterController> ();
+				if(UnityEngine.Random.value > 0.3){
+					obj = Instantiate (fighter) as GameObject;
+					ctrl = obj.GetComponentInChildren<FighterEnemy.FighterController> ();
+				}
+				else{
+					obj = Instantiate (mage) as GameObject;
+					ctrl = obj.GetComponentInChildren<MageEnemy.MageController> ();
+
+				}
 			}
 			ctrl.target = GameObject.FindObjectOfType<PlayerController>();
 			ctrl.map = this;

@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseManager.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseMovement.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\Instance\FighterController.cs" />
+     <Compile Include="Assets\Scripts\Entity\Enemy\Instance\MageController.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\Instance\TargetDummyController.cs" />
      <Compile Include="Assets\Scripts\Entity\EntityCombat.cs" />
      <Compile Include="Assets\Scripts\Entity\EntityController.cs" />
