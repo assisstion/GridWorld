@@ -101,7 +101,7 @@ public class MapGenerator : MonoBehaviour {
 		wave++;
 		enemyCount = (int)(width * height / 4.0f * (1 - Mathf.Pow(0.95f, wave))) + 1;
 		float waveValue = 0.5f * (1 - Mathf.Pow (0.8f, wave));
-		Debug.Log(wave + ":" + enemyCount + "," + waveValue);
+		//Debug.Log(wave + ":" + enemyCount + "," + waveValue);
 		for (int i = 0; i < enemyCount; i++) {
 			GameObject obj;
 			EnemyBaseController ctrl;

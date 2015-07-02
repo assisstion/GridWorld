@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class PlayerCombat : EntityCombat {
 
+	public List<Skill> skillLibrary;
 	public BarController healthBar;
 	public BarController actionBar;
 	public BarController manaBar;
@@ -43,11 +44,14 @@ public class PlayerCombat : EntityCombat {
 
 	protected override void Start(){
 		base.Start ();
-		
+		skillLibrary = new List<Skill> ();
 		controller = this.gameObject.GetComponent<PlayerController> ();
 		manager.Initialize ();
 		skills = new Skill[100];
-		AddSkill (Slash.Default (controller), 0);
+		Skill slash = Slash.Default (controller);
+		AddSkill (slash, 0);
+		skills [0] = slash;
+		manager.SetSkill (slash, 0);
 		/*for (int i = 0; i < 10; i++) {
 			Skill tempSkill;
 			switch(i){
@@ -109,7 +113,7 @@ public class PlayerCombat : EntityCombat {
 	}
 
 	public void AddSkill(Skill s, int id){
-		int index = id;
+		/*int index = id;
 		while (skills[index] != null) {
 			index ++;
 			if(index >= skills.Length){
@@ -119,6 +123,8 @@ public class PlayerCombat : EntityCombat {
 		}
 		skills [index] = s;
 		manager.SetSkill (s, index);
+		*/
+		skillLibrary.Add (s);
 	}
 
 	protected override void CleanUp(){

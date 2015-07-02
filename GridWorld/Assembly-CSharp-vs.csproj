@@ -82,6 +82,7 @@
      <Compile Include="Assets\Scripts\UI\ShopButtonHandler.cs" />
      <Compile Include="Assets\Scripts\UI\ShopButtonManager.cs" />
      <Compile Include="Assets\Scripts\UI\SkillButtonManager.cs" />
+     <Compile Include="Assets\Scripts\UI\SkillPageButtonManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

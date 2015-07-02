@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SkillButtonManager : MonoBehaviour {
+public class SkillButtonManager : MonoBehaviour{
 
 	public int id;
 	Image img;
@@ -11,6 +12,18 @@ public class SkillButtonManager : MonoBehaviour {
 	bool canPress;
 	string tempText;
 	bool init;
+
+	public void DropSkill(string text, PlayerController pc){
+		Skill sk = Skill.GetDefaultFromTitle (text, pc);
+		pc.combat.skills[id] = sk;
+		SetSkill(sk);
+	}
+
+	public void ClearSkill(PlayerController pc){
+		skill = null;
+		pc.combat.skills[id] = null;
+		Reset ();
+	}
 
 	public void Initialize(){
 		img = GetComponent<Image> ();
@@ -61,12 +74,12 @@ public class SkillButtonManager : MonoBehaviour {
 
 	public void SetSkill(Skill skill){
 		this.skill = skill;
-			text.text = "( " + (id + 1) + " )\n" +
+			text.text = "( " + ((id + 1) % 10) + " )\n" +
 				skill.GetName () + "\n" +
 					"Mana : " + skill.manaCost;
 	}
 
 	public void Reset(){
-		text.text = "( " + (id+1) + " )\n\n";
+		text.text = "( " + ((id+1) % 10) + " )\n\n";
 	}
 }

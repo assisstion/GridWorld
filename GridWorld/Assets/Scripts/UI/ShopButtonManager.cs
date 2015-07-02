@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ShopButtonManager : MonoBehaviour {
 
-	string name;
+	string buttonName;
 	int id;
 
 	public Text titleText;
@@ -24,7 +24,7 @@ public class ShopButtonManager : MonoBehaviour {
 	}
 
 	public void SetText(string name, int id, string info, string body){
-		this.name = name;
+		this.buttonName = name;
 		this.id = id;
 		titleText.text = Format(name, id);
 		infoText.text = info;
@@ -36,7 +36,7 @@ public class ShopButtonManager : MonoBehaviour {
 	}
 
 	public string GetTitle(){
-		return name;
+		return buttonName;
 	}
 
 	public int GetID(){

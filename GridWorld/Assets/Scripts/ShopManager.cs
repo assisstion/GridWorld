@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class ShopManager : MonoBehaviour, ShopButtonHandler {
 
+	public SkillManager skill;
 	public MapGenerator map;
 	public PlayerController player;
 	public GameObject shop;
@@ -38,7 +39,8 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler {
 		//missing.TrimExcess ();
 		if (missing.Count == 0) {
 			shop.SetActive (false);
-			map.NextWave ();
+			skill.Present();
+			//map.NextWave ();
 		} else {
 			while(missing.Count > 3){
 				missing.RemoveAt(Random.Range(0, missing.Count));
@@ -67,6 +69,7 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler {
 		}
 		addedButtons.Clear ();
 		shop.SetActive (false);
-		map.NextWave ();
+		skill.Present ();
+		//map.NextWave ();
 	}
 }
