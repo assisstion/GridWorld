@@ -32,7 +32,7 @@ public class ShopButtonManager : MonoBehaviour {
 	}
 
 	static string Format(string name, int id){
-		return name + " (" + id + ")";
+		return name; //+ " (" + id + ")";
 	}
 
 	public string GetTitle(){
