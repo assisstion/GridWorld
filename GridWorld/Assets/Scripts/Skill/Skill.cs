@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public abstract class Skill{
 
@@ -45,6 +45,10 @@ public abstract class Skill{
 		return 0.0f;
 	}
 
+	public abstract HashSet<string> GetPrerequisites ();
+
+	public abstract int GetMinimumWave();
+
 	public abstract SkillEvent GetSkillEvent ();
 
 	public string GetName(){
@@ -75,6 +79,14 @@ public abstract class Skill{
 			return Hyper.Default(controller);
 		case "Quake":
 			return Quake.Default(controller);
+		case "Dash":
+			return Dash.Default(controller);
+		case "Flare":
+			return Flare.Default(controller);
+		case "Minor Heal":
+			return MinorHeal.Default(controller);
+		case "Cleave":
+			return Cleave.Default(controller);
 		default:
 			return Slash.Default(controller);
 		}
@@ -96,8 +108,37 @@ public abstract class Skill{
 			return "Hyper";
 		case 5:
 			return "Quake";
+		case 6:
+			return "Dash";
+		case 7:
+			return "Flare";
+		case 8:
+			return "Minor Heal";
+		case 9:
+			return "Cleave";
 		default:
 			return "";
 		}
+	}
+
+	public static int MinimumWaveFromTier(int tier){
+		switch (tier) {
+		case 0:
+			return 0;
+		case 1:
+			return 1;
+		case 2:
+			return 3;
+		case 3:
+			return 6;
+		case 4:
+			return 10;
+		default:
+			return 0;
+		}
+	}
+
+	public static int GetMaxID(){
+		return 9;
 	}
 }

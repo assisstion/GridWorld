@@ -92,7 +92,7 @@ public class MapGenerator : MonoBehaviour {
 	public void EnemyDestroyed(){
 		waveLeft--;
 		if (waveLeft == 0) {
-			shopManager.Shop();
+			shopManager.Shop(wave);
 		}
 	}
 

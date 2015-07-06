@@ -35,6 +35,19 @@ public class Lunge : Skill {
 		return "Dash for a short distance, then performs a strike";
 	}
 
+	public override HashSet<string> GetPrerequisites ()
+	{
+		HashSet<string> hs = new HashSet<string> ();
+		hs.Add ("Dash");
+		hs.Add ("Slash");
+		return hs;
+	}
+	
+	public override int GetMinimumWave ()
+	{
+		return Skill.MinimumWaveFromTier (2);
+	}
+
 	public class LungeDashEvent : NoncombatAbstractSkillEvent{
 		
 		public LungeDashEvent(EntityController cont, float cd){

@@ -1,52 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Fireball : Skill {
+public class Flare : Skill {
 	
 	float cd;
 	
-	public Fireball(EntityController control, float cd, float manaCost) 
-	: base(control, "Fireball", cd, manaCost){
+	public Flare(EntityController control, float cd, float manaCost) 
+	: base(control, "Flare", cd, manaCost){
 		this.cd = cd;
 	} 
 	
 	public override SkillEvent GetSkillEvent(){
-		return new FireballEvent (controller, cd);
+		return new FlareEvent (controller, cd);
 	}
 
-	public static Fireball Default(EntityController control){
-		return new Fireball (control, 1.0f, 30);
+	public static Flare Default(EntityController control){
+		return new Flare (control, 0.35f, 10);
 	}
 
 	public override int GetID (){
-		return 2;
+		return 7;
 	}
 
 	public override string GetCustomStat(){
-		return "Range: " + 4;
+		return "Range: " + 2;
 	}
 
 	public override string GetBody(){
-		return "Cast a 3x3 burst of fire that deals damage to enemies";
+		return "Cast a burst of fire that deals damage to an enemy";
 	}
 
 	public override HashSet<string> GetPrerequisites ()
 	{
 		HashSet<string> hs = new HashSet<string> ();
-		hs.Add ("Flare");
+		//hs.Add ("Flare");
 		return hs;
 	}
 
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (2);
+		return Skill.MinimumWaveFromTier (1);
 	}
 
-	public class FireballEvent : AbstractSkillEvent{
+	public class FlareEvent : AbstractSkillEvent{
 
 		public Dictionary<KeyValuePair<int, int>, GameObject> anim;
 		
-		public FireballEvent(EntityController cont, float cd){
+		public FlareEvent(EntityController cont, float cd){
 			controller = cont;
 			cooldown = cd;
 			anim = new Dictionary<KeyValuePair<int, int>, GameObject>();
@@ -74,17 +74,10 @@ public class Fireball : Skill {
 				GameObject.Destroy (animPair.Value);
 			}
 		}
-
-		int centerX = 0;
-		int centerY = 4;
 		
 		protected override HashSet<KeyValuePair<int, int>> GetCoordinates (){
 			HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>> ();
-			for (int x = centerX - 1; x <= centerX + 1; x++) {
-				for(int y = centerY - 1; y <= centerY + 1; y++){
-					set.Add (new KeyValuePair<int, int> (x, y));
-				}
-			}
+			set.Add (new KeyValuePair<int, int> (0, 2));
 			return set;
 		}
 		
@@ -103,11 +96,11 @@ public class Fireball : Skill {
 			control.combat.TakeDamage (10);
 		}
 
-		protected override bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
+		/*protected override bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
 			if (base.ShouldCancel (casts)) {
 				return true;
 			}
 			return !(casts.Contains(new KeyValuePair<int, int>(centerX, centerY)));
-		}
+		}*/
 	}
 }

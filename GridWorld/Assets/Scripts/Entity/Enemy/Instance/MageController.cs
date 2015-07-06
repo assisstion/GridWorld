@@ -196,7 +196,7 @@ namespace MageEnemy{
 					can = false;
 				}
 				if (can) {
-					Debug.Log(dir);
+					//Debug.Log(dir);
 					Attack (dir);
 				} else {
 

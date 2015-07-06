@@ -30,6 +30,18 @@ public class Quake : Skill{
 		return "Deal damage to all enemies around the caster";
 	}
 
+	public override HashSet<string> GetPrerequisites ()
+	{
+		HashSet<string> hs = new HashSet<string> ();
+		hs.Add ("Cleave");
+		return hs;
+	}
+	
+	public override int GetMinimumWave ()
+	{
+		return Skill.MinimumWaveFromTier (3);
+	}
+
 	public class QuakeEvent : AbstractSkillEvent{
 		
 		public Dictionary<KeyValuePair<int, int>, GameObject> anim;

@@ -9,8 +9,7 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler {
 	public GameObject shop;
 	public GameObject shopButton;
 	public List<GameObject> addedButtons;
-
-	int maxID = 5;
+	int wave;
 
 	public ShopManager(){
 		addedButtons = new List<GameObject> ();
@@ -19,13 +18,25 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler {
 	public List<int> CanUnlockSkills(){
 		//todo add skill tree
 		List<int> list = new List<int> ();
-		for (int i = 0; i <= maxID; i++) {
+		for (int i = 0; i <= Skill.GetMaxID(); i++) {
+			Skill skill = Skill.GetDefaultFromTitle(Skill.GetTitleFromID(i), player);
+			if(wave < skill.GetMinimumWave()){
+				continue;
+			}
+			HashSet<string> required = skill.GetPrerequisites();
+			foreach(string s in required){
+				if(!System.Array.Exists<Skill>(player.combat.skills, (x => x != null && 
+				                Skill.GetTitleFromID(x.GetID()) == s))){
+					continue;
+				}
+			}
 			list.Add(i);
 		}
 		return list;
 	}
 
-	public void Shop(){
+	public void Shop(int wave){
+		this.wave = wave;
 		shop.SetActive (true);
 		player.combat.health = player.combat.maxHealth;
 		player.combat.mana = player.combat.maxMana;

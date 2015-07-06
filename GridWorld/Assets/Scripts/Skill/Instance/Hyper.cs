@@ -29,6 +29,18 @@ public class Hyper : Skill {
 	public override string GetBody(){
 		return "Doubles movement speed";
 	}
+
+	public override HashSet<string> GetPrerequisites ()
+	{
+		HashSet<string> hs = new HashSet<string> ();
+		//hs.Add ("Dash");
+		return hs;
+	}
+	
+	public override int GetMinimumWave ()
+	{
+		return Skill.MinimumWaveFromTier (3);
+	}
 	
 	public class HyperEvent : NoncombatAbstractSkillEvent{
 		

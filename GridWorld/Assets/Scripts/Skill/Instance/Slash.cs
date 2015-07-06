@@ -30,6 +30,17 @@ public class Slash : Skill{
 		return "A basic slash that damages enemies";
 	}
 
+	public override HashSet<string> GetPrerequisites ()
+	{
+		HashSet<string> hs = new HashSet<string> ();
+		return hs;
+	}
+	
+	public override int GetMinimumWave ()
+	{
+		return Skill.MinimumWaveFromTier (0);
+	}
+
 	public class SlashSkillEvent : AbstractSkillEvent{
 
 		
