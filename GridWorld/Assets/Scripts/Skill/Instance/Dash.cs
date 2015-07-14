@@ -22,8 +22,8 @@ public class Dash : Skill {
 		return "Range: " + 2;
 	}
 
-	public override int GetID (){
-		return 6;
+	public override SkillDB GetID (){
+		return SkillDB.Dash;
 	}
 
 	public override string GetBody(){

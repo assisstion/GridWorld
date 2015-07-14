@@ -19,14 +19,14 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler {
 		//todo add skill tree
 		List<int> list = new List<int> ();
 		for (int i = 0; i <= Skill.GetMaxID(); i++) {
-			Skill skill = Skill.GetDefaultFromTitle(Skill.GetTitleFromID(i), player);
+			Skill skill = Skill.GetDefaultFromTitle(Skill.GetSkillFromID(i), player);
 			if(wave < skill.GetMinimumWave()){
 				continue;
 			}
 			HashSet<string> required = skill.GetPrerequisites();
 			foreach(string s in required){
 				if(!System.Array.Exists<Skill>(player.combat.skills, (x => x != null && 
-				                Skill.GetTitleFromID(x.GetID()) == s))){
+				                Skill.Attr(x.GetID()).title == s))){
 					continue;
 				}
 			}
@@ -43,8 +43,8 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler {
 		player.combat.action = 0f;
 		List<Skill> missing = new List<Skill> ();
 		foreach(int i in CanUnlockSkills()){
-			if(!System.Array.Exists<Skill>(player.combat.skills, (x => x != null && x.GetID() == i))){
-				missing.Add(Skill.GetDefaultFromTitle(Skill.GetTitleFromID(i), player));
+			if(!System.Array.Exists<Skill>(player.combat.skills, (x => x != null && Skill.Attr(x.GetID()).id == i))){
+				missing.Add(Skill.GetDefaultFromTitle(Skill.GetSkillFromID(i), player));
 			}
 		}
 		//missing.TrimExcess ();
@@ -67,14 +67,14 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler {
 			obj.transform.localPosition = new Vector3(-120 + (120 * i), -20, 0);
 			ShopButtonManager manager = obj.GetComponent<ShopButtonManager>();
 			manager.AttachHandler(this);
-			manager.SetText(skills[i].GetName(), skills[i].GetID()+1, skills[i].GetInfo(), skills[i].GetBody());
+			manager.SetText(skills[i].GetName(), Skill.Attr (skills[i].GetID()).id+1, skills[i].GetInfo(), skills[i].GetBody());
 			addedButtons.Add(obj);
 		}
 	}
 	
 	public void ButtonPressed(ShopButtonManager manager){
-		Skill s = (Skill.GetDefaultFromTitle (manager.GetTitle (), player));
-		player.combat.AddSkill(s, s.GetID()); 
+		Skill s = (Skill.GetDefaultFromTitle (Skill.GetSkillFromTitle(manager.GetTitle ()), player));
+		player.combat.AddSkill(s, Skill.Attr(s.GetID()).id); 
 		foreach (GameObject obj in addedButtons) {
 			Destroy(obj);
 		}

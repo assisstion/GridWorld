@@ -18,8 +18,8 @@ public class Hyper : Skill {
 		return new Hyper (control, 0.5f, 75);
 	}
 
-	public override int GetID (){
-		return 4;
+	public override SkillDB GetID (){
+		return SkillDB.Hyper;
 	}
 
 	public override string GetCustomStat(){

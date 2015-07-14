@@ -19,8 +19,8 @@ public class Heal : Skill {
 		return new Heal (control, 0.2f, 30);
 	}
 
-	public override int GetID (){
-		return 3;
+	public override SkillDB GetID (){
+		return SkillDB.Heal;
 	}
 
 	public override string GetCustomStat(){

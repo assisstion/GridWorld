@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Reflection;
+using System;
+using System.Linq;
 
 public abstract class Skill{
 
@@ -65,61 +68,65 @@ public abstract class Skill{
 
 	public abstract string GetCustomStat ();
 
-	public static Skill GetDefaultFromTitle(string title, PlayerController controller){
-		switch (title) {
-		case "Slash":
-			return Slash.Default(controller);
-		case "Lunge":
-			return Lunge.Default(controller);
-		case "Fireball":
-			return Fireball.Default(controller);
-		case "Heal":
-			return Heal.Default(controller);
-		case "Hyper":
-			return Hyper.Default(controller);
-		case "Quake":
-			return Quake.Default(controller);
-		case "Dash":
-			return Dash.Default(controller);
-		case "Flare":
-			return Flare.Default(controller);
-		case "Minor Heal":
-			return MinorHeal.Default(controller);
-		case "Cleave":
-			return Cleave.Default(controller);
-		default:
-			return Slash.Default(controller);
+	public class SkillAttribute : Attribute
+	{
+		internal SkillAttribute(int id, String title, Type type)
+		{
+			this.id = id;
+			this.title = title;
+			this.type = type;
 		}
+		public string title { get; private set; }
+		public int id { get; private set; }
+		public Type type { get; private set; }
 	}
 
-	public abstract int GetID();
-
-	public static string GetTitleFromID(int id){
-		switch (id) {
-		case 0:
-			return "Slash";
-		case 1:
-			return "Lunge";
-		case 2:
-			return "Fireball";
-		case 3:
-			return "Heal";
-		case 4:
-			return "Hyper";
-		case 5:
-			return "Quake";
-		case 6:
-			return "Dash";
-		case 7:
-			return "Flare";
-		case 8:
-			return "Minor Heal";
-		case 9:
-			return "Cleave";
-		default:
-			return "";
-		}
+	public enum SkillDB{
+		[SkillAttribute(0, "Slash", typeof(Slash))] Slash,
+		[SkillAttribute(1, "Lunge", typeof(Lunge))] Lunge,
+		[SkillAttribute(2, "Fireball", typeof(Fireball))] Fireball,
+		[SkillAttribute(3, "Heal", typeof(Heal))] Heal,
+		[SkillAttribute(4, "Hyper", typeof(Hyper))] Hyper,
+		[SkillAttribute(5, "Quake", typeof(Quake))] Quake,
+		[SkillAttribute(6, "Dash", typeof(Dash))] Dash,
+		[SkillAttribute(7, "Flare", typeof(Flare))] Flare,
+		[SkillAttribute(8, "Minor Heal", typeof(MinorHeal))] MinorHeal,
+		[SkillAttribute(9, "Cleave", typeof(Cleave))] Cleave
 	}
+	
+	public static int GetMaxID(){
+		return 9;
+	}
+	
+	public static SkillDB GetSkillFromID(int id){
+		return GetSkillFrom(x => Skill.Attr(x).id == id);
+	}
+
+	public static SkillDB GetSkillFromTitle(string title){
+		return GetSkillFrom(x => Skill.Attr(x).title == title);
+	}
+
+	public static SkillAttribute Attr(SkillDB db){
+		return EnumExtensions.GetAttribute<SkillAttribute>(db);
+	}
+
+	public static SkillDB GetSkillFrom(Predicate<SkillDB> pred){
+
+		foreach (object obj in System.Enum.GetValues(typeof(SkillDB))) {
+			SkillDB db = (SkillDB)obj;
+			if(pred.Invoke(db)){
+				return db;
+			}
+		}
+		throw new Exception ("Cannot find skill with the given predicate");
+	}
+
+	public static Skill GetDefaultFromID(SkillDB db, PlayerController controller){
+		return Attr (db).type.GetMethod("Default")
+			.Invoke(null,new object[]{controller}) as Skill;
+	}
+
+	public abstract SkillDB GetID();
 
 	public static int MinimumWaveFromTier(int tier){
 		switch (tier) {
@@ -136,9 +143,5 @@ public abstract class Skill{
 		default:
 			return 0;
 		}
-	}
-
-	public static int GetMaxID(){
-		return 9;
 	}
 }

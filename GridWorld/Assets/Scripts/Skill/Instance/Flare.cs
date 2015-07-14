@@ -18,8 +18,8 @@ public class Flare : Skill {
 		return new Flare (control, 0.35f, 10);
 	}
 
-	public override int GetID (){
-		return 7;
+	public override SkillDB GetID (){
+		return SkillDB.Flare;
 	}
 
 	public override string GetCustomStat(){

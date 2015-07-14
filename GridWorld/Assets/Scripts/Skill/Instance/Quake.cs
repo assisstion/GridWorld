@@ -18,8 +18,8 @@ public class Quake : Skill{
 		return new Quake (control, 2f, 50);
 	}
 
-	public override int GetID (){
-		return 5;
+	public override SkillDB GetID (){
+		return SkillDB.Quake;
 	}
 
 	public override string GetCustomStat(){

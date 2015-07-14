@@ -19,8 +19,8 @@ public class MinorHeal : Skill {
 		return new MinorHeal (control, 0.2f, 10);
 	}
 
-	public override int GetID (){
-		return 8;
+	public override SkillDB GetID (){
+		return SkillDB.MinorHeal;
 	}
 
 	public override string GetCustomStat(){

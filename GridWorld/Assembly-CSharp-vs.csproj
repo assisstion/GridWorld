@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\Entity\Player\PlayerCombat.cs" />
      <Compile Include="Assets\Scripts\Entity\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Entity\Player\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\EnumExtensions.cs" />
      <Compile Include="Assets\Scripts\GridController.cs" />
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
      <Compile Include="Assets\Scripts\ShopManager.cs" />

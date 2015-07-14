@@ -27,8 +27,8 @@ public class Lunge : Skill {
 		return "Range: " + 3;
 	}
 
-	public override int GetID (){
-		return 1;
+	public override SkillDB GetID (){
+		return SkillDB.Lunge;
 	}
 
 	public override string GetBody(){

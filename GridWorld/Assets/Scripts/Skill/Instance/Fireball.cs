@@ -18,8 +18,8 @@ public class Fireball : Skill {
 		return new Fireball (control, 1.0f, 30);
 	}
 
-	public override int GetID (){
-		return 2;
+	public override SkillDB GetID (){
+		return SkillDB.Fireball;
 	}
 
 	public override string GetCustomStat(){

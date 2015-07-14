@@ -18,8 +18,8 @@ public class Cleave : Skill{
 		return new Cleave (control, 1f, 25);
 	}
 
-	public override int GetID (){
-		return 9;
+	public override SkillDB GetID (){
+		return SkillDB.Cleave;
 	}
 
 	public override string GetCustomStat(){

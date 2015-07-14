@@ -18,8 +18,8 @@ public class Slash : Skill{
 		return new Slash (control, 0.35f, 0);
 	}
 
-	public override int GetID (){
-		return 0;
+	public override SkillDB GetID (){
+		return SkillDB.Slash;
 	}
 
 	public override string GetCustomStat(){
