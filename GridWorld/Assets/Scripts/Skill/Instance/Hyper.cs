@@ -6,7 +6,7 @@ public class Hyper : Skill {
 	float cd;
 	
 	public Hyper(EntityController control, float cd, float manaCost) 
-	: base(control, "Hyper", cd, manaCost){
+	: base(control, cd, manaCost){
 		this.cd = cd;
 	} 
 	
@@ -18,8 +18,8 @@ public class Hyper : Skill {
 		return new Hyper (control, 0.5f, 75);
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.Hyper;
+	public override SkillInfo GetID (){
+		return SkillInfo.Hyper;
 	}
 
 	public override string GetCustomStat(){
@@ -39,7 +39,7 @@ public class Hyper : Skill {
 	
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (3);
+		return Skills.MinimumWaveFromTier (3);
 	}
 	
 	public class HyperEvent : NoncombatAbstractSkillEvent{

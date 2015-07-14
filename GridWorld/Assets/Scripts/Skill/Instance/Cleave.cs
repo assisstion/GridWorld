@@ -6,7 +6,7 @@ public class Cleave : Skill{
 	float cd;
 
 	public Cleave(EntityController control, float cd, float manaCost) 
-	: base(control, "Cleave", cd, manaCost){
+	: base(control, cd, manaCost){
 		this.cd = cd;
 	} 
 
@@ -18,8 +18,8 @@ public class Cleave : Skill{
 		return new Cleave (control, 1f, 25);
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.Cleave;
+	public override SkillInfo GetID (){
+		return SkillInfo.Cleave;
 	}
 
 	public override string GetCustomStat(){
@@ -39,7 +39,7 @@ public class Cleave : Skill{
 	
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (1);
+		return Skills.MinimumWaveFromTier (1);
 	}
 
 	public class CleaveEvent : AbstractSkillEvent{

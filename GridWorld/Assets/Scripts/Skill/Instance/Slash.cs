@@ -6,7 +6,7 @@ public class Slash : Skill{
 	float cd;
 
 	public Slash(EntityController control, float cd, float manaCost) 
-			: base(control, "Slash", cd, manaCost){
+			: base(control, cd, manaCost){
 		this.cd = cd;
 	} 
 
@@ -18,8 +18,8 @@ public class Slash : Skill{
 		return new Slash (control, 0.35f, 0);
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.Slash;
+	public override SkillInfo GetID (){
+		return SkillInfo.Slash;
 	}
 
 	public override string GetCustomStat(){
@@ -38,7 +38,7 @@ public class Slash : Skill{
 	
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (0);
+		return Skills.MinimumWaveFromTier (0);
 	}
 
 	public class SlashSkillEvent : AbstractSkillEvent{

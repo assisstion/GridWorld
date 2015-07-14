@@ -7,7 +7,7 @@ public class Heal : Skill {
 	float cd;
 	
 	public Heal(EntityController control, float cd, float manaCost) 
-	: base(control, "Heal", cd, manaCost){
+	: base(control, cd, manaCost){
 		this.cd = cd;
 	} 
 	
@@ -19,8 +19,8 @@ public class Heal : Skill {
 		return new Heal (control, 0.2f, 30);
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.Heal;
+	public override SkillInfo GetID (){
+		return SkillInfo.Heal;
 	}
 
 	public override string GetCustomStat(){
@@ -40,7 +40,7 @@ public class Heal : Skill {
 	
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (3);
+		return Skills.MinimumWaveFromTier (3);
 	}
 	
 	public class HealEvent : NoncombatAbstractSkillEvent{

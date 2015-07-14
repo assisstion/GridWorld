@@ -14,7 +14,7 @@ public class SkillButtonManager : MonoBehaviour{
 	bool init;
 
 	public void DropSkill(string text, PlayerController pc){
-		Skill sk = Skill.GetDefaultFromTitle (Skill.GetSkillFromTitle(text), pc);
+		Skill sk = Skills.GetDefaultFromSkillInfo (Skills.GetSkillInfoFromTitle(text), pc);
 		pc.combat.skills[id] = sk;
 		SetSkill(sk);
 	}

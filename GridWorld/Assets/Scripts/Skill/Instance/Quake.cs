@@ -6,7 +6,7 @@ public class Quake : Skill{
 	float cd;
 
 	public Quake(EntityController control, float cd, float manaCost) 
-			: base(control, "Quake", cd, manaCost){
+			: base(control, cd, manaCost){
 		this.cd = cd;
 	} 
 
@@ -18,8 +18,8 @@ public class Quake : Skill{
 		return new Quake (control, 2f, 50);
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.Quake;
+	public override SkillInfo GetID (){
+		return SkillInfo.Quake;
 	}
 
 	public override string GetCustomStat(){
@@ -39,7 +39,7 @@ public class Quake : Skill{
 	
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (3);
+		return Skills.MinimumWaveFromTier (3);
 	}
 
 	public class QuakeEvent : AbstractSkillEvent{

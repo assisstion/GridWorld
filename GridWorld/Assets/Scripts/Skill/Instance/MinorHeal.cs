@@ -7,7 +7,7 @@ public class MinorHeal : Skill {
 	float cd;
 	
 	public MinorHeal(EntityController control, float cd, float manaCost) 
-	: base(control, "Minor Heal", cd, manaCost){
+	: base(control, cd, manaCost){
 		this.cd = cd;
 	} 
 	
@@ -19,8 +19,8 @@ public class MinorHeal : Skill {
 		return new MinorHeal (control, 0.2f, 10);
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.MinorHeal;
+	public override SkillInfo GetID (){
+		return SkillInfo.MinorHeal;
 	}
 
 	public override string GetCustomStat(){
@@ -39,6 +39,6 @@ public class MinorHeal : Skill {
 	
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (2);
+		return Skills.MinimumWaveFromTier (2);
 	}
 }

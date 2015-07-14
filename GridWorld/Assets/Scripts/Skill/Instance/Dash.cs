@@ -6,7 +6,7 @@ public class Dash : Skill {
 	float cd;
 	
 	public Dash(EntityController control, float cd, float manaCost) 
-	: base(control, "Dash", cd, manaCost){
+	: base(control, cd, manaCost){
 		this.cd = cd;
 	} 
 	
@@ -22,8 +22,8 @@ public class Dash : Skill {
 		return "Range: " + 2;
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.Dash;
+	public override SkillInfo GetID (){
+		return SkillInfo.Dash;
 	}
 
 	public override string GetBody(){
@@ -38,7 +38,7 @@ public class Dash : Skill {
 	
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (1);
+		return Skills.MinimumWaveFromTier (1);
 	}
 
 	public class DashSkillEvent : NoncombatAbstractSkillEvent{

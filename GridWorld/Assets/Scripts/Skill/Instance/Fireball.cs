@@ -6,7 +6,7 @@ public class Fireball : Skill {
 	float cd;
 	
 	public Fireball(EntityController control, float cd, float manaCost) 
-	: base(control, "Fireball", cd, manaCost){
+	: base(control, cd, manaCost){
 		this.cd = cd;
 	} 
 	
@@ -18,8 +18,8 @@ public class Fireball : Skill {
 		return new Fireball (control, 1.0f, 30);
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.Fireball;
+	public override SkillInfo GetID (){
+		return SkillInfo.Fireball;
 	}
 
 	public override string GetCustomStat(){
@@ -39,7 +39,7 @@ public class Fireball : Skill {
 
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (2);
+		return Skills.MinimumWaveFromTier (2);
 	}
 
 	public class FireballEvent : AbstractSkillEvent{

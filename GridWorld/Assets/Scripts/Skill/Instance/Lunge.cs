@@ -7,7 +7,7 @@ public class Lunge : Skill {
 	float dashTime;
 	
 	public Lunge(EntityController control, float cd, float dashTime, float manaCost) 
-	: base(control, "Lunge", cd, manaCost){
+	: base(control, cd, manaCost){
 		this.cd = cd;
 		this.dashTime = dashTime;
 	} 
@@ -27,8 +27,8 @@ public class Lunge : Skill {
 		return "Range: " + 3;
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.Lunge;
+	public override SkillInfo GetID (){
+		return SkillInfo.Lunge;
 	}
 
 	public override string GetBody(){
@@ -45,7 +45,7 @@ public class Lunge : Skill {
 	
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (2);
+		return Skills.MinimumWaveFromTier (2);
 	}
 
 	public class LungeDashEvent : NoncombatAbstractSkillEvent{

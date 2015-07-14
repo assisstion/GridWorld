@@ -6,7 +6,7 @@ public class Flare : Skill {
 	float cd;
 	
 	public Flare(EntityController control, float cd, float manaCost) 
-	: base(control, "Flare", cd, manaCost){
+	: base(control, cd, manaCost){
 		this.cd = cd;
 	} 
 	
@@ -18,8 +18,8 @@ public class Flare : Skill {
 		return new Flare (control, 0.35f, 10);
 	}
 
-	public override SkillDB GetID (){
-		return SkillDB.Flare;
+	public override SkillInfo GetID (){
+		return SkillInfo.Flare;
 	}
 
 	public override string GetCustomStat(){
@@ -39,7 +39,7 @@ public class Flare : Skill {
 
 	public override int GetMinimumWave ()
 	{
-		return Skill.MinimumWaveFromTier (1);
+		return Skills.MinimumWaveFromTier (1);
 	}
 
 	public class FlareEvent : AbstractSkillEvent{
