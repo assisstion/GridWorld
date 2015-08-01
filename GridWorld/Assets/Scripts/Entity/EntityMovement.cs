@@ -145,6 +145,10 @@ public class EntityMovement : MonoBehaviour {
 		return new Vector3 (x * map.gridSize, y * map.gridSize, z);
 	}
 
+	public Vector3 UnconvertPosition(float x, float y, float z){
+		return new Vector3 (Mathf.FloorToInt(x / map.gridSize + 0.5f), Mathf.FloorToInt(y * map.gridSize + 0.5f), z);
+	}
+
 	public enum MoveMode{
 		Cooldown,NoCooldown,NoEvent
 	}

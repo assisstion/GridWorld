@@ -19,6 +19,7 @@ public class SkillAttribute : Attribute
 }
 
 public enum SkillInfo{
+	[SkillAttribute(-1, "None", null)] None,
 	[SkillAttribute(0, "Slash", typeof(Slash))] Slash,
 	[SkillAttribute(1, "Lunge", typeof(Lunge))] Lunge,
 	[SkillAttribute(2, "Fireball", typeof(Fireball))] Fireball,
@@ -28,13 +29,14 @@ public enum SkillInfo{
 	[SkillAttribute(6, "Dash", typeof(Dash))] Dash,
 	[SkillAttribute(7, "Flare", typeof(Flare))] Flare,
 	[SkillAttribute(8, "Minor Heal", typeof(MinorHeal))] MinorHeal,
-	[SkillAttribute(9, "Cleave", typeof(Cleave))] Cleave
+	[SkillAttribute(9, "Cleave", typeof(Cleave))] Cleave,
+	[SkillAttribute(10, "Magic Bolt", typeof(MagicBolt))] MagicBolt
 }
 
 public class Skills{
 
 	public static int GetMaxID(){
-		return 9;
+		return 10;
 	}
 	
 	public static SkillInfo GetSkillInfoFromID(int id){
