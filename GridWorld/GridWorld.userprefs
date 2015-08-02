@@ -1,56 +1,59 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Skill/Instance/DarkBolt.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Skill/Instance/Lightning.cs">
     <Files>
-      <File FileName="Assets/Scripts/Skill/Instance/DarkBolt.cs" Line="44" Column="37" />
-      <File FileName="Assets/Scripts/Skill/Skills.cs" Line="40" Column="12" />
+      <File FileName="Assets/Scripts/Skill/Instance/DarkBolt.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Skill/Skills.cs" Line="57" Column="12" />
       <File FileName="Assets/Scripts/Skill/Instance/MagicBolt.cs" Line="76" Column="3" />
       <File FileName="Assets/Scripts/Skill/Instance/Cleave.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Skill/Skill.cs" Line="81" Column="2" />
+      <File FileName="Assets/Scripts/Skill/Skill.cs" Line="53" Column="27" />
       <File FileName="Assets/Scripts/Skill/Instance/Fireball.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Heal.cs" Line="14" Column="31" />
-      <File FileName="Assets/Scripts/Skill/Instance/Hyper.cs" Line="19" Column="3" />
-      <File FileName="Assets/Scripts/Skill/Instance/Lunge.cs" Line="18" Column="26" />
-      <File FileName="Assets/Scripts/Skill/Instance/Quake.cs" Line="20" Column="2" />
+      <File FileName="Assets/Scripts/Skill/Instance/Hyper.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Skill/Instance/Lunge.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Skill/Instance/Quake.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Slash.cs" Line="19" Column="3" />
-      <File FileName="Assets/Scripts/SkillManager.cs" Line="22" Column="4" />
+      <File FileName="Assets/Scripts/SkillManager.cs" Line="74" Column="64" />
       <File FileName="Assets/Scripts/MapGenerator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Entity/Enemy/Instance/MageController.cs" Line="15" Column="3" />
+      <File FileName="Assets/Scripts/Entity/Enemy/Instance/MageController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Dash.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Flare.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Skill/Instance/MinorHeal.cs" Line="19" Column="27" />
+      <File FileName="Assets/Scripts/Skill/Instance/MinorHeal.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/EnumExtensions.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/SkillButtonManager.cs" Line="30" Column="30" />
+      <File FileName="Assets/Scripts/UI/SkillButtonManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/NoncombatAbstractSkillEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Skill/SkillEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Skill/AbstractSkillEvent.cs" Line="18" Column="25" />
-      <File FileName="Assets/Scripts/Skill/CompositeSkillEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Skill/SkillEvent.cs" Line="14" Column="28" />
+      <File FileName="Assets/Scripts/Skill/AbstractSkillEvent.cs" Line="129" Column="2" />
+      <File FileName="Assets/Scripts/Skill/CompositeSkillEvent.cs" Line="73" Column="8" />
       <File FileName="Assets/Scripts/GridController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Entity/EntityMovement.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/CameraController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Projectile/Projectile.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Projectile/ProjectileSkillEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Skill/Projectile/LineProjectile.cs" Line="36" Column="15" />
-      <File FileName="Assets/Scripts/Entity/Player/PlayerMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Skill/Projectile/LineProjectile.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Entity/Player/PlayerMovement.cs" Line="25" Column="38" />
       <File FileName="Assets/Scripts/Entity/EntityController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/BarController.cs" Line="27" Column="15" />
+      <File FileName="Assets/Scripts/BarController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Direction.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ShopManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UI/SkillPageButtonManager.cs" Line="25" Column="1" />
-      <File FileName="Assets/Scripts/UI/ShopButtonManager.cs" Line="26" Column="16" />
-      <File FileName="Assets/Scripts/UI/ShopButtonHandler.cs" Line="9" Column="1" />
-      <File FileName="Assets/Scripts/UI/MultiButton.cs" Line="19" Column="2" />
-      <File FileName="Assets/Scripts/UI/BeginButton.cs" Line="20" Column="1" />
-      <File FileName="Assets/Scripts/UI/BackToMainButton.cs" Line="20" Column="1" />
-      <File FileName="Assets/Scripts/Entity/EntityCombat.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Entity/Player/PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Entity/Player/PlayerCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ShopManager.cs" Line="46" Column="91" />
+      <File FileName="Assets/Scripts/UI/SkillPageButtonManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/ShopButtonManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/ShopButtonHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/MultiButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/BeginButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/BackToMainButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Entity/EntityCombat.cs" Line="148" Column="10" />
+      <File FileName="Assets/Scripts/Entity/Player/PlayerController.cs" Line="6" Column="9" />
+      <File FileName="Assets/Scripts/Entity/Player/PlayerCombat.cs" Line="28" Column="23" />
       <File FileName="Assets/Scripts/Entity/Enemy/EnemyBaseMovement.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Entity/Enemy/EnemyBaseManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Entity/Enemy/EnemyBaseController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Entity/Enemy/EnemyBaseCombat.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Entity/Enemy/Instance/TargetDummyController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Entity/Enemy/Instance/FighterController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Skill/Instance/VampStrike.cs" Line="6" Column="26" />
+      <File FileName="Assets/Scripts/Skill/Instance/Shock.cs" Line="68" Column="47" />
+      <File FileName="Assets/Scripts/Skill/Instance/Lightning.cs" Line="56" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

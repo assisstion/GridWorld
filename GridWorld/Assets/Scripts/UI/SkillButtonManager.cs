@@ -76,7 +76,7 @@ public class SkillButtonManager : MonoBehaviour{
 		this.skill = skill;
 		text.text = "( " + ((id + 1) % 10) + " )\n" +
 			skill.GetName() + "\n" +
-			"Mana : " + skill.manaCost;
+			skill.GetCostType().ToString() + " : " + skill.manaCost;
 	}
 
 	public void Reset(){

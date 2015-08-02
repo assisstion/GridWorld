@@ -125,4 +125,8 @@ public abstract class AbstractSkillEvent : SkillEvent{
 	protected virtual bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
 		return casts.Count == 0;
 	}
+
+	public virtual float GetActionModifier(){
+		return 0;
+	}
 }

@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class PlayerController : EntityController{
+	
+	public const bool DEBUG = false;
 
 	public new PlayerMovement movement{
 		get{

@@ -23,14 +23,18 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler{
 			if(wave < skill.GetMinimumWave()){
 				continue;
 			}
+			bool can = true;
 			HashSet<string> required = skill.GetPrerequisites();
 			foreach(string s in required){
-				if(!System.Array.Exists<Skill>(player.combat.skills, (x => x != null && 
-					Skills.Attr(x.GetID()).title == s))){
-					continue;
+				if(!player.combat.skillLibrary.Exists(x => x != null && 
+					Skills.Attr(x.GetID()).title == s)){
+					can = false;
+					break;
 				}
 			}
-			list.Add(i);
+			if(can){
+				list.Add(i);
+			}
 		}
 		return list;
 	}
@@ -43,7 +47,7 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler{
 		player.combat.action = 0f;
 		List<Skill> missing = new List<Skill>();
 		foreach(int i in CanUnlockSkills()){
-			if(!System.Array.Exists<Skill>(player.combat.skills, (x => x != null && Skills.Attr(x.GetID()).id == i))){
+			if(!player.combat.skillLibrary.Exists(x => x != null && Skills.Attr(x.GetID()).id == i)){
 				missing.Add(Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i), player));
 			}
 		}

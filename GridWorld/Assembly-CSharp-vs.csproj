@@ -75,11 +75,14 @@
      <Compile Include="Assets\Scripts\Skill\Instance\Flare.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Heal.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Hyper.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Lightning.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Lunge.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\MagicBolt.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\MinorHeal.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Quake.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Shock.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Slash.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\VampStrike.cs" />
      <Compile Include="Assets\Scripts\Skill\NoncombatAbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\Projectile\LineProjectile.cs" />
      <Compile Include="Assets\Scripts\Skill\Projectile\Projectile.cs" />

@@ -10,4 +10,6 @@ public interface SkillEvent{
 	void CleanUp();
 
 	float GetCoolDown();
+
+	float GetActionModifier();
 }

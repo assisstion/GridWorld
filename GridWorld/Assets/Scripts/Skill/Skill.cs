@@ -47,18 +47,20 @@ public abstract class Skill{
 				if(controller.combat.mana < manaCost){
 					break;
 				}
-				if(controller.combat.ActivateAnimation(GetSkillEvent())){
+				SkillEvent se0 = GetSkillEvent();
+				if(controller.combat.ActivateAnimation(se0)){
 					controller.combat.mana -= manaCost;
-					return cooldown;
+					return cooldown + se0.GetActionModifier();
 				} 
 				break;
 			case CostType.Health:
 				if(controller.combat.health < manaCost){
 					break;
 				}
-				if(controller.combat.ActivateAnimation(GetSkillEvent())){
+				SkillEvent se = GetSkillEvent();
+				if(controller.combat.ActivateAnimation(se)){
 					controller.combat.health -= manaCost;
-					return cooldown;
+					return cooldown + se.GetActionModifier();
 				}
 				break;
 			default:

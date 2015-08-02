@@ -51,31 +51,14 @@ public class PlayerCombat : EntityCombat{
 		AddSkill(slash, 0);
 		skills[0] = slash;
 		manager.SetSkill(slash, 0);
-		/*for (int i = 0; i < 10; i++) {
-			Skill tempSkill;
-			switch(i){
-			case 1:
-				tempSkill = Lunge.Default(controller);
-				break;
-			case 2:
-				tempSkill = Fireball.Default(controller);
-				break;
-			case 3:
-				tempSkill = Heal.Default(controller);
-				break;
-			case 4:
-				tempSkill = Hyper.Default(controller);
-				break;
-			case 5:
-				tempSkill = Quake.Default(controller);
-				break;
-			default:
-				tempSkill = Slash.Default(controller);
-				break;
-				//tempSkill.cooldown = (i+1) * 0.1f;
+		if(PlayerController.DEBUG){
+			//0 already added
+			for(int i = 1; i <= Skills.GetMaxID(); i++){
+				Skill s = Skills.GetDefaultFromSkillInfo(
+					Skills.GetSkillInfoFromID(i), controller);
+				AddSkill(s, i); 
 			}
-			skills[i] = tempSkill;
-		}*/
+		}
 	}
 
 	protected override void Update(){
@@ -120,17 +103,6 @@ public class PlayerCombat : EntityCombat{
 	}
 
 	public void AddSkill(Skill s, int id){
-		/*int index = id;
-		while (skills[index] != null) {
-			index ++;
-			if(index >= skills.Length){
-				Debug.Log("No more space for skill");
-				break;
-			}
-		}
-		skills [index] = s;
-		manager.SetSkill (s, index);
-		*/
 		skillLibrary.Add(s);
 	}
 

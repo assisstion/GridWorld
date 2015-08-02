@@ -1,7 +1,7 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{F902AF4A-689E-D688-B7A0-1E473D34BBAE}"
+# Visual Studio 2008
+
+Project("{8EDC19C1-6C5E-AF2A-6666-1A5D65098E7D}") = "GridWorld", "Assembly-CSharp.csproj", "{F902AF4A-689E-D688-B7A0-1E473D34BBAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,7 +14,10 @@ Global
 		{F902AF4A-689E-D688-B7A0-1E473D34BBAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F902AF4A-689E-D688-B7A0-1E473D34BBAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+				GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -210,7 +213,5 @@ Global
 		$0.VersionControlPolicy = $29
 		$29.inheritsSet = Mono
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
+
 EndGlobal
