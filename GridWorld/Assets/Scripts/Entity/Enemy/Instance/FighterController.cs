@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace FighterEnemy{
-	public class FighterController : EnemyBaseController {
+	public class FighterController : EnemyBaseController{
 
 		
 		public new FighterMovement movement{
@@ -18,6 +18,7 @@ namespace FighterEnemy{
 				return ___combat;
 			}
 		}
+
 		FighterCombat ___combat;
 		
 		protected override EntityMovement MovementHolder(){
@@ -31,18 +32,18 @@ namespace FighterEnemy{
 		bool started;
 		
 		protected override void Start(){
-			base.Start ();
-			if (!started) {
+			base.Start();
+			if(!started){
 				Initialize();
 			}
 		}
 		
 		protected override void Update(){
-			base.Update ();
+			base.Update();
 		}
 		
 		public override void Initialize(){
-			if (started) {
+			if(started){
 				return;
 			}
 			started = true;
@@ -51,21 +52,21 @@ namespace FighterEnemy{
 			movement.Initialize(this, 4, 8, Direction.right, map);
 			___combat = this.gameObject.AddComponent<FighterCombat>()
 				as FighterCombat;
-			combat.Initialize (this);
-			combat.holder = this.gameObject.GetComponent<EnemyBaseManager> ().holder;
+			combat.Initialize(this);
+			combat.holder = this.gameObject.GetComponent<EnemyBaseManager>().holder;
 		}
 		
 		
 		public class FighterMovement : EnemyBaseMovement{
 
 			// Use this for initialization
-			protected override void Start () {
-				base.Start ();
+			protected override void Start(){
+				base.Start();
 			}
 			
 			// Update is called once per frame
-			protected override void Update () {
-				base.Update ();
+			protected override void Update(){
+				base.Update();
 			}
 			
 			new FighterController controller;
@@ -73,23 +74,23 @@ namespace FighterEnemy{
 			int lastDirection;
 			
 			public void Initialize(FighterController control, int x, int y, int dir, MapGenerator map){
-				if (started) {
+				if(started){
 					return;
 				}
 				started = true;
 				controller = control;
 				this.map = map;
-				Setup (x, y, dir);
+				Setup(x, y, dir);
 				lastDirection = direction;
 			}
 			
 			public void MoveRandom(){
-				int targetDir = Direction.RandomDirection ();
-				if (Random.Range (0, 2) == 0) {
+				int targetDir = Direction.RandomDirection();
+				if(Random.Range(0, 2) == 0){
 					targetDir = lastDirection;
 				}
 				lastDirection = targetDir;
-				GoTowards (targetDir);
+				GoTowards(targetDir);
 			}
 
 			protected override EnemyBaseController GetController(){
@@ -100,13 +101,13 @@ namespace FighterEnemy{
 		public class FighterCombat : EnemyBaseCombat{
 
 			// Use this for initialization
-			protected override void Start () {
-				base.Start ();
+			protected override void Start(){
+				base.Start();
 			}
 			
 			// Update is called once per frame
-			protected override void Update () {
-				base.Update ();
+			protected override void Update(){
+				base.Update();
 			}
 			
 			new FighterController controller;
@@ -118,22 +119,23 @@ namespace FighterEnemy{
 			}
 			
 			public void Initialize(FighterController control){
-				if (started) {
+				if(started){
 					return;
 				}
 				started = true;
 				controller = control;
 				skills = new Skill[1];
-				skills [0] = Slash.Default (controller);
+				skills[0] = Slash.Default(controller);
 				_maxHealth = 10;
 			}
 			
 			protected override void PerformAction(){
 				int xDist = controller.target.movement.playerX - controller.movement.playerX;
 				int yDist = controller.target.movement.playerY - controller.movement.playerY;
-				if (Abs (xDist) + Abs (yDist) == 1) {
-					Attack ();
-				} else {
+				if(Abs(xDist) + Abs(yDist) == 1){
+					Attack();
+				}
+				else{
 					float f = Random.value;
 					int primaryD;
 					int secondaryD;
@@ -199,42 +201,49 @@ namespace FighterEnemy{
 			void Attack(){
 				int xDist = controller.target.movement.playerX - controller.movement.playerX;
 				int yDist = controller.target.movement.playerY - controller.movement.playerY;
-				if (xDist == 1) {
-					if (!controller.movement.TryTurn (Direction.right)) {
-						action = skills [0].Activate ();
+				if(xDist == 1){
+					if(!controller.movement.TryTurn(Direction.right)){
+						action = skills[0].Activate();
 					}
-				} else if (xDist == -1) {
-					if (!controller.movement.TryTurn (Direction.left)) {
-						action = skills [0].Activate ();
+				}
+				else if(xDist == -1){
+					if(!controller.movement.TryTurn(Direction.left)){
+						action = skills[0].Activate();
 					}
-				} else if (yDist == 1) {
-					if (!controller.movement.TryTurn (Direction.up)) {
-						action = skills [0].Activate ();
+				}
+				else if(yDist == 1){
+					if(!controller.movement.TryTurn(Direction.up)){
+						action = skills[0].Activate();
 					}
-				} else if (yDist == -1) {
-					if (!controller.movement.TryTurn (Direction.down)) {
-						action = skills [0].Activate ();
+				}
+				else if(yDist == -1){
+					if(!controller.movement.TryTurn(Direction.down)){
+						action = skills[0].Activate();
 					}
-				} else {
-					Debug.Log ("Wut");
+				}
+				else{
+					Debug.Log("Wut");
 				}
 			}
 			
 			static int Abs(int x){
-				if (x < 0) {
+				if(x < 0){
 					return -x;
-				} else {
+				}
+				else{
 					return x;
 				}
 
 			}
 
 			static int Signum(int x){
-				if (x < 0) {
+				if(x < 0){
 					return -1;
-				} else if (x > 0) {
+				}
+				else if(x > 0){
 					return 1;
-				} else {
+				}
+				else{
 					return 0;
 				}
 			}

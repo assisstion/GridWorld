@@ -1,18 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class ProjectileSkillEvent : NoncombatAbstractSkillEvent {
+public abstract class ProjectileSkillEvent : NoncombatAbstractSkillEvent{
 
 
 	protected HashSet<Projectile> projectiles = new HashSet<Projectile>();
-
-
 
 	public override void CleanUp(){
 
 	}
 
-	protected override bool PostCast (){
+	protected override bool PostCast(){
 		foreach(float f in GetAngles()){
 			Projectile p = GetNewProjectile();
 			Vector3 converted = controller.movement.ConvertPosition(x, y, 0);
@@ -25,17 +23,17 @@ public abstract class ProjectileSkillEvent : NoncombatAbstractSkillEvent {
 		return true;
 	}
 
-	protected abstract HashSet<float> GetAngles ();
+	protected abstract HashSet<float> GetAngles();
 
 	protected float previousUpdate = 0;
 	
-	public override bool Update (){
-		if (ShouldStopUpdate ()) {
+	public override bool Update(){
+		if(ShouldStopUpdate()){
 			return false;
 		}
-		float currentTime = TimePassed ();
-		HashSet<Projectile> toBeDestroyed = new HashSet<Projectile> ();
-		foreach (Projectile proj in projectiles) {
+		float currentTime = TimePassed();
+		HashSet<Projectile> toBeDestroyed = new HashSet<Projectile>();
+		foreach(Projectile proj in projectiles){
 			if(!proj.UpdateMovement(currentTime - previousUpdate)){
 				toBeDestroyed.Add(proj);
 				continue;
@@ -44,11 +42,11 @@ public abstract class ProjectileSkillEvent : NoncombatAbstractSkillEvent {
 				int x = pair.Key;
 				int y = pair.Value;
 				if(!proj.owner.movement.IsGameSpace(x, y) || 
-				   (proj.clipping && !proj.owner.movement.CanPass(proj.owner.movement.map.tiles[x, y]))){
+					(proj.clipping && !proj.owner.movement.CanPass(proj.owner.movement.map.tiles[x, y]))){
 					toBeDestroyed.Add(proj);
 					break;
 				}
-				GameObject obj = controller.movement.map.objects[x,y];
+				GameObject obj = controller.movement.map.objects[x, y];
 				if(obj != null){
 					EntityController ctrl = GetControllerFromObject(obj);
 					if(ctrl != null){
@@ -60,11 +58,11 @@ public abstract class ProjectileSkillEvent : NoncombatAbstractSkillEvent {
 				}
 			}
 		}
-		foreach (Projectile proj in toBeDestroyed) {
+		foreach(Projectile proj in toBeDestroyed){
 			proj.CleanUp();
 			projectiles.Remove(proj);
 		}
-		toBeDestroyed.Clear ();
+		toBeDestroyed.Clear();
 		previousUpdate = currentTime;
 		return true;
 	}
@@ -87,9 +85,9 @@ public abstract class ProjectileSkillEvent : NoncombatAbstractSkillEvent {
 	}
 
 	public HashSet<KeyValuePair<int, int>> CollisionSquares(Rect input){
-		Vector3 min = controller.movement.UnconvertPosition (input.xMin, input.yMin, 0);
-		Vector3 max = controller.movement.UnconvertPosition (input.xMax, input.yMax, 0);
-		HashSet<KeyValuePair<int, int>> set = new HashSet<KeyValuePair<int, int>> ();
+		Vector3 min = controller.movement.UnconvertPosition(input.xMin, input.yMin, 0);
+		Vector3 max = controller.movement.UnconvertPosition(input.xMax, input.yMax, 0);
+		HashSet<KeyValuePair<int, int>> set = new HashSet<KeyValuePair<int, int>>();
 		for(int x = Mathf.FloorToInt(min.x); x <= Mathf.CeilToInt(max.x); x++){
 			for(int y = Mathf.FloorToInt(min.y); y <= Mathf.CeilToInt(max.y); y++){
 				set.Add(new KeyValuePair<int, int>(x, y));

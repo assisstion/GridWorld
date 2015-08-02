@@ -4,7 +4,10 @@ using System.Collections;
 public interface SkillEvent{
 
 	bool Initialize();
-	bool Update ();
-	void CleanUp ();
+
+	bool Update();
+
+	void CleanUp();
+
 	float GetCoolDown();
 }

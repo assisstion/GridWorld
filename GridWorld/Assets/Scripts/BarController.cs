@@ -2,17 +2,18 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class BarController : MonoBehaviour {
+public class BarController : MonoBehaviour{
 
-	public float percent {
-		set {
+	public float percent{
+		set{
 			_percent = value;
-			bar.rectTransform.anchoredPosition = new Vector3(-(100-_percent), 0, 0);
+			bar.rectTransform.anchoredPosition = new Vector3(-(100 - _percent), 0, 0);
 		}
 		get{
 			return _percent;
 		}
 	}
+
 	float _percent;
 	public Image bar;
 	//RectTransform transform;
@@ -22,12 +23,12 @@ public class BarController : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	void Start(){
 		//transform = GetComponent<RectTransform> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update(){
 	
 	}
 }

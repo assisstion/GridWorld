@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : EntityController {
+public class PlayerController : EntityController{
 
 	public new PlayerMovement movement{
 		get{
 			return __movement;
 		}
 	}
+
 	PlayerMovement __movement;
 
 	public new PlayerCombat combat{
@@ -15,16 +16,17 @@ public class PlayerController : EntityController {
 			return __combat;
 		}
 	}
+
 	PlayerCombat __combat;
 
 	// Use this for initialization
-	protected override void Start () {
-		__movement = this.gameObject.GetComponent<PlayerMovement> ();
-		__combat = this.gameObject.GetComponent<PlayerCombat> ();
+	protected override void Start(){
+		__movement = this.gameObject.GetComponent<PlayerMovement>();
+		__combat = this.gameObject.GetComponent<PlayerCombat>();
 	}
 	
 	// Update is called once per frame
-	protected override void Update () {
+	protected override void Update(){
 	
 	}
 

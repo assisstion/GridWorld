@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyBaseController : EntityController {
+public class EnemyBaseController : EntityController{
 	
 	public EntityController target;
 	public MapGenerator map;
@@ -11,6 +11,7 @@ public class EnemyBaseController : EntityController {
 			return MovementHolder() as EnemyBaseMovement;
 		}
 	}
+
 	protected EnemyBaseMovement __movement;
 	
 	public new EnemyBaseCombat combat{
@@ -18,6 +19,7 @@ public class EnemyBaseController : EntityController {
 			return CombatHolder() as EnemyBaseCombat;
 		}
 	}
+
 	protected EnemyBaseCombat __combat;
 
 	public EnemyBaseController(){
@@ -31,12 +33,12 @@ public class EnemyBaseController : EntityController {
 	}
 	
 	// Use this for initialization
-	protected override void Start () {
+	protected override void Start(){
 
 	}
 	
 	// Update is called once per frame
-	protected override void Update () {
+	protected override void Update(){
 		
 	}
 

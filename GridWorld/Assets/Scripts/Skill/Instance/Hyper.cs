@@ -1,24 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Hyper : Skill {
+public class Hyper : Skill{
 	
 	float cd;
 	
 	public Hyper(EntityController control, float cd, float manaCost) 
 	: base(control, cd, manaCost){
 		this.cd = cd;
-	} 
+	}
 	
 	public override SkillEvent GetSkillEvent(){
-		return new HyperEvent (controller, cd);
+		return new HyperEvent(controller, cd);
 	}
 
 	public static Hyper Default(EntityController control){
-		return new Hyper (control, 0.5f, 75);
+		return new Hyper(control, 0.5f, 75);
 	}
 
-	public override SkillInfo GetID (){
+	public override SkillInfo GetID(){
 		return SkillInfo.Hyper;
 	}
 
@@ -30,16 +30,14 @@ public class Hyper : Skill {
 		return "Doubles movement speed";
 	}
 
-	public override HashSet<string> GetPrerequisites ()
-	{
-		HashSet<string> hs = new HashSet<string> ();
+	public override HashSet<string> GetPrerequisites(){
+		HashSet<string> hs = new HashSet<string>();
 		//hs.Add ("Dash");
 		return hs;
 	}
 	
-	public override int GetMinimumWave ()
-	{
-		return Skills.MinimumWaveFromTier (3);
+	public override int GetMinimumWave(){
+		return Skills.MinimumWaveFromTier(3);
 	}
 	
 	public class HyperEvent : NoncombatAbstractSkillEvent{
@@ -50,7 +48,7 @@ public class Hyper : Skill {
 		}
 		
 		public override bool Update(){
-			if (TimePassed() > 5) {
+			if(TimePassed() > 5){
 				controller.movement.moveCooldown = controller.movement.defaultMoveCooldown;
 				controller.movement.turnCooldown = controller.movement.defaultTurnCooldown;
 				return false;

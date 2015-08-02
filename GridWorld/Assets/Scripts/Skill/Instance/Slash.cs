@@ -8,17 +8,17 @@ public class Slash : Skill{
 	public Slash(EntityController control, float cd, float manaCost) 
 			: base(control, cd, manaCost){
 		this.cd = cd;
-	} 
+	}
 
 	public override SkillEvent GetSkillEvent(){
-		return new SlashSkillEvent (controller, cd);
+		return new SlashSkillEvent(controller, cd);
 	}
 
 	public static Slash Default(EntityController control){
-		return new Slash (control, 0.35f, 0);
+		return new Slash(control, 0.35f, 0);
 	}
 
-	public override SkillInfo GetID (){
+	public override SkillInfo GetID(){
 		return SkillInfo.Slash;
 	}
 
@@ -30,15 +30,13 @@ public class Slash : Skill{
 		return "A basic slash that damages enemies";
 	}
 
-	public override HashSet<string> GetPrerequisites ()
-	{
-		HashSet<string> hs = new HashSet<string> ();
+	public override HashSet<string> GetPrerequisites(){
+		HashSet<string> hs = new HashSet<string>();
 		return hs;
 	}
 	
-	public override int GetMinimumWave ()
-	{
-		return Skills.MinimumWaveFromTier (0);
+	public override int GetMinimumWave(){
+		return Skills.MinimumWaveFromTier(0);
 	}
 
 	public class SlashSkillEvent : AbstractSkillEvent{
@@ -52,41 +50,41 @@ public class Slash : Skill{
 		}
 
 		public override bool Update(){
-			KeyValuePair<int, int> pair = LocalToGame (new KeyValuePair<int, int>(0,1));
+			KeyValuePair<int, int> pair = LocalToGame(new KeyValuePair<int, int>(0, 1));
 			int vx = pair.Key;
 			int vy = pair.Value;
-			animObj.transform.position = controller.movement.ConvertPosition (vx, vy, -2.0f) 
+			animObj.transform.position = controller.movement.ConvertPosition(vx, vy, -2.0f) 
 				- Direction.ToVector(direction).normalized
-					*controller.movement.map.gridSize*(TimePassed()/cooldown)/2;
+				* controller.movement.map.gridSize * (TimePassed() / cooldown) / 2;
 			animObj.transform.localScale = new Vector3 
-				(0.1f*(1-TimePassed()/cooldown) ,animObj.transform.localScale.y,animObj.transform.localScale.z);
-			if (TimePassed() > cooldown) {
+				(0.1f * (1 - TimePassed() / cooldown), animObj.transform.localScale.y, animObj.transform.localScale.z);
+			if(TimePassed() > cooldown){
 				return false;
 			}
 			return true;
 		}
 
 		public override void CleanUp(){
-			GameObject.Destroy (animObj);
+			GameObject.Destroy(animObj);
 		}
 
-		protected override HashSet<KeyValuePair<int, int>> GetCoordinates (){
-			HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>> ();
-			set.Add (new KeyValuePair<int, int> (0, 1));
+		protected override HashSet<KeyValuePair<int, int>> GetCoordinates(){
+			HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>>();
+			set.Add(new KeyValuePair<int, int>(0, 1));
 			return set;
 		}
 
 		protected override void RunAttack(KeyValuePair<int, int> coords){
-			KeyValuePair<int, int> pair = LocalToGame (coords);
-			animObj = GameObject.CreatePrimitive (PrimitiveType.Plane);
-			animObj.transform.position = controller.movement.ConvertPosition (pair.Key, pair.Value, -2.0f);
-			animObj.transform.rotation = Quaternion.Euler (new Vector3 (Direction.Rotation(direction), 270, 90));
-			animObj.transform.localScale = new Vector3 (0.1f, 1, 0.02f);
+			KeyValuePair<int, int> pair = LocalToGame(coords);
+			animObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
+			animObj.transform.position = controller.movement.ConvertPosition(pair.Key, pair.Value, -2.0f);
+			animObj.transform.rotation = Quaternion.Euler(new Vector3(Direction.Rotation(direction), 270, 90));
+			animObj.transform.localScale = new Vector3(0.1f, 1, 0.02f);
 
 		}
 
 		protected override void Hit(EntityController control){
-			control.combat.TakeDamage (10);
+			control.combat.TakeDamage(10);
 		}
 	}
 }

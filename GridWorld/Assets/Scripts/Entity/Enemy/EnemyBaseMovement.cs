@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyBaseMovement : EntityMovement {
+public class EnemyBaseMovement : EntityMovement{
 
 	protected EnemyBaseController controller{
 		get{
 			return GetController();
 		}
 	}
+
 	EnemyBaseController _controller;
 
 	protected void SetupController(EnemyBaseController controller){
@@ -19,19 +20,18 @@ public class EnemyBaseMovement : EntityMovement {
 	}
 
 	// Use this for initialization
-	protected override void Start () {
-		base.Start ();
+	protected override void Start(){
+		base.Start();
 	}
 	
 	// Update is called once per frame
-	protected override void Update () {
-		base.Update ();
+	protected override void Update(){
+		base.Update();
 	}
 	
-	
 	protected override void MoveSuccess(bool ping){
-		base.MoveSuccess (ping);
-		if (ping) {
+		base.MoveSuccess(ping);
+		if(ping){
 			controller.combat.action = moveCooldown;
 		}
 	}

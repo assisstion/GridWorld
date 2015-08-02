@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MultiButton : MonoBehaviour {
+public class MultiButton : MonoBehaviour{
 
 	// Use this for initialization
-	void Start () {
+	void Start(){
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update(){
 	
 	}
 
 	public void ChangeMenu(){
-		Application.LoadLevel ("ServerMenu");
+		Application.LoadLevel("ServerMenu");
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class CompositeSkillEvent : SkillEvent {
+public class CompositeSkillEvent : SkillEvent{
 
 	protected float startTime;
 	protected List<SkillEvent> events;
@@ -15,26 +15,27 @@ public class CompositeSkillEvent : SkillEvent {
 		this.events = events;
 		controller = control;
 		cooldown = 0;
-		foreach (SkillEvent ev in events) {
+		foreach(SkillEvent ev in events){
 			cooldown += ev.GetCoolDown();
 		}
 	}
 
-
 	public bool Initialize(){
 		currIndex = -1;
 		startTime = Time.time;
-		return GoNextEvent ();
+		return GoNextEvent();
 	}
-	public bool Update (){
-		if (TimePassed () - currTimePassed >= currEvent.GetCoolDown ()) {
+
+	public bool Update(){
+		if(TimePassed() - currTimePassed >= currEvent.GetCoolDown()){
 			if(!GoNextEvent()){
 				return false;
 			}
 		}
 		return true;
 	}
-	public void CleanUp (){
+
+	public void CleanUp(){
 
 	}
 
@@ -52,10 +53,11 @@ public class CompositeSkillEvent : SkillEvent {
 	}
 
 	bool SetupEvent(SkillEvent ev){
-		if (controller.combat.ActivateAnimation (ev)) {
-			currTimePassed = TimePassed ();
+		if(controller.combat.ActivateAnimation(ev)){
+			currTimePassed = TimePassed();
 			return true;
-		} else {
+		}
+		else{
 			return false;
 		}
 	}
@@ -63,7 +65,6 @@ public class CompositeSkillEvent : SkillEvent {
 	public float TimePassed(){
 		return Time.time - startTime;
 	}
-	
 
 	public float GetCoolDown(){
 		return cooldown;

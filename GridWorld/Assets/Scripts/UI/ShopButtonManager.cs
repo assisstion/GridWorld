@@ -2,24 +2,22 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ShopButtonManager : MonoBehaviour {
+public class ShopButtonManager : MonoBehaviour{
 
 	string buttonName;
 	int id;
-
 	public Text titleText;
 	public Text infoText;
 	public Text bodyText;
-
 	public ShopButtonHandler handler;
 
 	// Use this for initialization
-	void Start () {
+	void Start(){
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update(){
 	
 	}
 
@@ -56,6 +54,6 @@ public class ShopButtonManager : MonoBehaviour {
 	}
 
 	public void ActionPerformed(){
-		handler.ButtonPressed (this);
+		handler.ButtonPressed(this);
 	}
 }

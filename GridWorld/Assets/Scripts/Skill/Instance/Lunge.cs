@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Lunge : Skill {
+public class Lunge : Skill{
 
 	float cd;
 	float dashTime;
@@ -10,24 +10,24 @@ public class Lunge : Skill {
 	: base(control, cd, manaCost){
 		this.cd = cd;
 		this.dashTime = dashTime;
-	} 
+	}
 	
 	public override SkillEvent GetSkillEvent(){
-		List<SkillEvent> evs = new List<SkillEvent> ();
-		evs.Add (new LungeDashEvent (controller, dashTime));
-		evs.Add (new LungeStrikeEvent (controller, cd - dashTime));
+		List<SkillEvent> evs = new List<SkillEvent>();
+		evs.Add(new LungeDashEvent(controller, dashTime));
+		evs.Add(new LungeStrikeEvent(controller, cd - dashTime));
 		return new CompositeSkillEvent(controller, evs);
 	}
 
 	public static Lunge Default(EntityController control){
-		return new Lunge (control, 1f, 0.3f, 10);
+		return new Lunge(control, 1f, 0.3f, 10);
 	}
 
 	public override string GetCustomStat(){
 		return "Range: " + 3;
 	}
 
-	public override SkillInfo GetID (){
+	public override SkillInfo GetID(){
 		return SkillInfo.Lunge;
 	}
 
@@ -35,17 +35,15 @@ public class Lunge : Skill {
 		return "Dash for a short distance, then performs a strike";
 	}
 
-	public override HashSet<string> GetPrerequisites ()
-	{
-		HashSet<string> hs = new HashSet<string> ();
-		hs.Add ("Dash");
-		hs.Add ("Slash");
+	public override HashSet<string> GetPrerequisites(){
+		HashSet<string> hs = new HashSet<string>();
+		hs.Add("Dash");
+		hs.Add("Slash");
 		return hs;
 	}
 	
-	public override int GetMinimumWave ()
-	{
-		return Skills.MinimumWaveFromTier (2);
+	public override int GetMinimumWave(){
+		return Skills.MinimumWaveFromTier(2);
 	}
 
 	public class LungeDashEvent : NoncombatAbstractSkillEvent{
@@ -60,12 +58,12 @@ public class Lunge : Skill {
 		bool moveDone;
 		
 		public override bool Update(){
-			if (!moveDone) {
+			if(!moveDone){
 				stop = dashDistance;
-				int start = (int)(TimePassed () / cooldown * dashDistance);
-				for (int i = start; i <= dashDistance; i++) {
-					KeyValuePair<int, int> pair = LocalToGame (new KeyValuePair<int, int> (0, i));
-					if (!controller.movement.CanMoveTo (pair.Key, pair.Value)) {
+				int start = (int)(TimePassed() / cooldown * dashDistance);
+				for(int i = start; i <= dashDistance; i++){
+					KeyValuePair<int, int> pair = LocalToGame(new KeyValuePair<int, int>(0, i));
+					if(!controller.movement.CanMoveTo(pair.Key, pair.Value)){
 						stop = i - 1;
 					}
 				}
@@ -73,39 +71,39 @@ public class Lunge : Skill {
 					moveDone = true;
 				}
 				else{
-					KeyValuePair<int, int> limPair = LocalToGame (new KeyValuePair<int, int> (0, dashDistance));
-					KeyValuePair<int, int> stopPair = LocalToGame (new KeyValuePair<int, int> (0, stop));
+					KeyValuePair<int, int> limPair = LocalToGame(new KeyValuePair<int, int>(0, dashDistance));
+					KeyValuePair<int, int> stopPair = LocalToGame(new KeyValuePair<int, int>(0, stop));
 					Vector3 limDist = (
-					controller.movement.ConvertPosition (limPair.Key, limPair.Value, -1.0f) - 
-						controller.movement.ConvertPosition (x, y, -1.0f));
+					controller.movement.ConvertPosition(limPair.Key, limPair.Value, -1.0f) - 
+						controller.movement.ConvertPosition(x, y, -1.0f));
 					Vector3 travelDist = (
-					controller.movement.ConvertPosition (stopPair.Key, stopPair.Value, -1.0f) - 
-						controller.movement.ConvertPosition (x, y, -1.0f));
+					controller.movement.ConvertPosition(stopPair.Key, stopPair.Value, -1.0f) - 
+						controller.movement.ConvertPosition(x, y, -1.0f));
 
-					float clampPassed = Mathf.Clamp (TimePassed () / cooldown, 0, travelDist.magnitude / limDist.magnitude);
+					float clampPassed = Mathf.Clamp(TimePassed() / cooldown, 0, travelDist.magnitude / limDist.magnitude);
 
 					controller.movement.transform.position = 
-					controller.movement.ConvertPosition (x, y, -1.0f) + ((limDist) * (clampPassed));
-					if (clampPassed > travelDist.magnitude / limDist.magnitude) {
+					controller.movement.ConvertPosition(x, y, -1.0f) + ((limDist) * (clampPassed));
+					if(clampPassed > travelDist.magnitude / limDist.magnitude){
 						moveDone = true;
 					}
 				}
 			}
-			if (TimePassed() > cooldown) {
+			if(TimePassed() > cooldown){
 				return false;
 			}
 			return true;
 		}
 
 		public override void CleanUp(){
-			KeyValuePair<int, int> stopPair = LocalToGame (new KeyValuePair<int, int> (0, stop));
-			controller.movement.TryMove (stopPair.Key, stopPair.Value, direction, EntityMovement.MoveMode.NoCooldown);
-			controller.movement.UpdatePosition ();
+			KeyValuePair<int, int> stopPair = LocalToGame(new KeyValuePair<int, int>(0, stop));
+			controller.movement.TryMove(stopPair.Key, stopPair.Value, direction, EntityMovement.MoveMode.NoCooldown);
+			controller.movement.UpdatePosition();
 		}
 
 		protected override bool CanRun(){
-			KeyValuePair<int, int> pair = LocalToGame (new KeyValuePair<int, int> (0, 1));
-			if (!controller.movement.CanMoveTo (pair.Key, pair.Value)) {
+			KeyValuePair<int, int> pair = LocalToGame(new KeyValuePair<int, int>(0, 1));
+			if(!controller.movement.CanMoveTo(pair.Key, pair.Value)){
 				return false;
 			}
 			return true;
@@ -123,41 +121,41 @@ public class Lunge : Skill {
 		}
 		
 		public override bool Update(){
-			KeyValuePair<int, int> pair = LocalToGame (new KeyValuePair<int, int>(0,1));
+			KeyValuePair<int, int> pair = LocalToGame(new KeyValuePair<int, int>(0, 1));
 			int vx = pair.Key;
 			int vy = pair.Value;
-			animObj.transform.position = controller.movement.ConvertPosition (vx, vy, -2.0f) 
+			animObj.transform.position = controller.movement.ConvertPosition(vx, vy, -2.0f) 
 				- Direction.ToVector(direction).normalized
-					*controller.movement.map.gridSize*(TimePassed()/cooldown)/2;
+				* controller.movement.map.gridSize * (TimePassed() / cooldown) / 2;
 			animObj.transform.localScale = new Vector3 
-				(0.1f*(1-TimePassed()/cooldown) ,animObj.transform.localScale.y,animObj.transform.localScale.z);
-			if (TimePassed() > cooldown) {
+				(0.1f * (1 - TimePassed() / cooldown), animObj.transform.localScale.y, animObj.transform.localScale.z);
+			if(TimePassed() > cooldown){
 				return false;
 			}
 			return true;
 		}
 		
 		public override void CleanUp(){
-			GameObject.Destroy (animObj);
+			GameObject.Destroy(animObj);
 		}
 		
-		protected override HashSet<KeyValuePair<int, int>> GetCoordinates (){
-			HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>> ();
-			set.Add (new KeyValuePair<int, int> (0, 1));
+		protected override HashSet<KeyValuePair<int, int>> GetCoordinates(){
+			HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>>();
+			set.Add(new KeyValuePair<int, int>(0, 1));
 			return set;
 		}
 		
 		protected override void RunAttack(KeyValuePair<int, int> coords){
-			KeyValuePair<int, int> pair = LocalToGame (coords);
-			animObj = GameObject.CreatePrimitive (PrimitiveType.Plane);
-			animObj.transform.position = controller.movement.ConvertPosition (pair.Key, pair.Value, -2.0f);
-			animObj.transform.rotation = Quaternion.Euler (new Vector3 (Direction.Rotation(direction), 270, 90));
-			animObj.transform.localScale = new Vector3 (0.1f, 1, 0.02f);
+			KeyValuePair<int, int> pair = LocalToGame(coords);
+			animObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
+			animObj.transform.position = controller.movement.ConvertPosition(pair.Key, pair.Value, -2.0f);
+			animObj.transform.rotation = Quaternion.Euler(new Vector3(Direction.Rotation(direction), 270, 90));
+			animObj.transform.localScale = new Vector3(0.1f, 1, 0.02f);
 			
 		}
 		
 		protected override void Hit(EntityController control){
-			control.combat.TakeDamage (10);
+			control.combat.TakeDamage(10);
 		}
 	}
 }

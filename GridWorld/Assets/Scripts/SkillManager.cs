@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class SkillManager : MonoBehaviour {
+public class SkillManager : MonoBehaviour{
 
 	public GameObject skillShop;
 	public MapGenerator map;
@@ -10,16 +10,14 @@ public class SkillManager : MonoBehaviour {
 	public GameObject[] skillButtons;
 	public GameObject skillButton;
 	public GameObject skillBar;
-
 	public List<GameObject> skillShopButtons;
 	public GameObject skillShopButton;
 	public GameObject skillShopPanel;
-
 	int len = 10;
 
 	public void Present(){
-		skillShop.SetActive (true);
-		foreach (Skill skill in player.combat.skillLibrary) {
+		skillShop.SetActive(true);
+		foreach(Skill skill in player.combat.skillLibrary){
 			GameObject obj = Instantiate(skillShopButton) as GameObject;
 			obj.transform.SetParent(skillShopPanel.transform);
 			SkillPageButtonManager button = obj.GetComponent<SkillPageButtonManager>();
@@ -31,15 +29,15 @@ public class SkillManager : MonoBehaviour {
 	}
 
 	public void Close(){
-		foreach (GameObject obj in skillShopButtons) {
+		foreach(GameObject obj in skillShopButtons){
 			Destroy(obj);
 		}
-		skillShop.SetActive (false);
-		map.NextWave ();
+		skillShop.SetActive(false);
+		map.NextWave();
 	}
 
 	public void Clear(){
-		foreach (GameObject button in skillButtons) {
+		foreach(GameObject button in skillButtons){
 			button.GetComponent<SkillButtonManager>().ClearSkill(player);
 		}
 	}
@@ -49,8 +47,8 @@ public class SkillManager : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
-		skillShopButtons = new List<GameObject> ();
+	void Start(){
+		skillShopButtons = new List<GameObject>();
 	}
 
 	public void Initialize(){
@@ -68,20 +66,20 @@ public class SkillManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update(){
 	
 	}
 
 	public void SetSkill(Skill s, int index){
-		skillButtons [index].GetComponent<SkillButtonManager> ().SetSkill (s);
+		skillButtons[index].GetComponent<SkillButtonManager>().SetSkill(s);
 	}
 
 	public void Dropped(Camera cam, RectTransform t, string text){
-		foreach (GameObject button in skillButtons) {
+		foreach(GameObject button in skillButtons){
 
 			RectTransform rt = button.GetComponent<RectTransform>();
-			Rect rect = new Rect(rt.position.x - rt.rect.width/2, 
-			   rt.position.y - rt.rect.height/2, rt.rect.width, rt.rect.height);
+			Rect rect = new Rect(rt.position.x - rt.rect.width / 2, 
+			   rt.position.y - rt.rect.height / 2, rt.rect.width, rt.rect.height);
 			if(rect.Contains(RectTransformUtility.WorldToScreenPoint(cam, t.position))){
 				button.GetComponent<SkillButtonManager>().DropSkill(text, player);
 				return;

@@ -8,35 +8,43 @@ public class Direction{
 	public const int right = 3;
 
 	public static Vector3 ToVector(int dir){
-		if (dir == right) {
+		if(dir == right){
 			return Vector3.right;
-		} else if (dir == up) {
+		}
+		else if(dir == up){
 			return Vector3.up;
-		} else if (dir == left) {
+		}
+		else if(dir == left){
 			return Vector3.left;
-		} else if (dir == down) {
+		}
+		else if(dir == down){
 			return Vector3.down;
-		} else {
+		}
+		else{
 			return Vector3.zero;
 		}
 	}
 
 	public static int ValueX(int dir){
-		if (dir == right) {
+		if(dir == right){
 			return 1;
-		} else if (dir == left) {
+		}
+		else if(dir == left){
 			return -1;
-		} else {
+		}
+		else{
 			return 0;
 		}
 	}
 
 	public static int ValueY(int dir){
-		if (dir == up) {
+		if(dir == up){
 			return 1;
-		} else if (dir == down) {
+		}
+		else if(dir == down){
 			return -1;
-		} else {
+		}
+		else{
 			return 0;
 		}
 	}
@@ -46,6 +54,6 @@ public class Direction{
 	}
 
 	public static int RandomDirection(){
-		return Random.Range(0,4);
+		return Random.Range(0, 4);
 	}
 }

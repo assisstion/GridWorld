@@ -18,11 +18,11 @@ public abstract class Projectile{
 
 	public abstract bool UpdateMovement(float deltaTime);
 
-	public abstract float GetSpeed ();
+	public abstract float GetSpeed();
 
 	public abstract bool OnHit(EntityController controller);
 
-	public abstract Rect CollisionRect ();
+	public abstract Rect CollisionRect();
 
 	public abstract void CleanUp();
 }

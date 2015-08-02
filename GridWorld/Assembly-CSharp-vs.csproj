@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\Skill\AbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\CompositeSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Cleave.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\DarkBolt.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Dash.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Fireball.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Flare.cs" />

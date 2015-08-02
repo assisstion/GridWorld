@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerCombat : EntityCombat {
+public class PlayerCombat : EntityCombat{
 
 	public List<Skill> skillLibrary;
 	public BarController healthBar;
@@ -38,20 +38,19 @@ public class PlayerCombat : EntityCombat {
 			return base.mana;
 		}
 	}
-
 	
 	PlayerController controller;
 
 	protected override void Start(){
-		base.Start ();
-		skillLibrary = new List<Skill> ();
-		controller = this.gameObject.GetComponent<PlayerController> ();
-		manager.Initialize ();
+		base.Start();
+		skillLibrary = new List<Skill>();
+		controller = this.gameObject.GetComponent<PlayerController>();
+		manager.Initialize();
 		skills = new Skill[100];
-		Skill slash = Slash.Default (controller);
-		AddSkill (slash, 0);
-		skills [0] = slash;
-		manager.SetSkill (slash, 0);
+		Skill slash = Slash.Default(controller);
+		AddSkill(slash, 0);
+		skills[0] = slash;
+		manager.SetSkill(slash, 0);
 		/*for (int i = 0; i < 10; i++) {
 			Skill tempSkill;
 			switch(i){
@@ -80,32 +79,40 @@ public class PlayerCombat : EntityCombat {
 	}
 
 	protected override void Update(){
-		base.Update ();
-		InputCheck ();
+		base.Update();
+		InputCheck();
 	}
-
 	
 	public void InputCheck(){
-		if (TryLockAction ()) {
+		if(TryLockAction()){
 			if(Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)){
 				ActivateSkill(0);
-			} else if(Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)){
+			}
+			else if(Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2)){
 				ActivateSkill(1);
-			} else if(Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3)){
+			}
+			else if(Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3)){
 				ActivateSkill(2);
-			} else if(Input.GetKey(KeyCode.Alpha4) || Input.GetKey(KeyCode.Keypad4)){
+			}
+			else if(Input.GetKey(KeyCode.Alpha4) || Input.GetKey(KeyCode.Keypad4)){
 				ActivateSkill(3);
-			} else if(Input.GetKey(KeyCode.Alpha5) || Input.GetKey(KeyCode.Keypad5)){
+			}
+			else if(Input.GetKey(KeyCode.Alpha5) || Input.GetKey(KeyCode.Keypad5)){
 				ActivateSkill(4);
-			} else if(Input.GetKey(KeyCode.Alpha6) || Input.GetKey(KeyCode.Keypad6)){
+			}
+			else if(Input.GetKey(KeyCode.Alpha6) || Input.GetKey(KeyCode.Keypad6)){
 				ActivateSkill(5);
-			} else if(Input.GetKey(KeyCode.Alpha7) || Input.GetKey(KeyCode.Keypad7)){
+			}
+			else if(Input.GetKey(KeyCode.Alpha7) || Input.GetKey(KeyCode.Keypad7)){
 				ActivateSkill(6);
-			} else if(Input.GetKey(KeyCode.Alpha8) || Input.GetKey(KeyCode.Keypad8)){
+			}
+			else if(Input.GetKey(KeyCode.Alpha8) || Input.GetKey(KeyCode.Keypad8)){
 				ActivateSkill(7);
-			} else if(Input.GetKey(KeyCode.Alpha9) || Input.GetKey(KeyCode.Keypad9)){
+			}
+			else if(Input.GetKey(KeyCode.Alpha9) || Input.GetKey(KeyCode.Keypad9)){
 				ActivateSkill(8);
-			} else if(Input.GetKey(KeyCode.Alpha0) || Input.GetKey(KeyCode.Keypad0)){
+			}
+			else if(Input.GetKey(KeyCode.Alpha0) || Input.GetKey(KeyCode.Keypad0)){
 				ActivateSkill(9);
 			}
 			UnlockAction();
@@ -124,10 +131,10 @@ public class PlayerCombat : EntityCombat {
 		skills [index] = s;
 		manager.SetSkill (s, index);
 		*/
-		skillLibrary.Add (s);
+		skillLibrary.Add(s);
 	}
 
 	protected override void CleanUp(){
-		Application.LoadLevel ("MainMenu");
+		Application.LoadLevel("MainMenu");
 	}
 }

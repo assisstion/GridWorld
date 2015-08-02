@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BackToMainButton : MonoBehaviour {
+public class BackToMainButton : MonoBehaviour{
 
 	// Use this for initialization
-	void Start () {
+	void Start(){
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update(){
 	
 	}
 
 	public void ChangeMenu(){
-		Application.LoadLevel ("MainMenu");
+		Application.LoadLevel("MainMenu");
 	}
 }

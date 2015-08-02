@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EntityController : MonoBehaviour {
+public class EntityController : MonoBehaviour{
 
 	public EntityController(){
 
@@ -17,6 +17,7 @@ public class EntityController : MonoBehaviour {
 			return MovementHolder();
 		}
 	}
+
 	EntityMovement _movement;
 
 	public virtual EntityCombat combat{
@@ -24,6 +25,7 @@ public class EntityController : MonoBehaviour {
 			return CombatHolder();
 		}
 	}
+
 	EntityCombat _combat;
 
 	protected virtual EntityMovement MovementHolder(){
@@ -34,12 +36,12 @@ public class EntityController : MonoBehaviour {
 		return _combat;
 	}
 
-	protected virtual void Start () {
+	protected virtual void Start(){
 
 	}
 	
 	// Update is called once per frame
-	protected virtual void Update () {
+	protected virtual void Update(){
 		
 	}
 }

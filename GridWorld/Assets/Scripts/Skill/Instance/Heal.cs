@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Heal : Skill {
+public class Heal : Skill{
 
 	int healAmt = 20;
 	float cd;
@@ -9,17 +9,17 @@ public class Heal : Skill {
 	public Heal(EntityController control, float cd, float manaCost) 
 	: base(control, cd, manaCost){
 		this.cd = cd;
-	} 
+	}
 	
 	public override SkillEvent GetSkillEvent(){
-		return new HealEvent (controller, cd, healAmt);
+		return new HealEvent(controller, cd, healAmt);
 	}
 
 	public static Heal Default(EntityController control){
-		return new Heal (control, 0.2f, 30);
+		return new Heal(control, 0.2f, 30);
 	}
 
-	public override SkillInfo GetID (){
+	public override SkillInfo GetID(){
 		return SkillInfo.Heal;
 	}
 
@@ -31,16 +31,14 @@ public class Heal : Skill {
 		return "Restores health to the caster";
 	}
 
-	public override HashSet<string> GetPrerequisites ()
-	{
-		HashSet<string> hs = new HashSet<string> ();
-		hs.Add ("Minor Heal");
+	public override HashSet<string> GetPrerequisites(){
+		HashSet<string> hs = new HashSet<string>();
+		hs.Add("Minor Heal");
 		return hs;
 	}
 	
-	public override int GetMinimumWave ()
-	{
-		return Skills.MinimumWaveFromTier (3);
+	public override int GetMinimumWave(){
+		return Skills.MinimumWaveFromTier(3);
 	}
 	
 	public class HealEvent : NoncombatAbstractSkillEvent{
@@ -54,7 +52,7 @@ public class Heal : Skill {
 		}
 		
 		public override bool Update(){
-			if (TimePassed() > cooldown) {
+			if(TimePassed() > cooldown){
 				return false;
 			}
 			return true;
@@ -65,7 +63,7 @@ public class Heal : Skill {
 		}
 
 		protected override bool PostCast(){
-			controller.combat.HealHealth (amt);
+			controller.combat.HealHealth(amt);
 			return true;
 		}
 

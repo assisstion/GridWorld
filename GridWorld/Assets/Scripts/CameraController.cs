@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour{
 
 	float speed = 10.0f;
 
 	// Use this for initialization
-	void Start () {
+	void Start(){
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update(){
 
 	}
 
 	public void UpdateLocation(float x, float y){
-		transform.position = new Vector3 (x, y, transform.position.z);
+		transform.position = new Vector3(x, y, transform.position.z);
 	}
 
 	void ManualMovement(){

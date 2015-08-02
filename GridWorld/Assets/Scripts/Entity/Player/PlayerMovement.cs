@@ -16,6 +16,7 @@ public class PlayerMovement : EntityMovement {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
+		defaultMoveCooldown = 0.3f;
 		controller = this.gameObject.GetComponent<PlayerController> ();
 	}
 

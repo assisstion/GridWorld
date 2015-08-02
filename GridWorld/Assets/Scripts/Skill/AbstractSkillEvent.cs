@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class AbstractSkillEvent : SkillEvent {
+public abstract class AbstractSkillEvent : SkillEvent{
 
 	protected float startTime;
 
@@ -10,36 +10,36 @@ public abstract class AbstractSkillEvent : SkillEvent {
 		direction = controller.movement.direction;
 		x = controller.movement.playerX;// + Direction.ValueX (direction);
 		y = controller.movement.playerY;// + Direction.ValueY (direction);
-		if (!CanRun ()) {
+		if(!CanRun()){
 			return false;
 		}
 		HashSet<KeyValuePair<int, int>> willCast = new HashSet<KeyValuePair<int, int>>();
-		HashSet<KeyValuePair<int, int>> set = GetCoordinates ();
-		foreach (KeyValuePair<int, int> pair in set) {
+		HashSet<KeyValuePair<int, int>> set = GetCoordinates();
+		foreach(KeyValuePair<int, int> pair in set){
 			switch(CanCast(pair)){
-			case CanCastValue.Yes:
-				willCast.Add(pair);
-				break;
-			case CanCastValue.CancelThis:
-				break;// Do nothing
-			case CanCastValue.CancelAll:
-				return false;
+				case CanCastValue.Yes:
+					willCast.Add(pair);
+					break;
+				case CanCastValue.CancelThis:
+					break;// Do nothing
+				case CanCastValue.CancelAll:
+					return false;
 			}
 		}
-		if (ShouldCancel (willCast)) {
+		if(ShouldCancel(willCast)){
 			return false;
 		}
-		foreach (KeyValuePair<int, int> pair in willCast) {
+		foreach(KeyValuePair<int, int> pair in willCast){
 			RunAttack(pair);
 		}
-		foreach (KeyValuePair<int, int> pair in willCast) {
+		foreach(KeyValuePair<int, int> pair in willCast){
 			KeyValuePair<int, int> targetPos = LocalToGame(pair);
-			GameObject target = controller.movement.map.objects[targetPos.Key,targetPos.Value];
-			if (target != null) {
+			GameObject target = controller.movement.map.objects[targetPos.Key, targetPos.Value];
+			if(target != null){
 				OnHit(target, pair);
 			}
 		}
-		if (!PostCast ()) {
+		if(!PostCast()){
 			return false;
 		}
 		return true;
@@ -59,17 +59,18 @@ public abstract class AbstractSkillEvent : SkillEvent {
 
 	public abstract void CleanUp();
 
-	protected abstract HashSet<KeyValuePair<int, int>> GetCoordinates ();
+	protected abstract HashSet<KeyValuePair<int, int>> GetCoordinates();
 
 	protected virtual CanCastValue CanCast(KeyValuePair<int, int> coords){
-		KeyValuePair<int, int> pair = LocalToGame (coords);
+		KeyValuePair<int, int> pair = LocalToGame(coords);
 		int vx = pair.Key;
 		int vy = pair.Value;
-		if (!(controller.movement.IsGameSpace (vx, vy) 
-		      && controller.movement.CanPass 
-		      (controller.movement.map.tiles [vx, vy]))) {
+		if(!(controller.movement.IsGameSpace(vx, vy) 
+			&& controller.movement.CanPass 
+		      (controller.movement.map.tiles[vx, vy]))){
 			return CanCastValue.CancelThis;
-		} else {
+		}
+		else{
 			return CanCastValue.Yes;
 		}
 	}
@@ -81,7 +82,7 @@ public abstract class AbstractSkillEvent : SkillEvent {
 			if(!controller.tag.Equals("Enemy")){
 				EnemyBaseManager manager = target.GetComponent<EnemyBaseManager>();
 				if(manager != null){
-					Hit (manager.controller);
+					Hit(manager.controller);
 					return true;
 				}
 			}
@@ -99,16 +100,18 @@ public abstract class AbstractSkillEvent : SkillEvent {
 		return true;
 	}
 
-	protected abstract void Hit (EntityController controller);
+	protected abstract void Hit(EntityController controller);
 
 	protected KeyValuePair<int, int> LocalToGame(KeyValuePair<int, int> local){
-		return new KeyValuePair<int, int> (x + Direction.ValueX(direction) * local.Value + 
-		       Direction.ValueY(direction) * local.Key, y + Direction.ValueY(direction) 
-		       * local.Value + Direction.ValueX(direction) * local.Key);
+		return new KeyValuePair<int, int>(x + Direction.ValueX(direction) * local.Value + 
+			Direction.ValueY(direction) * local.Key, y + Direction.ValueY(direction) 
+			* local.Value + Direction.ValueX(direction) * local.Key);
 	}
 
 	public enum CanCastValue{
-		Yes,CancelThis,CancelAll
+		Yes,
+		CancelThis,
+		CancelAll
 	}
 
 	public float GetCoolDown(){

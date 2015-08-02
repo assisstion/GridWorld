@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyBaseCombat : EntityCombat {
+public class EnemyBaseCombat : EntityCombat{
 
 	public EnemyBaseController controller{
 		get{
 			return GetController();
 		}
 	}
+
 	EnemyBaseController _controller;
 
 	public EnemyBaseCombat(){
@@ -19,13 +20,13 @@ public class EnemyBaseCombat : EntityCombat {
 	}
 
 	// Use this for initialization
-	protected override void Start () {
-		base.Start ();
+	protected override void Start(){
+		base.Start();
 	}
 	
 	// Update is called once per frame
-	protected override void Update () {
-		base.Update ();
+	protected override void Update(){
+		base.Update();
 	}
 
 	protected virtual EnemyBaseController GetController(){
@@ -33,8 +34,8 @@ public class EnemyBaseCombat : EntityCombat {
 	}
 
 	public override void ActionUpdate(){
-		base.ActionUpdate ();
-		if (action == 0) {
+		base.ActionUpdate();
+		if(action == 0){
 			PerformAction();
 		}
 	}
@@ -44,6 +45,6 @@ public class EnemyBaseCombat : EntityCombat {
 	}
 
 	protected override void CleanUp(){
-		controller.map.EnemyDestroyed ();
+		controller.map.EnemyDestroyed();
 	}
 }
