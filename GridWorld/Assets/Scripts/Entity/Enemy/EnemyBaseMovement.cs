@@ -32,12 +32,27 @@ public class EnemyBaseMovement : EntityMovement{
 	protected override void MoveSuccess(bool ping){
 		base.MoveSuccess(ping);
 		if(ping){
-			controller.combat.action = moveCooldown;
+			controller.combat.action = moveCooldown * MoveMultiplier();
 		}
 	}
 	
 	protected override void TurnSuccess(){
-		controller.combat.action = turnCooldown;
+		controller.combat.action = turnCooldown * TurnMultiplier();
 	}
 
+	public float MoveMultiplier(){
+		float mult = 1.0f;
+		if(controller.combat.effects.ContainsKey("hyper")){
+			mult *= 0.5f;
+		}
+		return mult;
+	}
+	
+	public float TurnMultiplier(){
+		float mult = 1.0f;
+		if(controller.combat.effects.ContainsKey("hyper")){
+			mult *= 0.35f;
+		}
+		return mult;
+	}
 }

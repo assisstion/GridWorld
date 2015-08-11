@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\Skill\Instance\Dash.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Fireball.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Flare.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Fury.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Heal.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Hyper.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Lightning.cs" />

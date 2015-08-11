@@ -65,7 +65,7 @@ public class PlayerCombat : EntityCombat{
 		base.Update();
 		InputCheck();
 	}
-	
+
 	public void InputCheck(){
 		if(TryLockAction()){
 			if(Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)){

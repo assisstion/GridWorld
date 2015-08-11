@@ -48,13 +48,15 @@ public enum SkillInfo{
 	[SkillAttribute(13, "Shock", typeof(Shock))]
 	Shock,
 	[SkillAttribute(14, "Lightning", typeof(Lightning))]
-	Lightning
+	Lightning,
+	[SkillAttribute(15, "Fury", typeof(Fury))]
+	Fury
 }
 
 public class Skills{
 
 	public static int GetMaxID(){
-		return 14;
+		return 15;
 	}
 	
 	public static SkillInfo GetSkillInfoFromID(int id){

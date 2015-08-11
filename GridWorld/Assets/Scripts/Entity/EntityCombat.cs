@@ -3,9 +3,33 @@ using System.Collections.Generic;
 
 public class EntityCombat : MonoBehaviour, DamageSource{
 
+	/*
+	 * Valid keys:
+	 * fury
+	 * hyper
+	 */
+	public Dictionary<string, float> effects;
+
+
+	/*
+	 * delayedSet modes:
+	 * 0 = false
+	 * 1 = true for all circumstances
+	 * 2 = true if it would decrease
+	 * 3 = true if it would increase
+	 */
+	public int delayedSetMana;
+	public int delayedSetHealth;
+	public int delayedSetAction;
+
+	public float delayedManaSet;
+	public float delayedHealthSet;
+	public float delayedActionSet;
+
 	public float delayedManaMod;
 	public float delayedHealthMod;
 	public float delayedActionMod;
+
 	public GameObject holder;
 	public Skill[] skills;
 	volatile bool actionLocked;
@@ -67,6 +91,7 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 	
 	// Use this for initialization
 	protected virtual void Start(){
+		effects = new Dictionary<string, float>();
 		liveSkills = new List<SkillEvent>();
 		toAdd = new List<SkillEvent>();
 		health = maxHealth;
@@ -78,6 +103,32 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 		ActionUpdate();
 		SkillEventUpdate();
 		Tick();
+		EffectCheck();
+	}
+
+	public void EffectCheck(){
+		HashSet<string> toBeRemoved = new HashSet<string>();
+		foreach(KeyValuePair<string, float> pair in effects){
+			//Tick(pair.Key, Time.deltaTime);
+			if(pair.Value < Time.time){
+				toBeRemoved.Add(pair.Key);
+			}
+		}
+		foreach(string s in toBeRemoved){
+			//RemoveEffect(s);
+			effects.Remove(s);
+		}
+	}
+	
+	public void AddEffect(string effect, float duration){
+		float time = Time.time + duration; 
+		if(effects.ContainsKey(effect)){
+			float tx = effects[effect];
+			if(tx > time){
+				time = tx;
+			}
+		}
+		effects[effect] = time;
 	}
 
 	public virtual void Tick(){
@@ -90,6 +141,7 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 		if(mana > maxMana){
 			mana = maxMana;
 		}
+		DelayedMod();
 	}
 	
 	public virtual void ActionUpdate(){
@@ -156,6 +208,34 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 
 	public void ActivateSkill(Skill skill){
 		action = skill.Activate();
+		DelayedMod();
+	}
+
+	void DelayedMod(){
+		if(delayedSetHealth != 0){
+			if(delayedSetHealth == 1 || (delayedSetHealth == 2 && health > delayedHealthSet) 
+				|| (delayedSetHealth == 3 && health < delayedHealthSet)){
+				HealthMod(delayedHealthSet - health);
+				delayedSetHealth = 0;
+				delayedHealthSet = 0;
+			}
+		}
+		if(delayedSetMana != 0){
+			if(delayedSetMana == 1 || (delayedSetMana == 2 && health > delayedManaSet) 
+				|| (delayedSetMana == 3 && health < delayedManaSet)){
+				mana = delayedManaSet;
+				delayedSetMana = 0;
+				delayedManaSet = 0;
+			}
+		}
+		if(delayedSetAction != 0){
+			if(delayedSetAction == 1 || (delayedSetAction == 2 && health > delayedActionSet) 
+				|| (delayedSetAction == 3 && health < delayedHealthSet)){
+				action = delayedActionSet;
+				delayedSetAction = 0;
+				delayedActionSet = 0;
+			}
+		}
 		HealthMod(delayedHealthMod);
 		mana += delayedManaMod;
 		action += delayedActionMod;
@@ -223,6 +303,9 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 	}
 
 	public virtual void EntityDestroyed(EntityCombat combat){
-		//Do nothing
+		if(effects.ContainsKey("fury")){
+			delayedActionSet = 0.5f;
+			delayedSetAction = 2;
+		}
 	}
 }

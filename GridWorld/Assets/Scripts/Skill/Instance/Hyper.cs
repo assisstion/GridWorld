@@ -15,7 +15,7 @@ public class Hyper : Skill{
 	}
 
 	public static Hyper Default(EntityController control){
-		return new Hyper(control, 0.5f, 75);
+		return new Hyper(control, 0.5f, 50);
 	}
 
 	public override SkillInfo GetID(){
@@ -23,7 +23,7 @@ public class Hyper : Skill{
 	}
 
 	public override string GetCustomStat(){
-		return "Duration: " + 5 + " s";
+		return "Duration: " + 3 + " s";
 	}
 
 	public override string GetBody(){
@@ -32,7 +32,7 @@ public class Hyper : Skill{
 
 	public override HashSet<string> GetPrerequisites(){
 		HashSet<string> hs = new HashSet<string>();
-		//hs.Add ("Dash");
+		hs.Add("Dash");
 		return hs;
 	}
 	
@@ -48,12 +48,13 @@ public class Hyper : Skill{
 		}
 		
 		public override bool Update(){
-			if(TimePassed() > 5){
+			/*if(TimePassed() > 5){
 				controller.movement.moveCooldown = controller.movement.defaultMoveCooldown;
 				controller.movement.turnCooldown = controller.movement.defaultTurnCooldown;
 				return false;
 			}
-			return true;
+			return true;*/
+			return false;
 		}
 		
 		protected override bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
@@ -61,8 +62,9 @@ public class Hyper : Skill{
 		}
 
 		protected override bool PostCast(){
-			controller.movement.moveCooldown = controller.movement.defaultMoveCooldown / 2;
-			controller.movement.turnCooldown = controller.movement.defaultTurnCooldown / 3;
+			//controller.movement.moveCooldown = controller.movement.defaultMoveCooldown / 2;
+			//controller.movement.turnCooldown = controller.movement.defaultTurnCooldown / 3;
+			controller.combat.AddEffect("hyper", 3.0f);
 			return true;
 		}
 

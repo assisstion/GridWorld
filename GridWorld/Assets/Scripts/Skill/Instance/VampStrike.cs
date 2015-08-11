@@ -39,6 +39,7 @@ public class VampStrike : Skill{
 	public override HashSet<string> GetPrerequisites(){
 		HashSet<string> hs = new HashSet<string>();
 		hs.Add("Dark Bolt");
+		hs.Add("Minor Heal");
 		return hs;
 	}
 	

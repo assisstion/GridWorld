@@ -44,7 +44,7 @@ public class Shock : Skill{
 
 	public class ShockEvent : AbstractSkillEvent{
 
-		bool hit = false;
+		//bool hit = false;
 
 		public Dictionary<KeyValuePair<int, int>, GameObject> anim;
 		

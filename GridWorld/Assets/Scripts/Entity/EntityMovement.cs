@@ -41,9 +41,9 @@ public class EntityMovement : MonoBehaviour{
 	protected int _playerY;
 	public float defaultMoveCooldown = 0.5f;
 	public float defaultTurnCooldown = 0.15f;
-	public float moveCooldown;
-	public float turnCooldown;
-	protected float speed;
+	protected float moveCooldown;
+	protected float turnCooldown;
+	//protected float speed;
 
 	public void Setup(int x, int y, int dir){
 		TryMove(x, y, dir, MoveMode.NoEvent);

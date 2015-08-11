@@ -64,12 +64,12 @@ public class PlayerMovement : EntityMovement{
 		if(gc.terrainType.Equals("swamp")){
 			controller.combat.TakeDamage(map, 10);
 			if(ping){
-				controller.combat.action = moveCooldown * 4;
+				controller.combat.action = moveCooldown * 4 * MoveMultiplier();
 			}
 		}
 		else{
 			if(ping){
-				controller.combat.action = moveCooldown;
+				controller.combat.action = moveCooldown * MoveMultiplier();
 			}
 		}
 	}
@@ -79,11 +79,27 @@ public class PlayerMovement : EntityMovement{
 		base.TurnSuccess();
 		GridController gc = map.tiles[playerX, playerY].GetComponent<GridController>();
 		if(gc.terrainType.Equals("swamp")){
-			controller.combat.action = turnCooldown * 4;
+			controller.combat.action = turnCooldown * 4 * TurnMultiplier();
 		}
 		else{
-			controller.combat.action = turnCooldown;
+			controller.combat.action = turnCooldown * TurnMultiplier();
 		}
+	}
+
+	public float MoveMultiplier(){
+		float mult = 1.0f;
+		if(controller.combat.effects.ContainsKey("hyper")){
+			mult *= 0.5f;
+		}
+		return mult;
+	}
+
+	public float TurnMultiplier(){
+		float mult = 1.0f;
+		if(controller.combat.effects.ContainsKey("hyper")){
+			mult *= 0.35f;
+		}
+		return mult;
 	}
 	
 }
