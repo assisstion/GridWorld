@@ -44,7 +44,7 @@ public class Lightning : Skill{
 
 	public class LightningEvent : AbstractSkillEvent{
 
-		bool hit;
+		//bool hit;
 
 		public Dictionary<KeyValuePair<int, int>, GameObject> anim;
 		
@@ -95,13 +95,14 @@ public class Lightning : Skill{
 		}
 		
 		protected override void Hit(EntityController control){
-			control.combat.TakeDamage(10);
-			hit = true;
+			control.combat.TakeDamage(controller.combat, 10);
+			controller.combat.delayedActionMod -= actionRecovery;
+			//hit = true;
 		}
 		
-		public override float GetActionModifier(){
+		/*public override float GetActionModifier(){
 			return base.GetActionModifier() + (hit ? -actionRecovery : 0);
-		}
+		}*/
 
 		/*protected override bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
 			if (base.ShouldCancel (casts)) {

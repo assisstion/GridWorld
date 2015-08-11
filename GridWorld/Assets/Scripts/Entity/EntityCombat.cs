@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class EntityCombat : MonoBehaviour{
-	
+public class EntityCombat : MonoBehaviour, DamageSource{
+
+	public float delayedManaMod;
+	public float delayedHealthMod;
+	public float delayedActionMod;
 	public GameObject holder;
 	public Skill[] skills;
 	volatile bool actionLocked;
@@ -111,14 +114,21 @@ public class EntityCombat : MonoBehaviour{
 		}
 	}
 	
-	public float TakeDamage(float dealt){
+	public float TakeDamage(DamageSource source, float dealt){
 		if(health > dealt){
 			health -= dealt;
+			if(source != null){
+				source.DamageDealt(this, dealt);
+			}
 			return dealt;
 		}
 		else{
 			float tempHealth = health;
 			health = 0;
+			if(source != null){
+				source.DamageDealt(this, tempHealth);
+				source.EntityDestroyed(this);
+			}
 			Remove();
 			return tempHealth;
 		}
@@ -146,6 +156,22 @@ public class EntityCombat : MonoBehaviour{
 
 	public void ActivateSkill(Skill skill){
 		action = skill.Activate();
+		HealthMod(delayedHealthMod);
+		mana += delayedManaMod;
+		action += delayedActionMod;
+		delayedHealthMod = 0;
+		delayedManaMod = 0;
+		delayedActionMod = 0;
+	}
+
+	void HealthMod(float f){
+		if(f > 0){
+			HealHealth(f);
+		}
+		else if(f < 0){
+			//todo: no source
+			TakeDamage(null, f);
+		}
 	}
 	
 	public bool TryLockAction(){
@@ -190,5 +216,13 @@ public class EntityCombat : MonoBehaviour{
 
 	public void AddSkillEvent(SkillEvent skill){
 		toAdd.Add(skill);
+	}
+
+	public virtual void DamageDealt(EntityCombat combat, float amt){
+		//Do nothing
+	}
+
+	public virtual void EntityDestroyed(EntityCombat combat){
+		//Do nothing
 	}
 }

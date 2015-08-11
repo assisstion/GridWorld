@@ -84,7 +84,7 @@ public class Slash : Skill{
 		}
 
 		protected override void Hit(EntityController control){
-			control.combat.TakeDamage(10);
+			control.combat.TakeDamage(controller.combat, 10);
 		}
 	}
 }

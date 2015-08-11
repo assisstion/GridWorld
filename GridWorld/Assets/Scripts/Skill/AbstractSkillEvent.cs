@@ -126,7 +126,7 @@ public abstract class AbstractSkillEvent : SkillEvent{
 		return casts.Count == 0;
 	}
 
-	public virtual float GetActionModifier(){
+	/*public virtual float GetActionModifier(){
 		return 0;
-	}
+	}*/
 }

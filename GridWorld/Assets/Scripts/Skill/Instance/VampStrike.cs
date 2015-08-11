@@ -91,8 +91,9 @@ public class VampStrike : Skill{
 		}
 
 		protected override void Hit(EntityController control){
-			control.combat.TakeDamage(10);
-			controller.combat.HealHealth(healAmt);
+			control.combat.TakeDamage(controller.combat, 10);
+			controller.combat.delayedHealthMod += healAmt;
+			//controller.combat.HealHealth(healAmt);
 		}
 	}
 }

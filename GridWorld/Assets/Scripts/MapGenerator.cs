@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TargetDummyEnemy;
 using Random = System.Random;
 
-public class MapGenerator : MonoBehaviour{
+public class MapGenerator : MonoBehaviour, DamageSource{
 
 	Random generator;
 	int seed;
@@ -168,5 +168,13 @@ public class MapGenerator : MonoBehaviour{
 		}
 		terrainType = "grass";
 		return grassMaterial;
+	}
+
+	public virtual void DamageDealt(EntityCombat combat, float amt){
+		//Do nothing
+	}
+	
+	public virtual void EntityDestroyed(EntityCombat combat){
+		//Do nothing
 	}
 }

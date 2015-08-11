@@ -76,7 +76,7 @@ public class MagicBolt : Skill{
 		}
 
 		public override bool Hit(EntityController controller){
-			controller.combat.TakeDamage(damage);
+			controller.combat.TakeDamage(controller.combat, damage);
 
 			return true;
 		}

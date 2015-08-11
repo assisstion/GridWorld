@@ -70,11 +70,11 @@ public class CompositeSkillEvent : SkillEvent{
 		return cooldown;
 	}
 
-	public float GetActionModifier(){
+	/*public float GetActionModifier(){
 		float acMod = 0;
 		foreach(SkillEvent ev in events){
 			acMod += ev.GetActionModifier();
 		}
 		return acMod;
-	}
+	}*/
 }

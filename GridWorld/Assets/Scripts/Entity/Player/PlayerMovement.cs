@@ -62,7 +62,7 @@ public class PlayerMovement : EntityMovement{
 		cam.UpdateLocation(transform.position.x, transform.position.y);
 		GridController gc = map.tiles[playerX, playerY].GetComponent<GridController>();
 		if(gc.terrainType.Equals("swamp")){
-			controller.combat.TakeDamage(10);
+			controller.combat.TakeDamage(map, 10);
 			if(ping){
 				controller.combat.action = moveCooldown * 4;
 			}

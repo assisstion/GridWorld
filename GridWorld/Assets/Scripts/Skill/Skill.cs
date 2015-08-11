@@ -50,7 +50,7 @@ public abstract class Skill{
 				SkillEvent se0 = GetSkillEvent();
 				if(controller.combat.ActivateAnimation(se0)){
 					controller.combat.mana -= manaCost;
-					return cooldown + se0.GetActionModifier();
+					return cooldown;// + se0.GetActionModifier();
 				} 
 				break;
 			case CostType.Health:
@@ -60,7 +60,7 @@ public abstract class Skill{
 				SkillEvent se = GetSkillEvent();
 				if(controller.combat.ActivateAnimation(se)){
 					controller.combat.health -= manaCost;
-					return cooldown + se.GetActionModifier();
+					return cooldown;// + se.GetActionModifier();
 				}
 				break;
 			default:

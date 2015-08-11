@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\BarController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Direction.cs" />
+     <Compile Include="Assets\Scripts\Entity\DamageSource.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseCombat.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseController.cs" />
      <Compile Include="Assets\Scripts\Entity\Enemy\EnemyBaseManager.cs" />
