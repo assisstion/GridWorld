@@ -46,24 +46,8 @@ public class Hyper : Skill{
 			controller = cont;
 			cooldown = cd;
 		}
-		
-		public override bool Update(){
-			/*if(TimePassed() > 5){
-				controller.movement.moveCooldown = controller.movement.defaultMoveCooldown;
-				controller.movement.turnCooldown = controller.movement.defaultTurnCooldown;
-				return false;
-			}
-			return true;*/
-			return false;
-		}
-		
-		protected override bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
-			return false;
-		}
 
 		protected override bool PostCast(){
-			//controller.movement.moveCooldown = controller.movement.defaultMoveCooldown / 2;
-			//controller.movement.turnCooldown = controller.movement.defaultTurnCooldown / 3;
 			controller.combat.AddEffect("hyper", 3.0f);
 			return true;
 		}

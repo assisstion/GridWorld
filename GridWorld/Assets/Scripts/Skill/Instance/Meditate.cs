@@ -1,25 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Fury : Skill{
+public class Meditate : Skill{
 	
 	float cd;
 	
-	public Fury(EntityController control, float cd, float manaCost) 
+	public Meditate(EntityController control, float cd, float manaCost) 
 	: base(control, cd, manaCost){
 		this.cd = cd;
 	}
 	
 	public override SkillEvent GetSkillEvent(){
-		return new FuryEvent(controller, cd);
+		return new MeditateEvent(controller, cd);
 	}
 
-	public static Fury Default(EntityController control){
-		return new Fury(control, 0.5f, 50);
+	public static Meditate Default(EntityController control){
+		return new Meditate(control, 3f, 0);
 	}
 
 	public override SkillInfo GetID(){
-		return SkillInfo.Fury;
+		return SkillInfo.Meditate;
 	}
 
 	public override string GetCustomStat(){
@@ -27,12 +27,12 @@ public class Fury : Skill{
 	}
 
 	public override string GetBody(){
-		return "Kills reduce current action to 0.5";
+		return "Greatly increases mana regeneration";
 	}
 
 	public override HashSet<string> GetPrerequisites(){
 		HashSet<string> hs = new HashSet<string>();
-		hs.Add("Quake");
+		hs.Add("Heal");
 		return hs;
 	}
 	
@@ -40,15 +40,15 @@ public class Fury : Skill{
 		return Skills.MinimumWaveFromTier(4);
 	}
 	
-	public class FuryEvent : NoncombatAbstractSkillEvent{
+	public class MeditateEvent : NoncombatAbstractSkillEvent{
 		
-		public FuryEvent(EntityController cont, float cd){
+		public MeditateEvent(EntityController cont, float cd){
 			controller = cont;
 			cooldown = cd;
 		}
 
 		protected override bool PostCast(){
-			controller.combat.AddEffect("fury", 3.0f);
+			controller.combat.AddEffect("meditate", 3.0f);
 			return true;
 		}
 

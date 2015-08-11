@@ -13,7 +13,7 @@ public class SkillManager : MonoBehaviour{
 	public List<GameObject> skillShopButtons;
 	public GameObject skillShopButton;
 	public GameObject skillShopPanel;
-	int len = 10;
+	int len = 4;
 
 	public void Present(){
 		skillShop.SetActive(true);

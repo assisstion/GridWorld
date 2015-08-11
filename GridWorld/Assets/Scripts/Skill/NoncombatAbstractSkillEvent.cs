@@ -11,6 +11,10 @@ public abstract class NoncombatAbstractSkillEvent : AbstractSkillEvent{
 		HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>>();
 		return set;
 	}
+
+	public override bool Update(){
+		return false;
+	}
 	
 	protected override void RunAttack(KeyValuePair<int, int> coords){
 		//Do nothing

@@ -1,25 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Fury : Skill{
+public class Bloodlust : Skill{
 	
 	float cd;
 	
-	public Fury(EntityController control, float cd, float manaCost) 
+	public Bloodlust(EntityController control, float cd, float manaCost) 
 	: base(control, cd, manaCost){
 		this.cd = cd;
 	}
 	
 	public override SkillEvent GetSkillEvent(){
-		return new FuryEvent(controller, cd);
+		return new BloodlustEvent(controller, cd);
 	}
 
-	public static Fury Default(EntityController control){
-		return new Fury(control, 0.5f, 50);
+	public static Bloodlust Default(EntityController control){
+		return new Bloodlust(control, 0.5f, 30);
+	}
+
+	public override CostType GetCostType(){
+		return CostType.Health;
 	}
 
 	public override SkillInfo GetID(){
-		return SkillInfo.Fury;
+		return SkillInfo.Bloodlust;
 	}
 
 	public override string GetCustomStat(){
@@ -27,12 +31,12 @@ public class Fury : Skill{
 	}
 
 	public override string GetBody(){
-		return "Kills reduce current action to 0.5";
+		return "Kills cause caster to gain 30 health";
 	}
 
 	public override HashSet<string> GetPrerequisites(){
 		HashSet<string> hs = new HashSet<string>();
-		hs.Add("Quake");
+		hs.Add("Vamp Strike");
 		return hs;
 	}
 	
@@ -40,15 +44,15 @@ public class Fury : Skill{
 		return Skills.MinimumWaveFromTier(4);
 	}
 	
-	public class FuryEvent : NoncombatAbstractSkillEvent{
+	public class BloodlustEvent : NoncombatAbstractSkillEvent{
 		
-		public FuryEvent(EntityController cont, float cd){
+		public BloodlustEvent(EntityController cont, float cd){
 			controller = cont;
 			cooldown = cd;
 		}
 
 		protected override bool PostCast(){
-			controller.combat.AddEffect("fury", 3.0f);
+			controller.combat.AddEffect("bloodlust", 3.0f);
 			return true;
 		}
 

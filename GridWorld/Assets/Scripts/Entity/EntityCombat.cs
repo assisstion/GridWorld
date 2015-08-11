@@ -133,15 +133,27 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 
 	public virtual void Tick(){
 		float delta = Time.deltaTime;
-		health += delta * baseHealthRegen;
+		health += delta * baseHealthRegen * HealthRegenMultiplier();
 		if(health > maxHealth){
 			health = maxHealth;
 		}
-		mana += delta * baseManaRegen;
+		mana += delta * baseManaRegen * ManaRegenMultiplier();
 		if(mana > maxMana){
 			mana = maxMana;
 		}
 		DelayedMod();
+	}
+
+	public virtual float HealthRegenMultiplier(){
+		return 1.0f;
+	}
+
+	public virtual float ManaRegenMultiplier(){
+		float v = 1.0f;
+		if(effects.ContainsKey("meditate")){
+			v *= 4;
+		}
+		return v;
 	}
 	
 	public virtual void ActionUpdate(){
@@ -306,6 +318,9 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 		if(effects.ContainsKey("fury")){
 			delayedActionSet = 0.5f;
 			delayedSetAction = 2;
+		}
+		if(effects.ContainsKey("bloodlust")){
+			delayedHealthMod += 30;
 		}
 	}
 }
