@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Skill\CompositeSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Blizzard.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Bloodlust.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Charge.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Cleave.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\DarkBolt.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Dash.cs" />

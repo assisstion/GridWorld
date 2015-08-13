@@ -58,29 +58,30 @@ public class Dash : Skill{
 					KeyValuePair<int, int> pair = LocalToGame(new KeyValuePair<int, int>(0, i));
 					if(!controller.movement.CanMoveTo(pair.Key, pair.Value)){
 						stop = i - 1;
+						break;
 					}
 				}
-				if(stop == 0){
+				//if(stop == 0){
+				//	moveDone = true;
+				//}
+				//else{
+				KeyValuePair<int, int> limPair = LocalToGame(new KeyValuePair<int, int>(0, dashDistance));
+				KeyValuePair<int, int> stopPair = LocalToGame(new KeyValuePair<int, int>(0, stop));
+				Vector3 limDist = (
+					controller.movement.ConvertPosition(limPair.Key, limPair.Value, -1.0f) - 
+					controller.movement.ConvertPosition(x, y, -1.0f));
+				Vector3 travelDist = (
+					controller.movement.ConvertPosition(stopPair.Key, stopPair.Value, -1.0f) - 
+					controller.movement.ConvertPosition(x, y, -1.0f));
+
+				float clampPassed = Mathf.Clamp(TimePassed() / cooldown, 0, travelDist.magnitude / limDist.magnitude);
+
+				controller.movement.transform.position = 
+					controller.movement.ConvertPosition(x, y, -1.0f) + ((limDist) * (clampPassed));
+				if(clampPassed > travelDist.magnitude / limDist.magnitude){
 					moveDone = true;
 				}
-				else{
-					KeyValuePair<int, int> limPair = LocalToGame(new KeyValuePair<int, int>(0, dashDistance));
-					KeyValuePair<int, int> stopPair = LocalToGame(new KeyValuePair<int, int>(0, stop));
-					Vector3 limDist = (
-					controller.movement.ConvertPosition(limPair.Key, limPair.Value, -1.0f) - 
-						controller.movement.ConvertPosition(x, y, -1.0f));
-					Vector3 travelDist = (
-					controller.movement.ConvertPosition(stopPair.Key, stopPair.Value, -1.0f) - 
-						controller.movement.ConvertPosition(x, y, -1.0f));
-
-					float clampPassed = Mathf.Clamp(TimePassed() / cooldown, 0, travelDist.magnitude / limDist.magnitude);
-
-					controller.movement.transform.position = 
-					controller.movement.ConvertPosition(x, y, -1.0f) + ((limDist) * (clampPassed));
-					if(clampPassed > travelDist.magnitude / limDist.magnitude){
-						moveDone = true;
-					}
-				}
+				//}
 			}
 			if(TimePassed() > cooldown){
 				return false;

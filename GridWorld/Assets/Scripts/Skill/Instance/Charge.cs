@@ -1,61 +1,83 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Lunge : Skill{
+public class Charge : Skill{
 
 	float cd;
 	float dashTime;
 	
-	public Lunge(EntityController control, float cd, float dashTime, float manaCost) 
+	public Charge(EntityController control, float cd, float dashTime, float manaCost) 
 	: base(control, cd, manaCost){
 		this.cd = cd;
 		this.dashTime = dashTime;
 	}
 	
 	public override SkillEvent GetSkillEvent(){
-		List<SkillEvent> evs = new List<SkillEvent>();
-		evs.Add(new LungeDashEvent(controller, dashTime));
-		evs.Add(new LungeStrikeEvent(controller, cd - dashTime));
-		return new CompositeSkillEvent(controller, evs);
+		return new ChargeDashEvent(controller, dashTime);
 	}
 
-	public static Lunge Default(EntityController control){
-		return new Lunge(control, 1f, 0.3f, 10);
+	public static Charge Default(EntityController control){
+		return new Charge(control, 0.5f, 0.5f, 30);
 	}
 
 	public override string GetCustomStat(){
-		return "Range: " + 3;
+		return "Distance: " + 5;
 	}
 
 	public override SkillInfo GetID(){
-		return SkillInfo.Lunge;
+		return SkillInfo.Charge;
 	}
 
 	public override string GetBody(){
-		return "Dash for a short distance, then performs a strike";
+		return "Charge through enemies, dealing damage to all enemies struck";
 	}
 
 	public override HashSet<string> GetPrerequisites(){
 		HashSet<string> hs = new HashSet<string>();
-		hs.Add("Dash");
-		hs.Add("Slash");
+		hs.Add("Lunge");
 		return hs;
 	}
 	
 	public override int GetMinimumWave(){
-		return Skills.MinimumWaveFromTier(2);
+		return Skills.MinimumWaveFromTier(4);
 	}
 
-	public class LungeDashEvent : NoncombatAbstractSkillEvent{
+	public class ChargeDashEvent : NoncombatAbstractSkillEvent{
 		
-		public LungeDashEvent(EntityController cont, float cd){
+		public ChargeDashEvent(EntityController cont, float cd){
 			controller = cont;
 			cooldown = cd;
 		}
 
-		int dashDistance = 3;
+		int dashDistance = 5;
 		int stop = 0;
 		bool moveDone;
+
+		bool TryHit(int x, int y){
+			if(!controller.movement.IsGameSpace(x, y)){
+				return false;
+			}
+			GameObject target = controller.movement.map.objects[x, y];
+			if(target == null){
+				return false;
+			}
+			if(target.tag.Equals("Enemy")){
+				if(!controller.tag.Equals("Enemy")){
+					EnemyBaseManager manager = target.GetComponent<EnemyBaseManager>();
+					if(manager != null){
+						Hit(manager.controller);
+						return true;
+					}
+				}
+			}
+			else if(target.tag.Equals("Player")){
+				if(!controller.tag.Equals("Player")){
+					Hit(target.GetComponent<PlayerController>());
+					return true;
+				}
+			}
+			return false;
+		}
 		
 		public override bool Update(){
 			if(!moveDone){
@@ -63,7 +85,13 @@ public class Lunge : Skill{
 				int start = (int)(TimePassed() / cooldown * dashDistance);
 				for(int i = start; i <= dashDistance; i++){
 					KeyValuePair<int, int> pair = LocalToGame(new KeyValuePair<int, int>(0, i));
-					if(!controller.movement.CanMoveTo(pair.Key, pair.Value)){
+					bool go = true;
+					if(i == start + 1){
+						if(TryHit(pair.Key, pair.Value)){
+							go = false;
+						}
+					}
+					if(go && !controller.movement.CanMoveTo(pair.Key, pair.Value)){
 						stop = i - 1;
 						break;
 					}
@@ -109,52 +137,7 @@ public class Lunge : Skill{
 			}
 			return true;
 		}
-	}
 
-	public class LungeStrikeEvent : AbstractSkillEvent{
-
-		
-		protected GameObject animObj;
-
-		public LungeStrikeEvent(EntityController cont, float cd){
-			controller = cont;
-			cooldown = cd;
-		}
-		
-		public override bool Update(){
-			KeyValuePair<int, int> pair = LocalToGame(new KeyValuePair<int, int>(0, 1));
-			int vx = pair.Key;
-			int vy = pair.Value;
-			animObj.transform.position = controller.movement.ConvertPosition(vx, vy, -2.0f) 
-				- Direction.ToVector(direction).normalized
-				* controller.movement.map.gridSize * (TimePassed() / cooldown) / 2;
-			animObj.transform.localScale = new Vector3 
-				(0.1f * (1 - TimePassed() / cooldown), animObj.transform.localScale.y, animObj.transform.localScale.z);
-			if(TimePassed() > cooldown){
-				return false;
-			}
-			return true;
-		}
-		
-		public override void CleanUp(){
-			GameObject.Destroy(animObj);
-		}
-		
-		protected override HashSet<KeyValuePair<int, int>> GetCoordinates(){
-			HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>>();
-			set.Add(new KeyValuePair<int, int>(0, 1));
-			return set;
-		}
-		
-		protected override void RunAttack(KeyValuePair<int, int> coords){
-			KeyValuePair<int, int> pair = LocalToGame(coords);
-			animObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
-			animObj.transform.position = controller.movement.ConvertPosition(pair.Key, pair.Value, -2.0f);
-			animObj.transform.rotation = Quaternion.Euler(new Vector3(Direction.Rotation(direction), 270, 90));
-			animObj.transform.localScale = new Vector3(0.1f, 1, 0.02f);
-			
-		}
-		
 		protected override void Hit(EntityController control){
 			control.combat.TakeDamage(controller.combat, 10);
 		}
