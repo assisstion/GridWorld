@@ -157,8 +157,15 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 	}
 	
 	public virtual void ActionUpdate(){
+		if(effects.ContainsKey("freeze")){
+			return;
+		}
+		float actionSpeed = 1.0f;
+		if(effects.ContainsKey("slow")){
+			actionSpeed /= 2.0f;
+		}
 		if(action > 0){
-			action -= Time.deltaTime;
+			action -= Time.deltaTime * actionSpeed;
 		}
 		if(action < 0){
 			action = 0;

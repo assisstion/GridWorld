@@ -44,12 +44,17 @@ public abstract class Skill{
 		 
 		switch(GetCostType()){
 			case CostType.Mana:
-				if(controller.combat.mana < manaCost){
+				float tmpManaCost = manaCost;
+				if(controller.combat.effects.ContainsKey("energize")){
+					tmpManaCost = 0;
+					controller.combat.effects.Remove("energize");
+				}
+				if(controller.combat.mana < tmpManaCost){
 					break;
 				}
 				SkillEvent se0 = GetSkillEvent();
 				if(controller.combat.ActivateAnimation(se0)){
-					controller.combat.mana -= manaCost;
+					controller.combat.mana -= tmpManaCost;
 					return cooldown;// + se0.GetActionModifier();
 				} 
 				break;

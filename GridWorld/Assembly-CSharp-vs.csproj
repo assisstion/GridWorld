@@ -69,13 +69,17 @@
      <Compile Include="Assets\Scripts\ShopManager.cs" />
      <Compile Include="Assets\Scripts\Skill\AbstractSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\CompositeSkillEvent.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Blizzard.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Bloodlust.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Cleave.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\DarkBolt.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Dash.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Energize.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Fireball.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\FlameJet.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Flare.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\Freeze.cs" />
+     <Compile Include="Assets\Scripts\Skill\Instance\FrostBlast.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Fury.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Heal.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Hyper.cs" />
