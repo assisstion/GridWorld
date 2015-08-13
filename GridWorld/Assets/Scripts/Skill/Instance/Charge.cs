@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 public class Charge : Skill{
 
-	float cd;
+	//float cd;
 	float dashTime;
 	
 	public Charge(EntityController control, float cd, float dashTime, float manaCost) 
 	: base(control, cd, manaCost){
-		this.cd = cd;
+		//this.cd = cd;
 		this.dashTime = dashTime;
 	}
 	

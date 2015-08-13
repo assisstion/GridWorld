@@ -32,7 +32,13 @@ public class EnemyBaseMovement : EntityMovement{
 	protected override void MoveSuccess(bool ping){
 		base.MoveSuccess(ping);
 		if(ping){
-			controller.combat.action = moveCooldown * MoveMultiplier();
+			GridController gc = map.tiles[playerX, playerY].GetComponent<GridController>();
+			if(gc.terrainType.Equals("swamp")){
+				controller.combat.action = moveCooldown * 4 * MoveMultiplier();
+			}
+			else{
+				controller.combat.action = moveCooldown * MoveMultiplier();
+			}
 		}
 	}
 	
