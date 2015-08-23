@@ -23,9 +23,8 @@ public class ClientShopManager : MonoBehaviour, ShopButtonHandler{
 		shop.SetActive(true);
 		
 		for(int i = 0; i < skills.Length; i++){
-			//TODO
 			Skill skill = Skills.GetDefaultFromSkillInfo(
-				Skills.GetSkillInfoFromID(skills[i]), null);
+				Skills.GetSkillInfoFromID(skills[i]));
 			GameObject obj = Instantiate(shopButton) as GameObject;
 			obj.transform.SetParent(shop.transform);
 			obj.transform.localPosition = new Vector3(-120 + (120 * i), -20, 0);

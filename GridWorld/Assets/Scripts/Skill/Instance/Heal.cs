@@ -6,17 +6,17 @@ public class Heal : Skill{
 	int healAmt = 20;
 	float cd;
 	
-	public Heal(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Heal(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new HealEvent(controller, cd, healAmt);
 	}
 
-	public static Heal Default(EntityController control){
-		return new Heal(control, 0.2f, 30);
+	public static Heal Default(){
+		return new Heal(0.2f, 30);
 	}
 
 	public override SkillInfo GetID(){

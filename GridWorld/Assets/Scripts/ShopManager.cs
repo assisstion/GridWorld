@@ -23,10 +23,9 @@ public class ShopManager : NetworkBehaviour, Initializable{
 	}
 
 	public List<int> CanUnlockSkills(){
-		//todo add skill tree
 		List<int> list = new List<int>();
 		for(int i = 0; i <= Skills.GetMaxID(); i++){
-			Skill skill = Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i), player);
+			Skill skill = Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i));
 			if(wave < skill.GetMinimumWave()){
 				continue;
 			}
@@ -54,7 +53,7 @@ public class ShopManager : NetworkBehaviour, Initializable{
 		List<Skill> missing = new List<Skill>();
 		foreach(int i in CanUnlockSkills()){
 			if(!player.combat.skillLibrary.Exists(x => x != null && Skills.Attr(x.GetID()).id == i)){
-				missing.Add(Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i), player));
+				missing.Add(Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i)));
 			}
 		}
 		NetworkPlayerController netPlayer = player.combat.server.client
@@ -91,7 +90,7 @@ public class ShopManager : NetworkBehaviour, Initializable{
 	}*/
 
 	public void AddSkill(int i){
-		Skill s = (Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i), player));
+		Skill s = (Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i)));
 		player.combat.AddSkill(s, Skills.Attr(s.GetID()).id); 
 
 		NetworkPlayerController netPlayer = player.combat.server.client

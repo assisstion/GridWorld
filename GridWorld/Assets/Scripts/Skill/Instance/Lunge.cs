@@ -6,21 +6,21 @@ public class Lunge : Skill{
 	float cd;
 	float dashTime;
 	
-	public Lunge(EntityController control, float cd, float dashTime, float manaCost) 
-	: base(control, cd, manaCost){
+	public Lunge(float cd, float dashTime, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 		this.dashTime = dashTime;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		List<SkillEvent> evs = new List<SkillEvent>();
 		evs.Add(new LungeDashEvent(controller, dashTime));
 		evs.Add(new LungeStrikeEvent(controller, cd - dashTime));
 		return new CompositeSkillEvent(controller, evs);
 	}
 
-	public static Lunge Default(EntityController control){
-		return new Lunge(control, 1f, 0.3f, 10);
+	public static Lunge Default(){
+		return new Lunge(1f, 0.3f, 10);
 	}
 
 	public override string GetCustomStat(){

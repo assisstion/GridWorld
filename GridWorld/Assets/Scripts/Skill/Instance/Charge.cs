@@ -6,18 +6,18 @@ public class Charge : Skill{
 	//float cd;
 	float dashTime;
 	
-	public Charge(EntityController control, float cd, float dashTime, float manaCost) 
-	: base(control, cd, manaCost){
+	public Charge(float cd, float dashTime, float manaCost) 
+	: base(cd, manaCost){
 		//this.cd = cd;
 		this.dashTime = dashTime;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new ChargeDashEvent(controller, dashTime);
 	}
 
-	public static Charge Default(EntityController control){
-		return new Charge(control, 0.5f, 0.5f, 30);
+	public static Charge Default(){
+		return new Charge(0.5f, 0.5f, 30);
 	}
 
 	public override string GetCustomStat(){

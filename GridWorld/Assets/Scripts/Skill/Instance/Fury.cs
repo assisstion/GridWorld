@@ -5,17 +5,17 @@ public class Fury : Skill{
 	
 	float cd;
 	
-	public Fury(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Fury(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new FuryEvent(controller, cd);
 	}
 
-	public static Fury Default(EntityController control){
-		return new Fury(control, 0.5f, 50);
+	public static Fury Default(){
+		return new Fury(0.5f, 50);
 	}
 
 	public override SkillInfo GetID(){

@@ -5,17 +5,17 @@ public class Slash : Skill{
 
 	float cd;
 
-	public Slash(EntityController control, float cd, float manaCost) 
-			: base(control, cd, manaCost){
+	public Slash(float cd, float manaCost) 
+			: base(cd, manaCost){
 		this.cd = cd;
 	}
 
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new SlashSkillEvent(controller, cd);
 	}
 
-	public static Slash Default(EntityController control){
-		return new Slash(control, 0.35f, 0);
+	public static Slash Default(){
+		return new Slash(0.35f, 0);
 	}
 
 	public override SkillInfo GetID(){

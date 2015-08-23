@@ -5,17 +5,17 @@ public class Freeze : Skill{
 
 	float cd;
 
-	public Freeze(EntityController control, float cd, float manaCost) 
-			: base(control, cd, manaCost){
+	public Freeze(float cd, float manaCost) 
+			: base(cd, manaCost){
 		this.cd = cd;
 	}
 
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new FreezeEvent(controller, cd);
 	}
 
-	public static Freeze Default(EntityController control){
-		return new Freeze(control, 0.5f, 20);
+	public static Freeze Default(){
+		return new Freeze(0.5f, 20);
 	}
 
 	public override SkillInfo GetID(){

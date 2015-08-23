@@ -5,17 +5,17 @@ public class Meditate : Skill{
 	
 	float cd;
 	
-	public Meditate(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Meditate(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new MeditateEvent(controller, cd);
 	}
 
-	public static Meditate Default(EntityController control){
-		return new Meditate(control, 3f, 0);
+	public static Meditate Default(){
+		return new Meditate(3f, 0);
 	}
 
 	public override SkillInfo GetID(){

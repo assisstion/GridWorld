@@ -179,7 +179,7 @@ public class NetworkPlayerController : NetworkBehaviour{
 			return;
 		}
 		skill.SetSkill(Skills.GetDefaultFromSkillInfo(
-			Skills.GetSkillInfoFromID(id), null), index);
+			Skills.GetSkillInfoFromID(id)), index);
 	}
 
 	[Command]
@@ -190,10 +190,10 @@ public class NetworkPlayerController : NetworkBehaviour{
 
 	[Command]
 	public void CmdSetSkill(int skill, int index){
-		PlayerController controller = serverPlayer.GetComponent<PlayerController>();
+		//PlayerController controller = serverPlayer.GetComponent<PlayerController>();
 		PlayerCombat combat = serverPlayer.GetComponent<PlayerCombat>();
 		combat.skills[index] = Skills.GetDefaultFromSkillInfo(
-			Skills.GetSkillInfoFromID(skill), controller);
+			Skills.GetSkillInfoFromID(skill));
 	}
 
 	[Command]
@@ -230,4 +230,19 @@ public class NetworkPlayerController : NetworkBehaviour{
 		GameObject.FindGameObjectWithTag("CGameController")
 			.GetComponent<ClientMapController>().LocalGenerateMap();
 	}
+
+
+	//TODO work on client side animations
+	/*[ClientRpc]
+	public void RpcAnimateSkill(int x, int y){
+		//no local player check
+		KeyValuePair<int, int> pair = new KeyValuePair<int, int>(x,y);
+		GameObject animObj;
+		animObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
+		animObj.GetComponent<MeshRenderer>().material.color = new Color(0f, 0, 1f);
+		animObj.transform.position = controller.movement.ConvertPosition(pair.Key, pair.Value, -2.0f);
+		animObj.transform.rotation = Quaternion.Euler(new Vector3(0, 270, 90));
+		animObj.transform.localScale = new Vector3(0.05f, 1, 0.05f);
+		anim.Add(coords, animObj);
+	}*/
 }

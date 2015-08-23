@@ -5,17 +5,17 @@ public class Flare : Skill{
 	
 	float cd;
 	
-	public Flare(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Flare(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new FlareEvent(controller, cd);
 	}
 
-	public static Flare Default(EntityController control){
-		return new Flare(control, 0.35f, 10);
+	public static Flare Default(){
+		return new Flare(0.35f, 10);
 	}
 
 	public override SkillInfo GetID(){

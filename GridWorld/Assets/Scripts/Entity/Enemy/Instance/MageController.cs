@@ -125,7 +125,7 @@ namespace MageEnemy{
 				started = true;
 				controller = control;
 				skills = new Skill[1];
-				skills[0] = Fireball.Default(controller);
+				skills[0] = Fireball.Default();
 				_maxHealth = 10;
 			}
 
@@ -260,7 +260,7 @@ namespace MageEnemy{
 			
 			void Attack(int direction){
 				if(!controller.movement.TryTurn(direction)){
-					SetAction(skills[0].Activate());
+					SetAction(skills[0].Activate(controller));
 				}
 			}
 			

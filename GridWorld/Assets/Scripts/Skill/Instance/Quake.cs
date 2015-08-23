@@ -5,17 +5,17 @@ public class Quake : Skill{
 
 	float cd;
 
-	public Quake(EntityController control, float cd, float manaCost) 
-			: base(control, cd, manaCost){
+	public Quake(float cd, float manaCost) 
+			: base(cd, manaCost){
 		this.cd = cd;
 	}
 
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new QuakeEvent(controller, cd);
 	}
 
-	public static Quake Default(EntityController control){
-		return new Quake(control, 2f, 50);
+	public static Quake Default(){
+		return new Quake(2f, 50);
 	}
 
 	public override SkillInfo GetID(){

@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections.Generic;
 
-public class EntityCombat : NetworkBehaviour, DamageSource, Initializable{
+public abstract class EntityCombat : NetworkBehaviour, DamageSource, Initializable{
 
 	/*
 	 * Valid keys:
@@ -240,8 +240,10 @@ public class EntityCombat : NetworkBehaviour, DamageSource, Initializable{
 		ActivateSkill(skill);
 	}
 
+	public abstract EntityController Controller();
+
 	public void ActivateSkill(Skill skill){
-		SetAction(skill.Activate());
+		SetAction(skill.Activate(Controller()));
 		DelayedMod();
 	}
 

@@ -5,17 +5,17 @@ public class Energize : Skill{
 	
 	float cd;
 	
-	public Energize(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Energize(float cd, float manaCost) 
+	: base( cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new EnergizeEvent(controller, cd);
 	}
 
-	public static Energize Default(EntityController control){
-		return new Energize(control, 1f, 20);
+	public static Energize Default(){
+		return new Energize(1f, 20);
 	}
 
 	public override SkillInfo GetID(){

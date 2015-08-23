@@ -28,7 +28,7 @@ public class ClientSkillManager : MonoBehaviour{
 	public void DisplaySkills(int[] skills){
 		skillShop.SetActive(true);
 		foreach(int i in skills){
-			Skill skill = Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i), null);
+			Skill skill = Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i));
 			GameObject obj = Instantiate(skillShopButton) as GameObject;
 			obj.transform.SetParent(skillShopPanel.transform);
 			SkillPageButtonManager button = obj.GetComponent<SkillPageButtonManager>();

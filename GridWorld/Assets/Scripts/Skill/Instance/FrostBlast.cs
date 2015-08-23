@@ -5,17 +5,17 @@ public class FrostBlast : Skill{
 
 	float cd;
 
-	public FrostBlast(EntityController control, float cd, float manaCost) 
-			: base(control, cd, manaCost){
+	public FrostBlast(float cd, float manaCost) 
+			: base(cd, manaCost){
 		this.cd = cd;
 	}
 
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new FrostBlastEvent(controller, cd);
 	}
 
-	public static FrostBlast Default(EntityController control){
-		return new FrostBlast(control, 1f, 50);
+	public static FrostBlast Default(){
+		return new FrostBlast(1f, 50);
 	}
 
 	public override SkillInfo GetID(){

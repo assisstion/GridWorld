@@ -7,17 +7,17 @@ public class VampStrike : Skill{
 
 	float cd;
 
-	public VampStrike(EntityController control, float cd, float manaCost) 
-			: base(control, cd, manaCost){
+	public VampStrike(float cd, float manaCost) 
+			: base(cd, manaCost){
 		this.cd = cd;
 	}
 
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new VampStrikeSkillEvent(controller, cd);
 	}
 
-	public static VampStrike Default(EntityController control){
-		return new VampStrike(control, 0.5f, 20);
+	public static VampStrike Default(){
+		return new VampStrike(0.5f, 20);
 	}
 
 	public override SkillInfo GetID(){

@@ -5,17 +5,17 @@ public class Blizzard : Skill{
 
 	float cd;
 
-	public Blizzard(EntityController control, float cd, float manaCost) 
-			: base(control, cd, manaCost){
+	public Blizzard(float cd, float manaCost) 
+			: base(cd, manaCost){
 		this.cd = cd;
 	}
 
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new BlizzardEvent(controller, cd);
 	}
 
-	public static Blizzard Default(EntityController control){
-		return new Blizzard(control, 0.5f, 50);
+	public static Blizzard Default(){
+		return new Blizzard(0.5f, 50);
 	}
 
 	public override SkillInfo GetID(){

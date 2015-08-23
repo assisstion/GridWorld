@@ -125,7 +125,7 @@ namespace FighterEnemy{
 				started = true;
 				controller = control;
 				skills = new Skill[1];
-				skills[0] = Slash.Default(controller);
+				skills[0] = Slash.Default();
 				_maxHealth = 10;
 			}
 			
@@ -203,22 +203,22 @@ namespace FighterEnemy{
 				int yDist = controller.target.movement.playerY - controller.movement.playerY;
 				if(xDist == 1){
 					if(!controller.movement.TryTurn(Direction.right)){
-						SetAction(skills[0].Activate());
+						SetAction(skills[0].Activate(controller));
 					}
 				}
 				else if(xDist == -1){
 					if(!controller.movement.TryTurn(Direction.left)){
-						SetAction(skills[0].Activate());
+						SetAction(skills[0].Activate(controller));
 					}
 				}
 				else if(yDist == 1){
 					if(!controller.movement.TryTurn(Direction.up)){
-						SetAction(skills[0].Activate());
+						SetAction(skills[0].Activate(controller));
 					}
 				}
 				else if(yDist == -1){
 					if(!controller.movement.TryTurn(Direction.down)){
-						SetAction(skills[0].Activate());
+						SetAction(skills[0].Activate(controller));
 					}
 				}
 				else{

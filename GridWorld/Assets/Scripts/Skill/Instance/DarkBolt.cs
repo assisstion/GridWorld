@@ -5,17 +5,17 @@ public class DarkBolt : Skill{
 	
 	float cd;
 	
-	public DarkBolt(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public DarkBolt(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new DarkBoltEvent(controller, cd);
 	}
 
-	public static DarkBolt Default(EntityController control){
-		return new DarkBolt(control, 0.5f, 10);
+	public static DarkBolt Default(){
+		return new DarkBolt(0.5f, 10);
 	}
 
 	public override SkillInfo GetID(){

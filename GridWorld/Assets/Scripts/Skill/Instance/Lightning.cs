@@ -7,17 +7,17 @@ public class Lightning : Skill{
 	
 	float cd;
 	
-	public Lightning(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Lightning(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new LightningEvent(controller, cd);
 	}
 
-	public static Lightning Default(EntityController control){
-		return new Lightning(control, 0.75f, 10);
+	public static Lightning Default(){
+		return new Lightning(0.75f, 10);
 	}
 
 	public override SkillInfo GetID(){

@@ -12,6 +12,10 @@ public class PlayerCombat : EntityCombat, Initializable{
 	//public SkillManager manager;
 	public ShopManager shop;
 
+	public override EntityController Controller(){
+		return Controller();
+	}
+
 	public override void SetHealth(float value){
 		base.SetHealth(value);
 		netPlayer.health = GetHealth();
@@ -37,7 +41,7 @@ public class PlayerCombat : EntityCombat, Initializable{
 	}
 
 	
-	PlayerController controller;
+	//PlayerController controller;
 
 	protected override void Start(){
 		//
@@ -51,7 +55,7 @@ public class PlayerCombat : EntityCombat, Initializable{
 
 
 		skillLibrary = new List<Skill>();
-		controller = this.gameObject.GetComponent<PlayerController>();
+		//controller = this.gameObject.GetComponent<PlayerController>();
 		
 		MapGenerator map = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapGenerator>();
 		
@@ -62,7 +66,7 @@ public class PlayerCombat : EntityCombat, Initializable{
 		
 		//manager.Initialize();
 		skills = new Skill[100];
-		Skill slash = Slash.Default(controller);
+		Skill slash = Slash.Default();
 		AddSkill(slash, 0);
 		skills[0] = slash;
 
@@ -73,7 +77,7 @@ public class PlayerCombat : EntityCombat, Initializable{
 			//0 already added
 			for(int i = 1; i <= Skills.GetMaxID(); i++){
 				Skill s = Skills.GetDefaultFromSkillInfo(
-					Skills.GetSkillInfoFromID(i), controller);
+					Skills.GetSkillInfoFromID(i));
 				AddSkill(s, i); 
 			}
 		}

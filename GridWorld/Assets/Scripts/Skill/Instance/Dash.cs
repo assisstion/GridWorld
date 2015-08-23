@@ -5,17 +5,17 @@ public class Dash : Skill{
 
 	float cd;
 	
-	public Dash(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Dash(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new DashSkillEvent(controller, cd);
 	}
 
-	public static Dash Default(EntityController control){
-		return new Dash(control, 0.3f, 10);
+	public static Dash Default(){
+		return new Dash(0.3f, 10);
 	}
 
 	public override string GetCustomStat(){

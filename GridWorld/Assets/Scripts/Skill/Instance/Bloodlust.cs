@@ -5,17 +5,17 @@ public class Bloodlust : Skill{
 	
 	float cd;
 	
-	public Bloodlust(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Bloodlust(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new BloodlustEvent(controller, cd);
 	}
 
-	public static Bloodlust Default(EntityController control){
-		return new Bloodlust(control, 0.5f, 30);
+	public static Bloodlust Default(){
+		return new Bloodlust(0.5f, 30);
 	}
 
 	public override CostType GetCostType(){

@@ -98,9 +98,9 @@ public class Skills{
 		throw new Exception("Cannot find skill with the given predicate");
 	}
 
-	public static Skill GetDefaultFromSkillInfo(SkillInfo db, PlayerController controller){
+	public static Skill GetDefaultFromSkillInfo(SkillInfo db){
 		return Attr(db).type.GetMethod("Default")
-			.Invoke(null, new object[]{controller}) as Skill;
+			.Invoke(null, new object[]{}) as Skill;
 	}
 
 	public static int MinimumWaveFromTier(int tier){

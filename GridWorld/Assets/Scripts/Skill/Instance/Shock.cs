@@ -7,17 +7,17 @@ public class Shock : Skill{
 	
 	float cd;
 	
-	public Shock(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Shock(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new ShockEvent(controller, cd);
 	}
 
-	public static Shock Default(EntityController control){
-		return new Shock(control, 0.5f, 10);
+	public static Shock Default(){
+		return new Shock(0.5f, 10);
 	}
 
 	public override SkillInfo GetID(){

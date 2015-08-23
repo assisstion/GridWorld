@@ -133,10 +133,10 @@ namespace TargetDummyEnemy{
 				started = true;
 				controller = control;
 				skills = new Skill[4];
-				skills[0] = Slash.Default(controller);
-				skills[1] = Lunge.Default(controller);
-				skills[2] = Fireball.Default(controller);
-				skills[3] = Heal.Default(controller);
+				skills[0] = Slash.Default();
+				skills[1] = Lunge.Default();
+				skills[2] = Fireball.Default();
+				skills[3] = Heal.Default();
 				_maxHealth = 10;
 			}
 
@@ -156,7 +156,7 @@ namespace TargetDummyEnemy{
 				}
 				else{
 					SetAction(skills[aSkill[
-					  Random.Range(0, aSkill.Length)]].Activate());
+					  Random.Range(0, aSkill.Length)]].Activate(controller));
 				}
 			}
 

@@ -29,6 +29,10 @@ public class EnemyBaseCombat : EntityCombat{
 		base.Update();
 	}
 
+	public override EntityController Controller(){
+		return _controller;
+	}
+
 	protected virtual EnemyBaseController GetController(){
 		return _controller;
 	}

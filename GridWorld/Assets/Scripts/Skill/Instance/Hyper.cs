@@ -5,17 +5,17 @@ public class Hyper : Skill{
 	
 	float cd;
 	
-	public Hyper(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Hyper(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new HyperEvent(controller, cd);
 	}
 
-	public static Hyper Default(EntityController control){
-		return new Hyper(control, 0.5f, 50);
+	public static Hyper Default(){
+		return new Hyper(0.5f, 50);
 	}
 
 	public override SkillInfo GetID(){

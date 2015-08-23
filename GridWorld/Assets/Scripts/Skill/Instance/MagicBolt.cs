@@ -5,17 +5,17 @@ public class MagicBolt : Skill{
 	
 	float cd;
 	
-	public MagicBolt(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public MagicBolt(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new MagicBoltEvent(controller, cd);
 	}
 
-	public static MagicBolt Default(EntityController control){
-		return new MagicBolt(control, 0.5f, 20);
+	public static MagicBolt Default(){
+		return new MagicBolt(0.5f, 20);
 	}
 
 	public override SkillInfo GetID(){

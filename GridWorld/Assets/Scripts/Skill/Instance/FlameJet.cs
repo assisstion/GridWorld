@@ -5,17 +5,17 @@ public class FlameJet : Skill{
 	
 	float cd;
 	
-	public FlameJet(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public FlameJet(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new FlameJetEvent(controller, cd);
 	}
 
-	public static FlameJet Default(EntityController control){
-		return new FlameJet(control, 1.0f, 40);
+	public static FlameJet Default(){
+		return new FlameJet(1.0f, 40);
 	}
 
 	public override SkillInfo GetID(){

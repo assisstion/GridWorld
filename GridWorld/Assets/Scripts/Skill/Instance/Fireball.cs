@@ -5,17 +5,17 @@ public class Fireball : Skill{
 	
 	float cd;
 	
-	public Fireball(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Fireball(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 	
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new FireballEvent(controller, cd);
 	}
 
-	public static Fireball Default(EntityController control){
-		return new Fireball(control, 1.0f, 30);
+	public static Fireball Default(){
+		return new Fireball(1.0f, 30);
 	}
 
 	public override SkillInfo GetID(){

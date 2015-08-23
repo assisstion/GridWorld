@@ -5,17 +5,17 @@ public class Cleave : Skill{
 
 	float cd;
 
-	public Cleave(EntityController control, float cd, float manaCost) 
-	: base(control, cd, manaCost){
+	public Cleave(float cd, float manaCost) 
+	: base(cd, manaCost){
 		this.cd = cd;
 	}
 
-	public override SkillEvent GetSkillEvent(){
+	public override SkillEvent GetSkillEvent(EntityController controller){
 		return new CleaveEvent(controller, cd);
 	}
 
-	public static Cleave Default(EntityController control){
-		return new Cleave(control, 1f, 25);
+	public static Cleave Default(){
+		return new Cleave(1f, 25);
 	}
 
 	public override SkillInfo GetID(){

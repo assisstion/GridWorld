@@ -7,7 +7,7 @@ using System.Linq;
 public abstract class Skill{
 
 	//protected string name;
-	protected EntityController controller;
+	//protected EntityController controller;
 
 	public float manaCost{
 		get{
@@ -17,19 +17,15 @@ public abstract class Skill{
 
 	float _manaCost;
 
-	public Skill(EntityController control, float cd, float manaCost){
-		this.controller = control;
+	public Skill(float cd, float manaCost){
+		//this.controller = control;
 		//name = skillName;
 		_cooldown = cd; 
 		_manaCost = manaCost;
 	}
 
-	public Skill(EntityController control) : this (control, 1.0f, 0){
+	public Skill() : this ( 1.0f, 0){
 		 
-	}
-
-	public EntityController GetController(){
-		return controller;
 	}
 
 	public float cooldown{
@@ -40,7 +36,7 @@ public abstract class Skill{
 
 	float _cooldown;
 
-	public float Activate(){
+	public float Activate(EntityController controller){
 		 
 		switch(GetCostType()){
 			case CostType.Mana:
@@ -52,7 +48,7 @@ public abstract class Skill{
 				if(controller.combat.GetMana() < tmpManaCost){
 					break;
 				}
-				SkillEvent se0 = GetSkillEvent();
+				SkillEvent se0 = GetSkillEvent(controller);
 				if(controller.combat.ActivateAnimation(se0)){
 					controller.combat.SetMana(controller.combat.GetMana() - tmpManaCost);
 					return cooldown;// + se0.GetActionModifier();
@@ -62,7 +58,7 @@ public abstract class Skill{
 				if(controller.combat.GetHealth() < manaCost){
 					break;
 				}
-				SkillEvent se = GetSkillEvent();
+				SkillEvent se = GetSkillEvent(controller);
 				if(controller.combat.ActivateAnimation(se)){
 					controller.combat.SetHealth(controller.combat.GetHealth() - manaCost);
 					return cooldown;// + se.GetActionModifier();
@@ -84,7 +80,7 @@ public abstract class Skill{
 
 	public abstract int GetMinimumWave();
 
-	public abstract SkillEvent GetSkillEvent();
+	public abstract SkillEvent GetSkillEvent(EntityController controller);
 
 	public string GetName(){ 
 		return Skills.Attr(GetID()).title;
