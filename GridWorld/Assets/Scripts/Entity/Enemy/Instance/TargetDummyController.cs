@@ -90,7 +90,7 @@ namespace TargetDummyEnemy{
 				controller = control;
 				this.map = map;
 				Setup(x, y, dir);
-				lastDirection = direction;
+				lastDirection = GetDirection();
 			}
 
 			public void Move(){
@@ -152,11 +152,11 @@ namespace TargetDummyEnemy{
 			void Attack(){
 				int[] aSkill = AllowedSkills();
 				if(aSkill.Length == 0){
-					action = 0;
+					SetAction(0);
 				}
 				else{
-					action = skills[aSkill[
-					  Random.Range(0, aSkill.Length)]].Activate();
+					SetAction(skills[aSkill[
+					  Random.Range(0, aSkill.Length)]].Activate());
 				}
 			}
 

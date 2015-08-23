@@ -59,7 +59,7 @@ public class Heal : Skill{
 		}
 		
 		protected override bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
-			return controller.combat.health == controller.combat.maxHealth;
+			return controller.combat.GetHealth() == controller.combat.GetMaxHealth();
 		}
 
 		protected override bool PostCast(){

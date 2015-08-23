@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class SkillButtonManager : MonoBehaviour{
 
+	NetworkPlayerController netPlayer;
+    
 	public int id;
 	Image img;
 	Text text;
@@ -13,21 +15,24 @@ public class SkillButtonManager : MonoBehaviour{
 	string tempText;
 	bool init;
 
-	public void DropSkill(string text, PlayerController pc){
-		Skill sk = Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromTitle(text), pc);
-		pc.combat.skills[id] = sk;
+	public void DropSkill(string text){
+		Skill sk = Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromTitle(text), null);
+		netPlayer.CmdSetSkill(Skills.Attr(sk.GetID()).id, id);
+		//pc.combat.skills[id] = sk;
 		SetSkill(sk);
 	}
 
-	public void ClearSkill(PlayerController pc){
+	public void ClearSkill(){
 		skill = null;
-		pc.combat.skills[id] = null;
+		//pc.combat.skills[id] = null;
 		Reset();
 	}
 
-	public void Initialize(){
+	public void Initialize(NetworkPlayerController netPlayer){
+		init = true;
 		img = GetComponent<Image>();
 		text = GetComponentInChildren<Text>();
+		this.netPlayer = netPlayer;
 	}
 
 	// Use this for initialization
@@ -36,16 +41,19 @@ public class SkillButtonManager : MonoBehaviour{
 	
 	// Update is called once per frame
 	void Update(){
+		if(!init){
+			return;
+		}
 		if(skill == null){
 			SetCanPress(false);
 			return;
 		}
-		EntityController control = skill.GetController();
-		if(control.combat.action != 0){
+		//EntityController control = skill.GetController();
+		if(netPlayer.action != 0){
 			SetCanPress(false);
 			return;
 		}
-		if(control.combat.mana < skill.manaCost){
+		if(netPlayer.mana < skill.manaCost){
 			SetCanPress(false);
 			return;
 		}
@@ -68,7 +76,8 @@ public class SkillButtonManager : MonoBehaviour{
 
 	public void ButtonPressed(){
 		if(canPress){
-			skill.GetController().combat.ActivateSkill(skill);
+			netPlayer.CmdActivateSkill(id);
+			//skill.GetController().combat.ActivateSkill(skill);
 		}
 	}
 

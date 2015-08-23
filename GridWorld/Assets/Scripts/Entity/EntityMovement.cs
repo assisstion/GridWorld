@@ -1,28 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class EntityMovement : MonoBehaviour{
+public class EntityMovement : NetworkBehaviour, Initializable{
+
+	public ServerOnlyScript server;
+	public GameObject client;
 
 	public MapGenerator map;
 
-	public int direction{
+	protected bool init;
+
+	private int direction{
 		get{
 			return _direction;
 		}
 	}
 
-	protected int _direction{
-		get{
-			return __direction;
-		}
-		set{
-			__direction = value;
-			transform.rotation = Quaternion.Euler(
-				new Vector3(Direction.Rotation(__direction), 270, 90));
-		}
-	}
-
-	int __direction;
+	protected int _direction;
 
 	public int playerX{
 		get{
@@ -69,19 +64,32 @@ public class EntityMovement : MonoBehaviour{
 	}
 	
 	public bool TryTurn(int direction){
-		if(this.direction == direction){
+		if(this.GetDirection() == direction){
 			return false;
 		}
 		else{
-			_direction = direction;
+			SetDirection(direction);
 			TurnSuccess();
 			return true;
 		}
 	}
 
+	public virtual void SetDirection(int direction){
+		_direction = direction;
+		UpdatePosition();
+	}
+
+	public virtual int GetDirection(){
+		return direction;
+	}
+
+	public Transform GetTransform(){
+		return client.transform;
+	}
+
 	public bool CanMoveTo(int x, int y){
 		return IsGameSpace(x, y) && map.objects[x, y] == null 
-			&& CanPass(map.tiles[x, y]);
+			&& CanPass(x, y);//map.tileData[x, y]);
 	}
 
 	public bool TryMove(int x, int y, int direction, MoveMode mode){
@@ -116,8 +124,10 @@ public class EntityMovement : MonoBehaviour{
 		//to be overriden
 	}
 	
-	public void UpdatePosition(){
-		transform.position = ConvertPosition(playerX, playerY, transform.position.z);
+	public virtual void UpdatePosition(){
+		GetTransform().rotation = Quaternion.Euler(
+			new Vector3(Direction.Rotation(_direction), 270, 90));
+		GetTransform().position = ConvertPosition(playerX, playerY, GetTransform().position.z);
 	}
 	
 	public bool IsGameSpace(int x, int y){
@@ -126,8 +136,22 @@ public class EntityMovement : MonoBehaviour{
 
 	// Use this for initialization
 	protected virtual void Start(){
+
+	}
+
+	public virtual void Init(){
+		server = GetComponent<ServerOnlyScript>();
+
+		//MP Set
+		map = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapGenerator>();
+
 		moveCooldown = defaultMoveCooldown;
 		turnCooldown = defaultTurnCooldown;
+
+		client = server.client.GetComponent<NetworkMovement>().mover;
+
+		init = true;
+		//targetTransform = client.transform;
 	}
 	
 	// Update is called once per frame
@@ -135,9 +159,9 @@ public class EntityMovement : MonoBehaviour{
 	
 	}
 
-	public bool CanPass(GameObject obj){
-		GridController gc = obj.GetComponent<GridController>();
-		if(gc.terrainType.Equals("rock")){
+	public bool CanPass(int x, int y){//GameObject obj){
+		//GridController gc = obj.GetComponent<GridController>();
+		if(map.TerrainType(x, y).Equals("rock")){
 			return false;
 		}
 		return true;

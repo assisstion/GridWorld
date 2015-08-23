@@ -17,7 +17,7 @@ public class SkillPageButtonManager : MonoBehaviour, IBeginDragHandler, IDragHan
 	
 	}
 
-	public SkillManager manager;
+	public ClientSkillManager manager;
 	public GameObject imageSource;
 	GameObject tempDragImg;
 	public string text;

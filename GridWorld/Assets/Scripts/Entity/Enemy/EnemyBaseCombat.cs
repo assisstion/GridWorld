@@ -35,8 +35,17 @@ public class EnemyBaseCombat : EntityCombat{
 
 	public override void ActionUpdate(){
 		base.ActionUpdate();
-		if(action == 0){
-			PerformAction();
+		if(GetAction() == 0){
+			if(controller.target == null){
+				GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+				if(objs.Length > 0){
+					int i = Random.Range(0, objs.Length);
+					controller.target = objs[i].GetComponent<PlayerController>();
+				}
+			}
+			else{
+				PerformAction();
+			}
 		}
 	}
 

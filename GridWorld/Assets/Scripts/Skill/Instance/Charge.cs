@@ -127,7 +127,7 @@ public class Charge : Skill{
 		public override void CleanUp(){
 			KeyValuePair<int, int> stopPair = LocalToGame(new KeyValuePair<int, int>(0, stop));
 			controller.movement.TryMove(stopPair.Key, stopPair.Value, direction, EntityMovement.MoveMode.NoCooldown);
-			controller.movement.UpdatePosition();
+			//controller.movement.UpdatePosition();
 		}
 
 		protected override bool CanRun(){

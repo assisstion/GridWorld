@@ -7,7 +7,7 @@ public abstract class AbstractSkillEvent : SkillEvent{
 
 	public virtual bool Initialize(){
 		startTime = Time.time;
-		direction = controller.movement.direction;
+		direction = controller.movement.GetDirection();
 		x = controller.movement.playerX;// + Direction.ValueX (direction);
 		y = controller.movement.playerY;// + Direction.ValueY (direction);
 		if(!CanRun()){
@@ -67,7 +67,7 @@ public abstract class AbstractSkillEvent : SkillEvent{
 		int vy = pair.Value;
 		if(!(controller.movement.IsGameSpace(vx, vy) 
 			&& controller.movement.CanPass 
-		      (controller.movement.map.tiles[vx, vy]))){
+		      (vx, vy))){
 			return CanCastValue.CancelThis;
 		}
 		else{

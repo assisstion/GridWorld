@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections.Generic;
 
-public class EntityCombat : MonoBehaviour, DamageSource{
+public class EntityCombat : NetworkBehaviour, DamageSource, Initializable{
 
 	/*
 	 * Valid keys:
@@ -10,6 +11,8 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 	 */
 	public Dictionary<string, float> effects;
 
+
+	public ServerOnlyScript server;
 
 	/*
 	 * delayedSet modes:
@@ -35,75 +38,87 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 	volatile bool actionLocked;
 	List<SkillEvent> liveSkills;
 	List<SkillEvent> toAdd;
-	
-	public virtual float health{
-		set{
-			_health = value;
-		}
-		get{
-			return _health;
-		}
+
+	public virtual void SetHealth(float value){
+		_health = value;
 	}
+	
+	public virtual float GetHealth(){
+		return _health;
+	}
+	
+	private float _health;
 
-	protected float _health;
-
-	public float maxHealth{
-		get{
-			return _maxHealth;
-		}
+	public virtual float GetMaxHealth(){
+		return _maxHealth;
 	}
 
 	protected float _maxHealth = 100;
 	protected float baseHealthRegen = 1f; // per second
+
+	public virtual void SetMana(float value){
+		_mana = value;
+	}
 	
-	public virtual float mana{
-		set{
-			_mana = value;
-		}
-		get{
-			return _mana;
-		}
+	public virtual float GetMana(){
+		return _mana;
 	}
 
-	protected float _mana;
-
-	public float maxMana{
-		get{
-			return _maxMana;
-		}
-	}
+	private float _mana;
 
 	protected float _maxMana = 100;
-	protected float baseManaRegen = 5f; // per second
-	
-	public virtual float action{
-		set{
-			_action = value;
-		}
-		get{
-			return _action;
-		}
+
+	public virtual float GetMaxMana(){
+		return _maxMana;
 	}
 
-	protected float _action;
+	protected float baseManaRegen = 5f; // per second
+	
+	public virtual void SetAction(float value){
+		_action = value;
+	}
+
+	public virtual float GetAction(){
+		return _action;
+	}
+
+	private float _action;
 	protected float maxAction = 3.0f;
+
+	public virtual float GetMaxAction(){
+		return maxAction;
+	}
+
+	protected bool init;
 	
 	
 	// Use this for initialization
 	protected virtual void Start(){
+
+	}
+
+	public virtual void Init(){
+		server = GetComponent<ServerOnlyScript>();
+		holder = server.client;
+
 		effects = new Dictionary<string, float>();
 		liveSkills = new List<SkillEvent>();
 		toAdd = new List<SkillEvent>();
-		health = maxHealth;
-		mana = maxMana;
+		SetHealth(GetMaxHealth());
+		SetMana(GetMaxMana());
+
+		//Debug.Log("Entitycombat Init");
+		init = true;
 	}
 	
 	// Update is called once per frame
 	protected virtual void Update(){
-		ActionUpdate();
-		SkillEventUpdate();
-		Tick();
-		EffectCheck();
+		if(init){
+			ActionUpdate();
+			SkillEventUpdate();
+			Tick();
+			EffectCheck();
+		}
 	}
 
 	public void EffectCheck(){
@@ -133,13 +148,13 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 
 	public virtual void Tick(){
 		float delta = Time.deltaTime;
-		health += delta * baseHealthRegen * HealthRegenMultiplier();
-		if(health > maxHealth){
-			health = maxHealth;
+		SetHealth(GetHealth() + delta * baseHealthRegen * HealthRegenMultiplier());
+		if(GetHealth() > GetMaxHealth()){
+			SetHealth(GetMaxHealth());
 		}
-		mana += delta * baseManaRegen * ManaRegenMultiplier();
-		if(mana > maxMana){
-			mana = maxMana;
+		SetMana(GetMana() + delta * baseManaRegen * ManaRegenMultiplier());
+		if(GetMana() > GetMaxMana()){
+			SetMana(GetMaxMana());
 		}
 		DelayedMod();
 	}
@@ -164,38 +179,38 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 		if(effects.ContainsKey("slow")){
 			actionSpeed /= 2.0f;
 		}
-		if(action > 0){
-			action -= Time.deltaTime * actionSpeed;
+		if(GetAction() > 0){
+			SetAction(GetAction() - Time.deltaTime * actionSpeed);
 		}
-		if(action < 0){
-			action = 0;
+		if(GetAction() < 0){
+			SetAction(0);
 		}
 	}
 
 	public float HealHealth(float healed){
-		float temp = health + healed;
-		if(temp < maxHealth){
-			health = temp;
+		float temp = GetHealth() + healed;
+		if(temp < GetMaxHealth()){
+			SetHealth(temp);
 			return healed;
 		}
 		else{
-			float temp2 = health;
-			health = maxHealth;
-			return health - temp2;
+			float temp2 = GetHealth();
+			SetHealth(GetMaxHealth());
+			return GetHealth() - temp2;
 		}
 	}
 	
 	public float TakeDamage(DamageSource source, float dealt){
-		if(health > dealt){
-			health -= dealt;
+		if(GetHealth() > dealt){
+			SetHealth(GetHealth() - dealt);
 			if(source != null){
 				source.DamageDealt(this, dealt);
 			}
 			return dealt;
 		}
 		else{
-			float tempHealth = health;
-			health = 0;
+			float tempHealth = GetHealth();
+			SetHealth(0);
 			if(source != null){
 				source.DamageDealt(this, tempHealth);
 				source.EntityDestroyed(this);
@@ -210,7 +225,7 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 			sEvent.CleanUp();
 		}
 		CleanUp();
-		GameObject.Destroy(holder);
+		NetworkServer.Destroy(holder);
 	}
 
 	protected virtual void CleanUp(){
@@ -226,38 +241,38 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 	}
 
 	public void ActivateSkill(Skill skill){
-		action = skill.Activate();
+		SetAction(skill.Activate());
 		DelayedMod();
 	}
 
 	void DelayedMod(){
 		if(delayedSetHealth != 0){
-			if(delayedSetHealth == 1 || (delayedSetHealth == 2 && health > delayedHealthSet) 
-				|| (delayedSetHealth == 3 && health < delayedHealthSet)){
-				HealthMod(delayedHealthSet - health);
+			if(delayedSetHealth == 1 || (delayedSetHealth == 2 && GetHealth() > delayedHealthSet) 
+				|| (delayedSetHealth == 3 && GetHealth() < delayedHealthSet)){
+				HealthMod(delayedHealthSet - GetHealth());
 				delayedSetHealth = 0;
 				delayedHealthSet = 0;
 			}
 		}
 		if(delayedSetMana != 0){
-			if(delayedSetMana == 1 || (delayedSetMana == 2 && health > delayedManaSet) 
-				|| (delayedSetMana == 3 && health < delayedManaSet)){
-				mana = delayedManaSet;
+			if(delayedSetMana == 1 || (delayedSetMana == 2 && GetMana() > delayedManaSet) 
+				|| (delayedSetMana == 3 && GetMana() < delayedManaSet)){
+				SetMana(delayedManaSet);
 				delayedSetMana = 0;
 				delayedManaSet = 0;
 			}
 		}
 		if(delayedSetAction != 0){
-			if(delayedSetAction == 1 || (delayedSetAction == 2 && health > delayedActionSet) 
-				|| (delayedSetAction == 3 && health < delayedHealthSet)){
-				action = delayedActionSet;
+			if(delayedSetAction == 1 || (delayedSetAction == 2 && GetAction() > delayedActionSet) 
+				|| (delayedSetAction == 3 && GetAction() < delayedHealthSet)){
+				SetAction(delayedActionSet);
 				delayedSetAction = 0;
 				delayedActionSet = 0;
 			}
 		}
 		HealthMod(delayedHealthMod);
-		mana += delayedManaMod;
-		action += delayedActionMod;
+		SetMana(GetMana() + delayedManaMod);
+		SetAction(GetAction() + delayedActionMod);
 		delayedHealthMod = 0;
 		delayedManaMod = 0;
 		delayedActionMod = 0;
@@ -274,7 +289,7 @@ public class EntityCombat : MonoBehaviour, DamageSource{
 	}
 	
 	public bool TryLockAction(){
-		if(action != 0 || actionLocked){
+		if(GetAction() != 0 || actionLocked){
 			return false;
 		}
 		actionLocked = true;

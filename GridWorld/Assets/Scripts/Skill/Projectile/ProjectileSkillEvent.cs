@@ -42,7 +42,7 @@ public abstract class ProjectileSkillEvent : NoncombatAbstractSkillEvent{
 				int x = pair.Key;
 				int y = pair.Value;
 				if(!proj.owner.movement.IsGameSpace(x, y) || 
-					(proj.clipping && !proj.owner.movement.CanPass(proj.owner.movement.map.tiles[x, y]))){
+					(proj.clipping && !proj.owner.movement.CanPass(x, y))){
 					toBeDestroyed.Add(proj);
 					break;
 				}

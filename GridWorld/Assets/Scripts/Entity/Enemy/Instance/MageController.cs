@@ -81,7 +81,7 @@ namespace MageEnemy{
 				controller = control;
 				this.map = map;
 				Setup(x, y, dir);
-				lastDirection = direction;
+				lastDirection = GetDirection();
 			}
 			
 			public void MoveRandom(){
@@ -236,10 +236,10 @@ namespace MageEnemy{
 					}
 					float f = Random.value;
 					if(f > 0.8){
-						if(controller.movement.direction == primaryD){
+						if(controller.movement.GetDirection() == primaryD){
 							controller.movement.GoTowards(primaryD);
 						}
-						else if(controller.movement.direction == secondaryD){
+						else if(controller.movement.GetDirection() == secondaryD){
 							controller.movement.GoTowards(secondaryD);
 						}
 						else{
@@ -260,7 +260,7 @@ namespace MageEnemy{
 			
 			void Attack(int direction){
 				if(!controller.movement.TryTurn(direction)){
-					action = skills[0].Activate();
+					SetAction(skills[0].Activate());
 				}
 			}
 			

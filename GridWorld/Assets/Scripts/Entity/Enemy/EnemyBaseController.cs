@@ -39,7 +39,7 @@ public class EnemyBaseController : EntityController{
 	
 	// Update is called once per frame
 	protected override void Update(){
-		
+
 	}
 
 	public virtual void Initialize(){

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour{
 
+	public GameObject player;
+
 	float speed = 10.0f;
 
 	// Use this for initialization

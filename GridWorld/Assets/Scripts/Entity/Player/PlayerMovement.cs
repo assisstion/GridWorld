@@ -7,7 +7,7 @@ public class PlayerMovement : EntityMovement{
 	
 	PlayerController controller;
 
-	public CameraController cam;
+	CameraController cam;
 
 	public PlayerMovement(){
 
@@ -15,7 +15,14 @@ public class PlayerMovement : EntityMovement{
 
 	// Use this for initialization
 	protected override void Start(){
-		base.Start();
+		//
+	}
+
+	public override void Init(){
+		base.Init();
+
+		//cam = server.client.GetComponentInChildren<CameraController>();
+		
 		defaultMoveCooldown = 0.3f;
 		if(PlayerController.DEBUG){
 			defaultMoveCooldown = 0.1f;
@@ -24,6 +31,14 @@ public class PlayerMovement : EntityMovement{
 		moveCooldown = defaultMoveCooldown;
 		turnCooldown = defaultTurnCooldown;
 		controller = this.gameObject.GetComponent<PlayerController>();
+
+		NetworkPlayerController netPlayer = server.client.GetComponent<NetworkPlayerController>();
+		//netPlayer.movement.RpcSetGridsize(map.gridSize);
+
+		
+		
+		GameObject.FindGameObjectWithTag("CGameController")
+			.GetComponent<ClientMapController>().Generate(netPlayer);
 	}
 
 	public void Initialize(){
@@ -36,40 +51,28 @@ public class PlayerMovement : EntityMovement{
 	
 	// Update is called once per frame
 	protected override void Update(){
-		if(!started){
-			Initialize();
-		}
-		if(controller.combat.TryLockAction()){
-			if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
-				GoTowards(Direction.up);
+		if(init){
+			if(!started){
+				Initialize();
 			}
-			else if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-				GoTowards(Direction.left);
-			}
-			else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
-				GoTowards(Direction.down);
-			}
-			else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-				GoTowards(Direction.right);
-			}
-			controller.combat.UnlockAction();
 		}
 	}
 
 	protected override void MoveSuccess(bool ping){
 		//Overriden method currently empty
 		base.MoveSuccess(ping);
-		cam.UpdateLocation(transform.position.x, transform.position.y);
-		GridController gc = map.tiles[playerX, playerY].GetComponent<GridController>();
-		if(gc.terrainType.Equals("swamp")){
+		//NetworkPlayerController netPlayer = server.client.GetComponent<NetworkPlayerController>();
+		//netPlayer.RpcUpdateCamera();
+		//GridController gc = map.tiles[playerX, playerY].GetComponent<GridController>();
+		if(map.TerrainType(playerX, playerY).Equals("swamp")){
 			controller.combat.TakeDamage(map, 10);
 			if(ping){
-				controller.combat.action = moveCooldown * 4 * MoveMultiplier();
+				controller.combat.SetAction(moveCooldown * 4 * MoveMultiplier());
 			}
 		}
 		else{
 			if(ping){
-				controller.combat.action = moveCooldown * MoveMultiplier();
+				controller.combat.SetAction(moveCooldown * MoveMultiplier());
 			}
 		}
 	}
@@ -77,12 +80,12 @@ public class PlayerMovement : EntityMovement{
 	protected override void TurnSuccess(){
 		//Overriden method currently empty
 		base.TurnSuccess();
-		GridController gc = map.tiles[playerX, playerY].GetComponent<GridController>();
-		if(gc.terrainType.Equals("swamp")){
-			controller.combat.action = turnCooldown * 4 * TurnMultiplier();
+		//GridController gc = map.tiles[playerX, playerY].GetComponent<GridController>();
+		if(map.TerrainType(playerX, playerY).Equals("swamp")){
+			controller.combat.SetAction(turnCooldown * 4 * TurnMultiplier());
 		}
 		else{
-			controller.combat.action = turnCooldown * TurnMultiplier();
+			controller.combat.SetAction(turnCooldown * TurnMultiplier());
 		}
 	}
 
@@ -101,5 +104,17 @@ public class PlayerMovement : EntityMovement{
 		}
 		return mult;
 	}
-	
+
+	public override void UpdatePosition(){
+		//no base
+		NetworkPlayerController netPlayer = server.client.GetComponent<NetworkPlayerController>();
+		if(netPlayer.movement.gridSize != map.gridSize){
+			netPlayer.movement.gridSize = map.gridSize;
+		}
+		netPlayer.movement.x = playerX;
+		netPlayer.movement.y = playerY;
+		netPlayer.movement.direction = GetDirection();
+		//Update loop catches syncvars
+		//netPlayer.RpcUpdatePosition();
+	}
 }

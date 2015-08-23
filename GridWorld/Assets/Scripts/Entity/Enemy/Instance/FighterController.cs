@@ -81,7 +81,7 @@ namespace FighterEnemy{
 				controller = control;
 				this.map = map;
 				Setup(x, y, dir);
-				lastDirection = direction;
+				lastDirection = GetDirection();
 			}
 			
 			public void MoveRandom(){
@@ -175,10 +175,10 @@ namespace FighterEnemy{
 						}
 					}
 					if(f > 0.8){
-						if(controller.movement.direction == primaryD){
+						if(controller.movement.GetDirection() == primaryD){
 							controller.movement.GoTowards(primaryD);
 						}
-						else if(controller.movement.direction == secondaryD){
+						else if(controller.movement.GetDirection() == secondaryD){
 							controller.movement.GoTowards(secondaryD);
 						}
 						else{
@@ -203,22 +203,22 @@ namespace FighterEnemy{
 				int yDist = controller.target.movement.playerY - controller.movement.playerY;
 				if(xDist == 1){
 					if(!controller.movement.TryTurn(Direction.right)){
-						action = skills[0].Activate();
+						SetAction(skills[0].Activate());
 					}
 				}
 				else if(xDist == -1){
 					if(!controller.movement.TryTurn(Direction.left)){
-						action = skills[0].Activate();
+						SetAction(skills[0].Activate());
 					}
 				}
 				else if(yDist == 1){
 					if(!controller.movement.TryTurn(Direction.up)){
-						action = skills[0].Activate();
+						SetAction(skills[0].Activate());
 					}
 				}
 				else if(yDist == -1){
 					if(!controller.movement.TryTurn(Direction.down)){
-						action = skills[0].Activate();
+						SetAction(skills[0].Activate());
 					}
 				}
 				else{

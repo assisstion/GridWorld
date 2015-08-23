@@ -1,18 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections.Generic;
 
-public class ShopManager : MonoBehaviour, ShopButtonHandler{
+public class ShopManager : NetworkBehaviour, Initializable{
 
-	public SkillManager skill;
+	//public SkillManager skill;
 	public MapGenerator map;
 	public PlayerController player;
-	public GameObject shop;
-	public GameObject shopButton;
-	public List<GameObject> addedButtons;
 	int wave;
 
 	public ShopManager(){
-		addedButtons = new List<GameObject>();
+
+	}
+
+	public void Start(){
+		//shop.SetActive(false);
+		//shop = GetComponentInChildren<ShopPlaceholder>().gameObject;
+	}
+
+	public void Init(){
+		//
 	}
 
 	public List<int> CanUnlockSkills(){
@@ -41,31 +48,37 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler{
 
 	public void Shop(int wave){
 		this.wave = wave;
-		shop.SetActive(true);
-		player.combat.health = player.combat.maxHealth;
-		player.combat.mana = player.combat.maxMana;
-		player.combat.action = 0f;
+		player.combat.SetHealth(player.combat.GetMaxHealth());
+		player.combat.SetMana(player.combat.GetMaxMana());
+		player.combat.SetAction(0f);
 		List<Skill> missing = new List<Skill>();
 		foreach(int i in CanUnlockSkills()){
 			if(!player.combat.skillLibrary.Exists(x => x != null && Skills.Attr(x.GetID()).id == i)){
 				missing.Add(Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i), player));
 			}
 		}
+		NetworkPlayerController netPlayer = player.combat.server.client
+			.GetComponent<NetworkPlayerController>();
 		//missing.TrimExcess ();
 		if(missing.Count == 0){
-			shop.SetActive(false);
-			skill.Present();
+			DisplaySkills(netPlayer);
 			//map.NextWave ();
 		}
 		else{
 			while(missing.Count > 3){
 				missing.RemoveAt(Random.Range(0, missing.Count));
 			}
-			PresentSkills(missing.ToArray());
+			int[] ia = new int[missing.Count];
+			for(int i = 0; i < missing.Count; i++){
+				ia[i] = Skills.Attr(missing[i].GetID()).id;
+			}
+			netPlayer.RpcDisplayShop(ia);
+
+			//PresentSkills(missing.ToArray());
 		}
 	}
 	
-	void PresentSkills(Skill[] skills){
+	/*void PresentSkills(Skill[] skills){
 		for(int i = 0; i < skills.Length; i++){
 			GameObject obj = Instantiate(shopButton) as GameObject;
 			obj.transform.SetParent(shop.transform);
@@ -75,17 +88,23 @@ public class ShopManager : MonoBehaviour, ShopButtonHandler{
 			manager.SetText(skills[i].GetName(), Skills.Attr(skills[i].GetID()).id + 1, skills[i].GetInfo(), skills[i].GetBody());
 			addedButtons.Add(obj);
 		}
-	}
-	
-	public void ButtonPressed(ShopButtonManager manager){
-		Skill s = (Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromTitle(manager.GetTitle()), player));
+	}*/
+
+	public void AddSkill(int i){
+		Skill s = (Skills.GetDefaultFromSkillInfo(Skills.GetSkillInfoFromID(i), player));
 		player.combat.AddSkill(s, Skills.Attr(s.GetID()).id); 
-		foreach(GameObject obj in addedButtons){
-			Destroy(obj);
+
+		NetworkPlayerController netPlayer = player.combat.server.client
+			.GetComponent<NetworkPlayerController>();
+		DisplaySkills(netPlayer);
+	}
+
+	void DisplaySkills(NetworkPlayerController netPlayer){
+		Skill[] sa = player.combat.skills;
+		int[] ia = new int[sa.Length];
+		for(int i = 0; i < sa.Length; i++){
+			ia[i] = Skills.Attr(sa[i].GetID()).id;
 		}
-		addedButtons.Clear();
-		shop.SetActive(false);
-		skill.Present();
-		//map.NextWave ();
+		netPlayer.RpcDisplaySkills(ia);
 	}
 }

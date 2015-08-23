@@ -49,22 +49,22 @@ public abstract class Skill{
 					tmpManaCost = 0;
 					controller.combat.effects.Remove("energize");
 				}
-				if(controller.combat.mana < tmpManaCost){
+				if(controller.combat.GetMana() < tmpManaCost){
 					break;
 				}
 				SkillEvent se0 = GetSkillEvent();
 				if(controller.combat.ActivateAnimation(se0)){
-					controller.combat.mana -= tmpManaCost;
+					controller.combat.SetMana(controller.combat.GetMana() - tmpManaCost);
 					return cooldown;// + se0.GetActionModifier();
 				} 
 				break;
 			case CostType.Health:
-				if(controller.combat.health < manaCost){
+				if(controller.combat.GetHealth() < manaCost){
 					break;
 				}
 				SkillEvent se = GetSkillEvent();
 				if(controller.combat.ActivateAnimation(se)){
-					controller.combat.health -= manaCost;
+					controller.combat.SetHealth(controller.combat.GetHealth() - manaCost);
 					return cooldown;// + se.GetActionModifier();
 				}
 				break;
