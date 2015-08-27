@@ -44,6 +44,12 @@ public class DarkBolt : Skill{
 		return Skills.MinimumWaveFromTier(2);
 	}
 
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		//TODO Add projectile animations
+		//Probably just make projectiles spawnable and then spawn them
+		return new EmptySkillAnimation();
+	}
+
 	public class DarkBoltEvent : ProjectileSkillEvent{
 
 		public DarkBoltEvent(EntityController control, float cd){
@@ -65,6 +71,10 @@ public class DarkBolt : Skill{
 			obj.transform.rotation = Quaternion.Euler(new Vector3(Direction.Rotation(direction), 270, 90));
 			obj.transform.localScale = new Vector3(0.05f, 1, 0.05f);
 			return new DarkBoltProjectile(controller, obj, 0.5f, 0.5f);
+		}
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.DarkBolt;
 		}
 	}
 

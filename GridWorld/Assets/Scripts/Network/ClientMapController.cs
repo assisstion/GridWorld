@@ -85,9 +85,28 @@ public class ClientMapController : NetworkBehaviour{
 		return data;
 	}
 
-	public void Generate(NetworkPlayerController npc){
-		npc.RpcGenerateMap();
+	/*public void Generate(NetworkPlayerController npc){
+		Debug.Log("RPC trying");
+		Debug.Log(this.hasAuthority);
+		Debug.Log(this.isServer);
+		Debug.Log(this.isClient);
+		RpcGenerateMap();
 		//npc.RpcGenerateMap(serverWidth, serverHeight, serverData, serverGs);
+	}*/
+
+	/*[ClientRpc]
+	public void RpcGenerateMap(){
+		//Debug.Log("RPC success");
+		//if(!isLocalPlayer){
+		//	return;
+		//}
+		GameObject.FindGameObjectWithTag("CGameController")
+			.GetComponent<ClientMapController>().LocalGenerateMap();
+	}*/
+
+	[ClientRpc]
+	public void RpcTest(){
+		Debug.Log("Rpc works");
 	}
 
 	//public override 
@@ -152,5 +171,9 @@ public class ClientMapController : NetworkBehaviour{
 			default:
 				throw new UnityException("Invalid terrain type");
 		}
+	}
+
+	public float GridSize(){
+		return gridSize;
 	}
 }

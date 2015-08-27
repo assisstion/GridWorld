@@ -40,18 +40,43 @@ public class FlameJet : Skill{
 		return Skills.MinimumWaveFromTier(3);
 	}
 
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		return new FlameJetAnimation(x, y, direction, length);
+	}
+	
+	public class FlameJetAnimation : BoxSkillAnimation{
+		
+		public FlameJetAnimation(int x, int y, int direction, float length) : base(x, y, direction, length){
+			
+		}
+		
+		public override Color GetColor(){
+			return new Color(1, 0, 0);
+		}
+		
+		int distance = 3;
+		
+		public override HashSet<KeyValuePair<int, int>> GetCoords(){
+			HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>>();
+			for(int y = 1; y <= distance; y++){
+				set.Add(new KeyValuePair<int, int>(0, y));
+			} 
+			return set;
+		}
+	}
+
 	public class FlameJetEvent : AbstractSkillEvent{
 
-		public Dictionary<KeyValuePair<int, int>, GameObject> anim;
+		//public Dictionary<KeyValuePair<int, int>, GameObject> anim;
 		
 		public FlameJetEvent(EntityController cont, float cd){
 			controller = cont;
 			cooldown = cd;
-			anim = new Dictionary<KeyValuePair<int, int>, GameObject>();
+			//anim = new Dictionary<KeyValuePair<int, int>, GameObject>();
 		}
 		
 		public override bool Update(){
-			foreach(KeyValuePair<KeyValuePair<int, int>, GameObject> animPair in anim){
+			/*foreach(KeyValuePair<KeyValuePair<int, int>, GameObject> animPair in anim){
 				KeyValuePair<int, int> pair = LocalToGame(animPair.Key);
 				int vx = pair.Key;
 				int vy = pair.Value;
@@ -60,7 +85,7 @@ public class FlameJet : Skill{
 				animX.transform.localScale = new Vector3 
 					(0.05f * (1 - TimePassed() / cooldown), animX.transform.localScale.y, 0.05f * (1 - TimePassed() / cooldown));
 
-			}
+			}*/
 			if(TimePassed() > cooldown){
 				return false;
 			}
@@ -68,9 +93,9 @@ public class FlameJet : Skill{
 		}
 		
 		public override void CleanUp(){
-			foreach(KeyValuePair<KeyValuePair<int, int>, GameObject> animPair in anim){
+			/*foreach(KeyValuePair<KeyValuePair<int, int>, GameObject> animPair in anim){
 				GameObject.Destroy(animPair.Value);
-			}
+			}*/
 		}
 
 		int distance = 3;
@@ -84,14 +109,14 @@ public class FlameJet : Skill{
 		}
 		
 		protected override void RunAttack(KeyValuePair<int, int> coords){
-			KeyValuePair<int, int> pair = LocalToGame(coords);
+			/*KeyValuePair<int, int> pair = LocalToGame(coords);
 			GameObject animObj;
 			animObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
 			animObj.GetComponent<MeshRenderer>().material.color = new Color(1, 0, 0);
 			animObj.transform.position = controller.movement.ConvertPosition(pair.Key, pair.Value, -2.0f);
 			animObj.transform.rotation = Quaternion.Euler(new Vector3(Direction.Rotation(direction), 270, 90));
 			animObj.transform.localScale = new Vector3(0.05f, 1, 0.05f);
-			anim.Add(coords, animObj);
+			anim.Add(coords, animObj);*/
 		}
 		
 		protected override void Hit(EntityController control){
@@ -104,5 +129,9 @@ public class FlameJet : Skill{
 			}
 			return !(casts.Contains(new KeyValuePair<int, int>(centerX, centerY)));
 		}*/
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.FlameJet;
+		}
 	}
 }

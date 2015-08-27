@@ -16,7 +16,7 @@ public class Lunge : Skill{
 		List<SkillEvent> evs = new List<SkillEvent>();
 		evs.Add(new LungeDashEvent(controller, dashTime));
 		evs.Add(new LungeStrikeEvent(controller, cd - dashTime));
-		return new CompositeSkillEvent(controller, evs);
+		return new CompositeSkillEvent(controller, evs, SkillInfo.None);
 	}
 
 	public static Lunge Default(){
@@ -33,6 +33,11 @@ public class Lunge : Skill{
 
 	public override string GetBody(){
 		return "Dash for a short distance, then performs a strike";
+	}
+
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		//TODO Add lunge animation
+		return new EmptySkillAnimation();
 	}
 
 	public override HashSet<string> GetPrerequisites(){
@@ -109,6 +114,10 @@ public class Lunge : Skill{
 			}
 			return true;
 		}
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.Lunge;
+		}
 	}
 
 	public class LungeStrikeEvent : AbstractSkillEvent{
@@ -157,6 +166,11 @@ public class Lunge : Skill{
 		
 		protected override void Hit(EntityController control){
 			control.combat.TakeDamage(controller.combat, 10);
+		}
+
+		public override SkillInfo GetInfo(){
+			//TODO Composite skillinfos
+			return SkillInfo.None;
 		}
 	}
 }

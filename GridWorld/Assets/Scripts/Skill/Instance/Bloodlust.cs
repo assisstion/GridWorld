@@ -43,6 +43,10 @@ public class Bloodlust : Skill{
 	public override int GetMinimumWave(){
 		return Skills.MinimumWaveFromTier(4);
 	}
+
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		return new EmptySkillAnimation();
+	}
 	
 	public class BloodlustEvent : NoncombatAbstractSkillEvent{
 		
@@ -56,5 +60,8 @@ public class Bloodlust : Skill{
 			return true;
 		}
 
+		public override SkillInfo GetInfo(){
+			return SkillInfo.Bloodlust;
+		}
 	}
 }

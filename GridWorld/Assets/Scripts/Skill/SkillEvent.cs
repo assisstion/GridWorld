@@ -11,5 +11,7 @@ public interface SkillEvent{
 
 	float GetCoolDown();
 
+	SkillInfo GetInfo();
+
 	//float GetActionModifier();
 }

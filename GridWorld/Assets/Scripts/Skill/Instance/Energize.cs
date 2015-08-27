@@ -39,6 +39,10 @@ public class Energize : Skill{
 	public override int GetMinimumWave(){
 		return Skills.MinimumWaveFromTier(4);
 	}
+
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		return new EmptySkillAnimation();
+	}
 	
 	public class EnergizeEvent : NoncombatAbstractSkillEvent{
 		
@@ -52,5 +56,8 @@ public class Energize : Skill{
 			return true;
 		}
 
+		public override SkillInfo GetInfo(){
+			return SkillInfo.Energize;
+		}
 	}
 }

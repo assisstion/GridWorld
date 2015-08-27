@@ -39,4 +39,9 @@ public class MinorHeal : Skill{
 	public override int GetMinimumWave(){
 		return Skills.MinimumWaveFromTier(2);
 	}
+
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		//TODO add heal animation
+		return new EmptySkillAnimation();
+	}
 }

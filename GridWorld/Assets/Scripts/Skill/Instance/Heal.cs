@@ -40,6 +40,11 @@ public class Heal : Skill{
 	public override int GetMinimumWave(){
 		return Skills.MinimumWaveFromTier(3);
 	}
+
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		//TODO Add a heal animation
+		return new EmptySkillAnimation();
+	}
 	
 	public class HealEvent : NoncombatAbstractSkillEvent{
 
@@ -67,5 +72,8 @@ public class Heal : Skill{
 			return true;
 		}
 
+		public override SkillInfo GetInfo(){
+			return SkillInfo.Heal;
+		}
 	}
 }

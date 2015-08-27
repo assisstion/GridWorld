@@ -40,18 +40,43 @@ public class Cleave : Skill{
 		return Skills.MinimumWaveFromTier(1);
 	}
 
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		return new CleaveAnimation(x, y, direction, length);
+	}
+
+	public class CleaveAnimation : BoxSkillAnimation{
+
+		public CleaveAnimation(int x, int y, int direction, float length) : base(x, y, direction, length){
+
+		}
+
+		public override Color GetColor(){
+			return new Color(1f, 1f, 0f);
+		}
+
+		int extent = 1;
+		
+		public override HashSet<KeyValuePair<int, int>> GetCoords(){
+			HashSet<KeyValuePair<int,int>> set = new HashSet<KeyValuePair<int, int>>();
+			for(int x = -extent; x <= extent; x++){
+				set.Add(new KeyValuePair<int, int>(x, 1));
+			}
+			return set;
+		}
+	}
+
 	public class CleaveEvent : AbstractSkillEvent{
 		
-		public Dictionary<KeyValuePair<int, int>, GameObject> anim;
+		//public Dictionary<KeyValuePair<int, int>, GameObject> anim;
 		
 		public CleaveEvent(EntityController cont, float cd){
 			controller = cont;
 			cooldown = cd;
-			anim = new Dictionary<KeyValuePair<int, int>, GameObject>();
+			//anim = new Dictionary<KeyValuePair<int, int>, GameObject>();
 		}
 		
 		public override bool Update(){
-			foreach(KeyValuePair<KeyValuePair<int, int>, GameObject> animPair in anim){
+			/*foreach(KeyValuePair<KeyValuePair<int, int>, GameObject> animPair in anim){
 				KeyValuePair<int, int> pair = LocalToGame(animPair.Key);
 				int vx = pair.Key;
 				int vy = pair.Value;
@@ -60,7 +85,7 @@ public class Cleave : Skill{
 				animX.transform.localScale = new Vector3 
 					(0.05f * (1 - TimePassed() / cooldown), animX.transform.localScale.y, 0.05f * (1 - TimePassed() / cooldown));
 				
-			}
+			}*/
 			if(TimePassed() > cooldown){
 				return false;
 			}
@@ -68,9 +93,9 @@ public class Cleave : Skill{
 		}
 		
 		public override void CleanUp(){
-			foreach(KeyValuePair<KeyValuePair<int, int>, GameObject> animPair in anim){
+			/*foreach(KeyValuePair<KeyValuePair<int, int>, GameObject> animPair in anim){
 				GameObject.Destroy(animPair.Value);
-			}
+			}*/
 		}
 		
 		int extent = 1;
@@ -84,14 +109,14 @@ public class Cleave : Skill{
 		}
 		
 		protected override void RunAttack(KeyValuePair<int, int> coords){
-			KeyValuePair<int, int> pair = LocalToGame(coords);
+			/*KeyValuePair<int, int> pair = LocalToGame(coords);
 			GameObject animObj;
 			animObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
 			animObj.GetComponent<MeshRenderer>().material.color = new Color(1f, 1f, 0);
 			animObj.transform.position = controller.movement.ConvertPosition(pair.Key, pair.Value, -2.0f);
 			animObj.transform.rotation = Quaternion.Euler(new Vector3(Direction.Rotation(direction), 270, 90));
 			animObj.transform.localScale = new Vector3(0.05f, 1, 0.05f);
-			anim.Add(coords, animObj);
+			anim.Add(coords, animObj);*/
 		}
 		
 		protected override void Hit(EntityController control){
@@ -103,6 +128,10 @@ public class Cleave : Skill{
 				return true;
 			}
 			return !(casts.Contains(new KeyValuePair<int, int>(0, 1)));
+		}
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.Cleave;
 		}
 	}
 }

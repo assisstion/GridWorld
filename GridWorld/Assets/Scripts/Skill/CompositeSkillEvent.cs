@@ -10,14 +10,16 @@ public class CompositeSkillEvent : SkillEvent{
 	float currTimePassed;
 	EntityController controller;
 	float cooldown;
+	SkillInfo info;
 
-	public CompositeSkillEvent(EntityController control, List<SkillEvent> events){
+	public CompositeSkillEvent(EntityController control, List<SkillEvent> events, SkillInfo si){
 		this.events = events;
 		controller = control;
 		cooldown = 0;
 		foreach(SkillEvent ev in events){
 			cooldown += ev.GetCoolDown();
 		}
+		info = si;
 	}
 
 	public bool Initialize(){
@@ -68,6 +70,10 @@ public class CompositeSkillEvent : SkillEvent{
 
 	public float GetCoolDown(){
 		return cooldown;
+	}
+
+	public virtual SkillInfo GetInfo(){
+		return info;
 	}
 
 	/*public float GetActionModifier(){

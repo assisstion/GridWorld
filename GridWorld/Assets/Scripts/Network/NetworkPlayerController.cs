@@ -38,6 +38,7 @@ public class NetworkPlayerController : NetworkBehaviour{
 
 	public ClientShopManager shop;
 	public ClientSkillManager skill;
+	//public ClientAnimation anim;
 
 	public MapGenerator map;
 
@@ -49,6 +50,7 @@ public class NetworkPlayerController : NetworkBehaviour{
 		if(isLocalPlayer){
 			GetComponentInChildren<Camera>().enabled = true;
 			GetComponentInChildren<Canvas>().enabled = true;
+			GenerateMap();
 		}
 		if(isServer){
 			serverPlayer = Instantiate(serverPlayerPrefab) as GameObject;
@@ -76,7 +78,12 @@ public class NetworkPlayerController : NetworkBehaviour{
 			}
 		}
 	}
-	
+
+	void GenerateMap(){
+		GameObject.FindGameObjectWithTag("CGameController")
+			.GetComponent<ClientMapController>().LocalGenerateMap();
+	}
+
 	public void InputCheck(){
 		//if(TryLockAction()){
 		if(Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1)){
@@ -222,14 +229,14 @@ public class NetworkPlayerController : NetworkBehaviour{
 		GameObject.FindGameObjectWithTag("CGameController")
 			.GetComponent<ClientMapController>().LocalGenerateMap(width, height, data, gs);
 	}*/
-	[ClientRpc]
+	/*[ClientRpc]
 	public void RpcGenerateMap(){
 		if(!isLocalPlayer){
 			return;
 		}
 		GameObject.FindGameObjectWithTag("CGameController")
 			.GetComponent<ClientMapController>().LocalGenerateMap();
-	}
+	}*/
 
 
 	//TODO work on client side animations

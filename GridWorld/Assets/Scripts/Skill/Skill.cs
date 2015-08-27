@@ -52,7 +52,7 @@ public abstract class Skill{
 				if(controller.combat.ActivateAnimation(se0)){
 					controller.combat.SetMana(controller.combat.GetMana() - tmpManaCost);
 					return cooldown;// + se0.GetActionModifier();
-				} 
+				}
 				break;
 			case CostType.Health:
 				if(controller.combat.GetHealth() < manaCost){
@@ -97,6 +97,8 @@ public abstract class Skill{
 	public abstract string GetCustomStat();
 	
 	public abstract SkillInfo GetID(); 
+
+	public abstract SkillAnimation GetAnimation(int x, int y, int direction, float length);
 }
 
 public enum CostType{

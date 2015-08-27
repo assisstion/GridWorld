@@ -18,7 +18,7 @@ public class MapGenerator : NetworkBehaviour, DamageSource{
 	 * 3 = swamp
 	 */
 
-	public GameObject cgc;
+	//public GameObject cgc;
 
 	public const byte grass = 1;
 	public const byte rock = 2;
@@ -74,7 +74,7 @@ public class MapGenerator : NetworkBehaviour, DamageSource{
 	
 	// Use this for initialization
 	void Start(){
-		NetworkInit();
+		//	NetworkInit();
 		swampCount = width * height / 8;
 		seed = new Random().Next();
 		generator = new Random(seed);
@@ -84,12 +84,12 @@ public class MapGenerator : NetworkBehaviour, DamageSource{
 		NextWave();
 	}
 
-	GameObject cgco;
+	//GameObject cgco;
 
-	void NetworkInit(){
+	/*void NetworkInit(){
 		cgco = Instantiate(cgc) as GameObject;
 		NetworkServer.Spawn(cgco);
-	}
+	}*/
 
 	void GenerateWorld(){
 		for(int i = 0; i < swampCount; i++){
@@ -103,8 +103,12 @@ public class MapGenerator : NetworkBehaviour, DamageSource{
 			}
 		}
 
-		cgco.GetComponent<ClientMapController>().GenerateMap(
-			width, height, tileData, gridSize);
+		GameObject.FindGameObjectWithTag("CGameController")
+			.GetComponent<ClientMapController>().GenerateMap(
+				width, height, tileData, gridSize);
+
+		//cgco.GetComponent<ClientMapController>().GenerateMap(
+		//	width, height, tileData, gridSize);
 		/*GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
 		plane.transform.position = new Vector3(gridSize * (width - 1) / 2.0f, gridSize * (height - 1) / 2.0f, 0.01f);
 		plane.transform.localScale = new Vector3(scaleConst * gridSize * width, 1, scaleConst * gridSize * height);

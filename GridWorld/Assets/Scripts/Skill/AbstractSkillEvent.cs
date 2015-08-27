@@ -42,6 +42,10 @@ public abstract class AbstractSkillEvent : SkillEvent{
 		if(!PostCast()){
 			return false;
 		}
+		//TODO add animator
+		GameObject.FindGameObjectWithTag("CGameController")
+			.GetComponent<ClientAnimation>()
+				.RpcAnimateSkill(Skills.Attr(GetInfo()).id, x, y, direction, cooldown);
 		return true;
 	}
 
@@ -125,6 +129,8 @@ public abstract class AbstractSkillEvent : SkillEvent{
 	protected virtual bool ShouldCancel(HashSet<KeyValuePair<int, int>> casts){
 		return casts.Count == 0;
 	}
+
+	public abstract SkillInfo GetInfo();
 
 	/*public virtual float GetActionModifier(){
 		return 0;

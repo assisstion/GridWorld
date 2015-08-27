@@ -13,7 +13,7 @@ public class PlayerCombat : EntityCombat, Initializable{
 	public ShopManager shop;
 
 	public override EntityController Controller(){
-		return Controller();
+		return GetComponent<PlayerController>();
 	}
 
 	public override void SetHealth(float value){
@@ -69,6 +69,11 @@ public class PlayerCombat : EntityCombat, Initializable{
 		Skill slash = Slash.Default();
 		AddSkill(slash, 0);
 		skills[0] = slash;
+
+		//TODO DEBUG animation testing
+		Skill test = Fireball.Default();
+		AddSkill(test, 1);
+		skills[1] = test;
 
 		netPlayer.RpcSetSkill(0, 0);
 

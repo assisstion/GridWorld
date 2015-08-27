@@ -39,6 +39,10 @@ public class Hyper : Skill{
 	public override int GetMinimumWave(){
 		return Skills.MinimumWaveFromTier(3);
 	}
+
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		return new EmptySkillAnimation();
+	}
 	
 	public class HyperEvent : NoncombatAbstractSkillEvent{
 		
@@ -50,6 +54,10 @@ public class Hyper : Skill{
 		protected override bool PostCast(){
 			controller.combat.AddEffect("hyper", 3.0f);
 			return true;
+		}
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.Hyper;
 		}
 
 	}

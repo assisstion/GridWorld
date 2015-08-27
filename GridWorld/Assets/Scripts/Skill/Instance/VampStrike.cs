@@ -47,6 +47,11 @@ public class VampStrike : Skill{
 		return Skills.MinimumWaveFromTier(3);
 	}
 
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		//TODO Add slash animation
+		return new EmptySkillAnimation();
+	}
+
 	public class VampStrikeSkillEvent : AbstractSkillEvent{
 
 		
@@ -95,6 +100,10 @@ public class VampStrike : Skill{
 			control.combat.TakeDamage(controller.combat, 10);
 			controller.combat.delayedHealthMod += healAmt;
 			//controller.combat.HealHealth(healAmt);
+		}
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.VampStrike;
 		}
 	}
 }

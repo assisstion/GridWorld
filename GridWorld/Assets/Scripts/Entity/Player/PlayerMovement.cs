@@ -32,13 +32,13 @@ public class PlayerMovement : EntityMovement{
 		turnCooldown = defaultTurnCooldown;
 		controller = this.gameObject.GetComponent<PlayerController>();
 
-		NetworkPlayerController netPlayer = server.client.GetComponent<NetworkPlayerController>();
+		//NetworkPlayerController netPlayer = server.client.GetComponent<NetworkPlayerController>();
 		//netPlayer.movement.RpcSetGridsize(map.gridSize);
 
 		
-		
-		GameObject.FindGameObjectWithTag("CGameController")
-			.GetComponent<ClientMapController>().Generate(netPlayer);
+
+		//GameObject.FindGameObjectWithTag("CGameController")
+		//	.GetComponent<ClientMapController>().Generate(netPlayer);
 	}
 
 	public void Initialize(){

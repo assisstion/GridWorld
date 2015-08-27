@@ -42,6 +42,11 @@ public class Charge : Skill{
 		return Skills.MinimumWaveFromTier(4);
 	}
 
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		//TODO add charge animation
+		return new EmptySkillAnimation();
+	}
+
 	public class ChargeDashEvent : NoncombatAbstractSkillEvent{
 		
 		public ChargeDashEvent(EntityController cont, float cd){
@@ -140,6 +145,10 @@ public class Charge : Skill{
 
 		protected override void Hit(EntityController control){
 			control.combat.TakeDamage(controller.combat, 10);
+		}
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.Charge;
 		}
 	}
 }

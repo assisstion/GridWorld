@@ -39,6 +39,11 @@ public class Slash : Skill{
 		return Skills.MinimumWaveFromTier(0);
 	}
 
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		//TODO Add slash animation
+		return new EmptySkillAnimation();
+	}
+
 	public class SlashSkillEvent : AbstractSkillEvent{
 
 		
@@ -85,6 +90,10 @@ public class Slash : Skill{
 
 		protected override void Hit(EntityController control){
 			control.combat.TakeDamage(controller.combat, 10);
+		}
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.Slash;
 		}
 	}
 }

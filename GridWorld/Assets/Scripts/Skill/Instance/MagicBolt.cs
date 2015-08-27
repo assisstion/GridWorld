@@ -40,6 +40,11 @@ public class MagicBolt : Skill{
 		return Skills.MinimumWaveFromTier(1);
 	}
 
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		//TODO add projectile animation
+		return new EmptySkillAnimation();
+	}
+
 	public class MagicBoltEvent : ProjectileSkillEvent{
 
 		public MagicBoltEvent(EntityController control, float cd){
@@ -61,6 +66,10 @@ public class MagicBolt : Skill{
 			obj.transform.rotation = Quaternion.Euler(new Vector3(Direction.Rotation(direction), 270, 90));
 			obj.transform.localScale = new Vector3(0.05f, 1, 0.05f);
 			return new MagicBoltProjectile(controller, obj, 0.5f, 0.5f);
+		}
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.MagicBolt;
 		}
 	}
 

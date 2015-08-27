@@ -39,6 +39,11 @@ public class Dash : Skill{
 		return Skills.MinimumWaveFromTier(1);
 	}
 
+	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
+		//TODO Add dash animation
+		return new EmptySkillAnimation();
+	}
+
 	public class DashSkillEvent : NoncombatAbstractSkillEvent{
 		
 		public DashSkillEvent(EntityController cont, float cd){
@@ -101,6 +106,10 @@ public class Dash : Skill{
 				return false;
 			}
 			return true;
+		}
+
+		public override SkillInfo GetInfo(){
+			return SkillInfo.Dash;
 		}
 	}
 }
