@@ -99,9 +99,9 @@ public class ShopManager : NetworkBehaviour, Initializable{
 	}
 
 	void DisplaySkills(NetworkPlayerController netPlayer){
-		Skill[] sa = player.combat.skills;
-		int[] ia = new int[sa.Length];
-		for(int i = 0; i < sa.Length; i++){
+		List<Skill> sa = player.combat.skillLibrary;
+		int[] ia = new int[sa.Count];
+		for(int i = 0; i < sa.Count; i++){
 			ia[i] = Skills.Attr(sa[i].GetID()).id;
 		}
 		netPlayer.RpcDisplaySkills(ia);

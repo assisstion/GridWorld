@@ -43,7 +43,7 @@ public class EnemyBaseController : EntityController{
 	}
 
 	public virtual void Initialize(){
-
+		map = GameObject.FindGameObjectWithTag("GameController").GetComponent<MapGenerator>();
 	}
 	
 	protected override EntityMovement MovementHolder(){

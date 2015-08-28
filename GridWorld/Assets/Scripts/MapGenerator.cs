@@ -136,13 +136,16 @@ public class MapGenerator : NetworkBehaviour, DamageSource{
 		for(int i = 0; i < enemyCount; i++){
 			GameObject obj;
 			EnemyBaseController ctrl;
-			if(UnityEngine.Random.value > waveValue){
-				obj = Instantiate(targetDummy) as GameObject;
-				TargetDummyController tdc = obj.GetComponentInChildren<TargetDummyController>();
-				tdc.SetMode(UnityEngine.Random.Range(0, 4));
-				ctrl = tdc; 
+			//if(UnityEngine.Random.value > waveValue){
+			obj = Instantiate(targetDummy) as GameObject;
+			NetworkServer.Spawn(obj);
+			obj.GetComponent<NetworkEnemyController>().Initialize();
+			TargetDummyController tdc = //obj.GetComponentInChildren<TargetDummyController>();
+				obj.GetComponent<NetworkEnemyController>().serverEnemy.GetComponent<TargetDummyController>();
+			tdc.SetMode(UnityEngine.Random.Range(0, 4));
+			ctrl = tdc; 
 
-			}
+			/*}
 			else{
 				if(UnityEngine.Random.value > 0.3){
 					obj = Instantiate(fighter) as GameObject;
@@ -153,7 +156,7 @@ public class MapGenerator : NetworkBehaviour, DamageSource{
 					ctrl = obj.GetComponentInChildren<MageEnemy.MageController>();
 
 				}
-			}
+			}*/
 			ctrl.target = GameObject.FindObjectOfType<PlayerController>();
 			ctrl.map = this;
 			ctrl.Initialize();

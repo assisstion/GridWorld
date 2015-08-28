@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Network\ClientSkillManager.cs" />
      <Compile Include="Assets\Scripts\Network\CustomNetworkManager.cs" />
      <Compile Include="Assets\Scripts\Network\Initializable.cs" />
+     <Compile Include="Assets\Scripts\Network\NetworkEnemyController.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkMovement.cs" />
      <Compile Include="Assets\Scripts\Network\NetworkPlayerController.cs" />
      <Compile Include="Assets\Scripts\Network\ServerOnlyScript.cs" />
@@ -80,6 +81,7 @@
      <Compile Include="Assets\Scripts\Skill\Animation\BoxSkillAnimation.cs" />
      <Compile Include="Assets\Scripts\Skill\Animation\EmptySkillAnimation.cs" />
      <Compile Include="Assets\Scripts\Skill\Animation\SkillAnimation.cs" />
+     <Compile Include="Assets\Scripts\Skill\Animation\SlashSkillAnimation.cs" />
      <Compile Include="Assets\Scripts\Skill\CompositeSkillEvent.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Blizzard.cs" />
      <Compile Include="Assets\Scripts\Skill\Instance\Bloodlust.cs" />

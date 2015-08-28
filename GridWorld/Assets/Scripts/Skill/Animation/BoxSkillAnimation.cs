@@ -12,7 +12,7 @@ public class BoxSkillAnimation : SkillAnimation{
 	protected HashSet<KeyValuePair<int, int>> coords;
 
 	public BoxSkillAnimation(int x, int y, int direction, float length) : 
-		this(x, y, direction, length, new HashSet<KeyValuePair<int, int>>(), Color.black){
+		this(x, y, direction, length, new HashSet<KeyValuePair<int, int>>(), Color.white){
 		
 	}
 

@@ -51,7 +51,7 @@ public class Freeze : Skill{
 		}
 		
 		public override Color GetColor(){
-			return new Color(1, 0, 0);
+			return new Color(0, 1, 1);
 		}
 		
 		int extent = 1;

@@ -2,9 +2,15 @@
 using System.Collections;
 
 namespace TargetDummyEnemy{
-	public class TargetDummyController : EnemyBaseController{
+	public class TargetDummyController : EnemyBaseController, Initializable{
 
 		int mode;
+
+		public void Init(){
+			if(!started){
+				Initialize();
+			}
+		}
 
 		public new TargetDummyMovement movement{
 			get{
@@ -34,9 +40,6 @@ namespace TargetDummyEnemy{
 
 		protected override void Start(){
 			base.Start();
-			if(!started){
-				Initialize();
-			}
 		}
 
 		protected override void Update(){
@@ -44,15 +47,19 @@ namespace TargetDummyEnemy{
 		}
 
 		public override void Initialize(){
+			base.Initialize();
 			if(started){
 				return;
 			}
 			started = true;
 			___movement = this.gameObject.AddComponent <TargetDummyMovement>() 
 				as TargetDummyMovement;
+			//Debug.Log(movement.map == null);
+			movement.Init();
 			movement.Initialize(this, 4, 8, Direction.right, map);
 			___combat = this.gameObject.AddComponent<TargetDummyCombat>()
 				as TargetDummyCombat;
+			combat.Init();
 			combat.Initialize(this);
 			combat.holder = this.gameObject.GetComponent<EnemyBaseManager>().holder;
 		}
@@ -134,7 +141,7 @@ namespace TargetDummyEnemy{
 				controller = control;
 				skills = new Skill[4];
 				skills[0] = Slash.Default();
-				skills[1] = Lunge.Default();
+				skills[1] = Flare.Default();//Lunge.Default(); //TODO lunge animation broken
 				skills[2] = Fireball.Default();
 				skills[3] = Heal.Default();
 				_maxHealth = 10;

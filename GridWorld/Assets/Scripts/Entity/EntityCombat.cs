@@ -226,6 +226,7 @@ public abstract class EntityCombat : NetworkBehaviour, DamageSource, Initializab
 		}
 		CleanUp();
 		NetworkServer.Destroy(holder);
+		Destroy(this.gameObject);
 	}
 
 	protected virtual void CleanUp(){

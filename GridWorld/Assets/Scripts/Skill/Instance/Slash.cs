@@ -40,14 +40,13 @@ public class Slash : Skill{
 	}
 
 	public override SkillAnimation GetAnimation(int x, int y, int direction, float length){
-		//TODO Add slash animation
-		return new EmptySkillAnimation();
+		return new SlashSkillAnimation(x, y, direction, length);
 	}
 
 	public class SlashSkillEvent : AbstractSkillEvent{
 
 		
-		protected GameObject animObj;
+		//protected GameObject animObj;
 
 		public SlashSkillEvent(EntityController cont, float cd){
 			controller = cont;
@@ -55,7 +54,7 @@ public class Slash : Skill{
 		}
 
 		public override bool Update(){
-			KeyValuePair<int, int> pair = LocalToGame(new KeyValuePair<int, int>(0, 1));
+			/*KeyValuePair<int, int> pair = LocalToGame(new KeyValuePair<int, int>(0, 1));
 			int vx = pair.Key;
 			int vy = pair.Value;
 			animObj.transform.position = controller.movement.ConvertPosition(vx, vy, -2.0f) 
@@ -63,6 +62,7 @@ public class Slash : Skill{
 				* controller.movement.map.gridSize * (TimePassed() / cooldown) / 2;
 			animObj.transform.localScale = new Vector3 
 				(0.1f * (1 - TimePassed() / cooldown), animObj.transform.localScale.y, animObj.transform.localScale.z);
+			*/
 			if(TimePassed() > cooldown){
 				return false;
 			}
@@ -70,7 +70,7 @@ public class Slash : Skill{
 		}
 
 		public override void CleanUp(){
-			GameObject.Destroy(animObj);
+			//GameObject.Destroy(animObj);
 		}
 
 		protected override HashSet<KeyValuePair<int, int>> GetCoordinates(){
@@ -80,11 +80,11 @@ public class Slash : Skill{
 		}
 
 		protected override void RunAttack(KeyValuePair<int, int> coords){
-			KeyValuePair<int, int> pair = LocalToGame(coords);
+			/*KeyValuePair<int, int> pair = LocalToGame(coords);
 			animObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
 			animObj.transform.position = controller.movement.ConvertPosition(pair.Key, pair.Value, -2.0f);
 			animObj.transform.rotation = Quaternion.Euler(new Vector3(Direction.Rotation(direction), 270, 90));
-			animObj.transform.localScale = new Vector3(0.1f, 1, 0.02f);
+			animObj.transform.localScale = new Vector3(0.1f, 1, 0.02f);*/
 
 		}
 

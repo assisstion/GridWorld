@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Entity/Player/PlayerMovement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Entity/EntityMovement.cs">
     <Files>
-      <File FileName="Assets/Scripts/Network/ClientMapController.cs" Line="98" Column="17" />
+      <File FileName="Assets/Scripts/Network/ClientMapController.cs" Line="109" Column="26" />
       <File FileName="Assets/Scripts/Skill/Instance/FrostBlast.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Fury.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Flare.cs" Line="1" Column="1" />
@@ -17,20 +17,20 @@
       <File FileName="Assets/Scripts/Skill/Instance/Quake.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Shock.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Slash.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Skill/Instance/VampStrike.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Skill/Instance/VampStrike.cs" Line="96" Column="4" />
       <File FileName="Assets/Scripts/Skill/Skill.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Network/ClientAnimation.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Network/NetworkPlayerController.cs" Line="84" Column="46" />
+      <File FileName="Assets/Scripts/Network/NetworkPlayerController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/AbstractSkillEvent.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Skills.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Entity/EntityMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Entity/Player/PlayerCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Entity/EntityMovement.cs" Line="151" Column="18" />
+      <File FileName="Assets/Scripts/Entity/Player/PlayerCombat.cs" Line="88" Column="4" />
       <File FileName="Assets/Scripts/Entity/Player/PlayerController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/SkillEvent.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Blizzard.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Entity/EntityCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Entity/EntityCombat.cs" Line="224" Column="1" />
       <File FileName="Assets/Scripts/Network/CustomNetworkManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MapGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MapGenerator.cs" Line="156" Column="6" />
       <File FileName="Assets/Scripts/Skill/CompositeSkillEvent.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Bloodlust.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Charge.cs" Line="1" Column="1" />
@@ -40,7 +40,14 @@
       <File FileName="Assets/Scripts/Skill/Instance/Fireball.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/FlameJet.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Skill/Instance/Freeze.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Entity/Player/PlayerMovement.cs" Line="35" Column="35" />
+      <File FileName="Assets/Scripts/Entity/Player/PlayerMovement.cs" Line="41" Column="63" />
+      <File FileName="Assets/Scripts/Skill/Animation/BoxSkillAnimation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Skill/Animation/SlashSkillAnimation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Skill/Animation/SkillAnimation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Entity/Enemy/EnemyBaseManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Entity/Enemy/Instance/TargetDummyController.cs" Line="100" Column="6" />
+      <File FileName="Assets/Scripts/Entity/Enemy/EnemyBaseCombat.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Entity/Enemy/EnemyBaseMovement.cs" Line="33" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

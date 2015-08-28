@@ -70,11 +70,6 @@ public class PlayerCombat : EntityCombat, Initializable{
 		AddSkill(slash, 0);
 		skills[0] = slash;
 
-		//TODO DEBUG animation testing
-		Skill test = Fireball.Default();
-		AddSkill(test, 1);
-		skills[1] = test;
-
 		netPlayer.RpcSetSkill(0, 0);
 
 		//manager.SetSkill(slash, 0);
